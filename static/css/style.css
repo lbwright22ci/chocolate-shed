@@ -30,3 +30,34 @@ body{
     font-size: 1rem;
     margin-top:2rem;
 }
+
+/* Buttons*/
+.btn-main{
+    background-color: var(--text-highlight-color);
+    color:var(--primary-background-color);
+    font-family: var(--primary-font), sans-serif;
+    font-size: 1.5rem;
+    padding-left:40px;
+    padding-right:40px;
+    box-shadow:2rem 2rem 5rem var(--second-highlight);
+}
+
+.btn-main:hover{
+    background-color: var(--secondary-text-color);
+    color:var(--secondary-background-color);
+}
+
+.btn-second{
+    background-color: var(--secondary-text-color);
+    color:var(--primary-background-color);
+    font-family: var(--primary-font), sans-serif;
+    font-size: 1.5rem;
+    padding-left:40px;
+    padding-right:40px;
+    box-shadow:2rem 2rem 5rem var(--shadow-color);
+}
+
+.btn-second:hover{
+    background-color: var(--secondary-background-color);
+    color:var(--primary-text-color);
+}
