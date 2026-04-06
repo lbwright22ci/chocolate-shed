@@ -3,3 +3,30 @@
  body text: Lato in regular weight
 */
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=M+PLUS+Rounded+1c:wght@800&display=swap');
+
+/* Variables */
+:root {
+    --primary-font:'Lato', sans-serif;
+    --heading-font: 'M_Plus_rounded_1c', sans-serif;
+    --primary-background-color: #fbfcee;
+    --primary-text-color: #47290b;
+    --text-highlight-color: #de1b28;
+    --secondary-text-color: #693c10ff; /* walnut*/
+    --secondary-background-color: #e5e88fff; /* cream*/
+    --shadow-color: #cbbb9fff; /* beige*/
+    --second-highlight: #78a857ff; /* green*/
+    --third-highlight: #f95d12ff; /* orange*/
+}
+
+/* Generic style rules*/
+html{
+    font-size: 10px;
+}
+
+body{
+    background-color: var(--primary-background-color);
+    font-family: var(--primary-font);
+    color:var(--primary-text-color);
+    font-size: 1rem;
+    margin-top:2rem;
+}
