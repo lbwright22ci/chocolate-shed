@@ -9,9 +9,9 @@ class WorkshopType(models.Model):
     """ Stores a single workshop category (eg. kids, 1 hour workshop, costing £27.50 pp)"""
 
     TYPE_CHOICES =(
-        ('CH', 'mixed ages 8-16 years'),
-        ('AD', 'adults & late teens'),
-        ('FA', 'children with adults')
+        ('CH', 'children'),
+        ('AD', 'adults'),
+        ('FA', 'families')
     )
 
     target_audience= models.CharField(max_length=2, choices = TYPE_CHOICES)
@@ -22,7 +22,7 @@ class WorkshopType(models.Model):
         ordering = ["target_audience"]
     
     def __str__(self):
-        return f"{self.workshop_duration} minute workshop for {self.get_target_audience_display()}"
+        return f"{self.workshop_duration} min {self.get_target_audience_display()}"
 
 class Workshop(models.Model):
     """ Stores a single workshop entry related to :model:`WorkshopCategory`"""

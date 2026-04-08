@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'cloudinary_storage',
     'cloudinary',
+    'bookings',
     'workshops',
 ]
 
