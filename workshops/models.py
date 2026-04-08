@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 
@@ -31,7 +33,6 @@ class Workshop(models.Model):
 
     category = models.ForeignKey(WorkshopType, on_delete=models.CASCADE, related_name= 'category')
     event_date = models.DateTimeField(unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
     session_name = models.CharField(max_length=200)
     location = models.CharField(max_length=400, default='on site')
     excerpt = models.TextField(max_length= 500)
@@ -41,6 +42,7 @@ class Workshop(models.Model):
     secondary_photo = CloudinaryField('extra_image', blank = True)
     updated_on = models.DateField(auto_now= True)
     publication_status = models.IntegerField(choices = STATUS, default = 0)
+    slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
         ordering = ['-event_date']
