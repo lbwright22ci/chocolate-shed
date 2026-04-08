@@ -22,7 +22,7 @@ class WorkshopType(models.Model):
         ordering = ["target_audience"]
     
     def __str__(self):
-        return f"{self.workshop_duration} minute workshop for {self.target_audience}"
+        return f"{self.workshop_duration} minute workshop for {self.get_target_audience_display()}"
 
 class Workshop(models.Model):
     """ Stores a single workshop entry related to :model:`WorkshopCategory`"""
