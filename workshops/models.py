@@ -30,9 +30,9 @@ class Workshop(models.Model):
     STATUS = ( (0, 'Draft'), (1, 'Open'), (2, 'Cancelled'), (3, 'Closed'))
 
     category = models.ForeignKey(WorkshopType, on_delete=models.CASCADE, related_name= 'category')
-    session_name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
     event_date = models.DateTimeField(unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    session_name = models.CharField(max_length=200)
     location = models.CharField(max_length=400, default='on site')
     excerpt = models.TextField(max_length= 500)
     full_description = models.TextField()
