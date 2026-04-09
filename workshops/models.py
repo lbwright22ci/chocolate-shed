@@ -33,7 +33,7 @@ class Workshop(models.Model):
 
     category = models.ForeignKey(WorkshopType, on_delete=models.CASCADE, related_name= 'category')
     event_date = models.DateTimeField(unique=True)
-    session_name = models.CharField(max_length=200)
+    session_name = models.CharField(max_length=200, unique=True)
     location = models.CharField(max_length=400, default='on site')
     excerpt = models.TextField(max_length= 500)
     full_description = models.TextField()

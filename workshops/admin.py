@@ -12,7 +12,7 @@ class WorkshopAdmin(SummernoteModelAdmin):
     """ Renders all instances of :model:`Workshop` in admin panel 
     
     """
-    prepopulated_fields = {'slug': ('category', 'session_name')}
+    prepopulated_fields = {'slug': ('session_name')}
     summernote_fields =('excerpt', 'full_description')
     list_filter = ('publication_status', 'category')
     search_fields =('event_date', 'title')
