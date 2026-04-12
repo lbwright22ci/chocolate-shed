@@ -1,12 +1,12 @@
 {% load static %}
 
 {% url 'home' as home_url %}
-{% url 'contact' as contact_url %}
+<!-- {% url 'contact' as contact_url %}
 {% url 'book_now' as booking_url %}
 {% url 'my_account' as account_admin_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_register' as register_url %}
-{% url 'account_logout' as logout_url %}
+{% url 'account_logout' as logout_url %} -->
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -38,7 +38,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo_light' % }"></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo-light.webp' %}"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -49,24 +49,24 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == home_url %} active" aria-current="page {% endif %}" aria-label ="Takes you to the home page" href="{% url 'home'%}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == contact_url %} active" aria-current="page {% endif %}" aria-label="takes you to the contact page" href="{% url 'contact'%}">Contact Us</a>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link {% if request.path == contact_url %} active" aria-current="page {% endif %}" aria-label="takes you to the contact page" href=#>Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == booking_url %} active" aria-current="page {% endif %}" aria-label="takes you to the booking page" href="{% url 'book_now'%}">Book A Place!</a>
+                        <a class="nav-link {% if request.path == booking_url %} active" aria-current="page {% endif %}" aria-label="takes you to the booking page" href=#>Book A Place!</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == account_admin_url %} active" aria-current="page {% end if%}" aria-label="takes you to account area to manage bookings" href="{% url 'my_account' %}"> <i class="fa-solid fa-user-gear"></i> My account </a>
+                        <a class="nav-link {% if request.path == account_admin_url %} active" aria-current="page {% endif %}" aria-label="takes you to account area to manage bookings" href=#> <i class="fa-solid fa-user-gear"></i> My account </a>
                     </li>
-                    {% endif %}
+                    {% endif %} -->
                 </ul>
                 <span>
                     {% if user.is_authenticated %}
-                    <a class="nav-link {% if request.path == logout_url %} active" aria-current="page {% end if%}" aria-label="logout of my account " href="{% url 'account_logout' %}"> <i class="fa-solid fa-right-from-bracket"></i> Logout </a>
+                    <a class="nav-link {% if request.path == logout_url %} active" aria-current="page {% endif%}" aria-label="logout of my account " href=#> <i class="fa-solid fa-right-from-bracket"></i> Logout </a>
                     {% else % }
-                    <a class="nav-link {% if request.path == register_url %} active" aria-current="page {% end if%}" aria-label="register for an account " href="{% url 'account_register' %}"> <i class="fa-solid fa-user-plus"></i> Register </a>
-                    <a class="nav-link {% if request.path == login_url %} active" aria-current="page {% end if%}" aria-label="login to my account " href="{% url 'account_login' %}"> <i class="fa-solid fa-left-from-bracket"></i> Login </a>
+                    <a class="nav-link {% if request.path == register_url %} active" aria-current="page {% endif%}" aria-label="register for an account " href=#> <i class="fa-solid fa-user-plus"></i> Register </a>
+                    <a class="nav-link {% if request.path == login_url %} active" aria-current="page {% endif%}" aria-label="login to my account " href=#> <i class="fa-solid fa-left-from-bracket"></i> Login </a>
                     {% endif %}
                 </span>
             </div>
@@ -78,7 +78,8 @@
     <main>
     <!-- main block content-->
     {% block content %}
-    {% endblock content % }
+        <!-- content goes here-->
+    {% endblock content %}
     </main>
     <!--footer-->
     <footer class="mt-auto footer container-fluid">
