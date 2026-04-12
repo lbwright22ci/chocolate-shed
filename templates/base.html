@@ -36,7 +36,7 @@
 
 <body class="d-flex flex-column min-vh-100">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo-light.webp' %}"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -49,25 +49,30 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == home_url %} active" aria-current="page {% endif %}" aria-label ="Takes you to the home page" href="{% url 'home'%}">Home</a>
                     </li>
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link {% if request.path == contact_url %} active" aria-current="page {% endif %}" aria-label="takes you to the contact page" href=#>Contact Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == booking_url %} active" aria-current="page {% endif %}" aria-label="takes you to the booking page" href=#>Book A Place!</a>
                     </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == account_admin_url %} active" aria-current="page {% endif %}" aria-label="takes you to account area to manage bookings" href=#> <i class="fa-solid fa-user-gear"></i> My account </a>
-                    </li>
-                    {% endif %} -->
+                    
                 </ul>
-                <span>
+                <span class="nat-item dropdown">
                     {% if user.is_authenticated %}
-                    <a class="nav-link {% if request.path == logout_url %} active" aria-current="page {% endif%}" aria-label="logout of my account " href=#> <i class="fa-solid fa-right-from-bracket"></i> Logout </a>
-                    {% else % }
-                    <a class="nav-link {% if request.path == register_url %} active" aria-current="page {% endif%}" aria-label="register for an account " href=#> <i class="fa-solid fa-user-plus"></i> Register </a>
-                    <a class="nav-link {% if request.path == login_url %} active" aria-current="page {% endif%}" aria-label="login to my account " href=#> <i class="fa-solid fa-left-from-bracket"></i> Login </a>
-                    {% endif %}
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user-gear"></i> My account </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {% if request.path == account_admin_url %} active" aria-current="page {% endif %}" aria-label="takes you to account area to manage your account" href=#> Settings </a></li>
+                        <li><a class="dropdown-item {% if request.path == account_admin_url %} active" aria-current="page {% endif %}" aria-label="takes you to account area to manage bookings" href=#> My workshops </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item {% if request.path == account_admin_url %} active" aria-current="page {% endif %}" aria-label="logout of your account" href=#><i class="fa-solid fa-right-from-bracket"></i>Logout </a></li>
+                    </ul>
+                    {% else %}
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i> Login/Register </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {% if request.path == register_url %} active" aria-current="page {% endif%}" aria-label="register for an account " href=#> <i class="fa-solid fa-user-plus"></i> Register </a></li>
+                        <li><a class="nav-link {% if request.path == login_url %} active" aria-current="page {% endif%}" aria-label="login to my account " href=#> <i class="fa-solid fa-left-from-bracket"></i> Login </a></li>
+                    </ul>
+                                        {% endif %}
                 </span>
             </div>
         </div>

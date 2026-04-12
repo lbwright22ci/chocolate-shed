@@ -24,7 +24,7 @@ html{
 }
 
 body{
-    background-color: var(--primary-background-color);
+    background-color: var(--primary-background-color); 
     font-family: var(--primary-font);
     color:var(--primary-text-color);
     font-size: 1rem;
@@ -60,4 +60,87 @@ body{
 .btn-second:hover{
     background-color: var(--secondary-background-color);
     color:var(--primary-text-color);
+}
+
+/* Navbar */
+
+.navbar .container-fluid{
+    --bs-gutter-x:0;
+    margin-right:1.5rem;
+}
+
+.navbar, 
+.footer{
+    background-color: var(--secondary-text-color);
+    color: var(--primary-background-color);
+    font-size: 3rem;
+    font-family: var(--primary-font);
+}
+
+.navbar{
+    height:8rem;
+    box-shadow: 0 0.5rem 0.5rem var(--shadow-color);
+}
+
+.navbar-brand img{
+    max-height: 6rem;
+    padding-left: 4rem;
+}
+
+.navbar a,
+.navbar-nav .nav-link.active,
+.footer a{
+    color: var(--primary-background-color);
+}
+
+.navbar a:hover,
+.footer a:hover{
+    color: var(--second-highlight);
+    font-weight: bold;
+}
+
+.navbar-toggler{
+    color: var(--primary-background-color);
+    border: 1px solid var(--primary-background-color);
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.navbar-collapse.show{
+    background-color: var(--secondary-text-color);
+    align-items: flex-start;
+    padding-left: 4rem;
+    margin-right:5.5rem;
+}
+
+.dropdown-menu.show{
+    color:var(--primary-background-color);
+    background-color: var(--secondary-text-color);
+    font-size: 3rem;
+    margin-left: -4rem;
+    padding-left:6rem;
+    padding-right:2rem;
+}
+
+.dropdown-divider{
+    border-top: 2px solid var(--primary-background-color);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+/* Footer */
+.footer{
+    height: 6.1rem;
+    box-shadow: 0 0.5rem 0.5rem var(--shadow-color) inset;
+}
+.footer .fa-brands{
+    padding:1.5rem;
+}
+
+/* Media queries */
+/* Large screens 992px and above: laptops*/
+@media screen and (min-width:992px) {
+    .navbar-collapse{
+
+    }
 }
