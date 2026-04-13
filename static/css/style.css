@@ -31,6 +31,11 @@ body{
     margin-top:7.2rem;
 }
 
+.section{
+    padding-top:2rem;
+    padding-bottom:2rem;
+}
+
 .display-1, 
 .display-3{
     font-family: var(--heading-font);
@@ -43,6 +48,31 @@ body{
 .display-3{
     font-size: 3.2rem;
 }
+
+.image-container{
+    position: relative;
+}
+
+.workshop-date{
+    position:absolute;
+    top:10%;
+    left:-0.2rem;
+    background-color: var(--primary-text-color);
+    color: var(--primary-background-color);
+}
+
+.age-cat{
+    position:absolute;
+    bottom:0;
+    right:4rem;
+    font-family: var(--heading-font);
+    font-weight: bold;
+}
+
+.child{
+    color:var(--third-highlight);
+}
+
 
 /* Buttons*/
 .btn-main{

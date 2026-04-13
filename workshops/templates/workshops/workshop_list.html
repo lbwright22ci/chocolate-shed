@@ -3,41 +3,120 @@
 {% block content %}
 
 <!-- Hero image on home page-->
-<header class = "container-fluid" id = "hero">
-            <div class="row" id="home-logo">
-                <div class="col-3">
-                    <img src="{% static 'images/logo-dark.webp' %}">
-                </div>
-            </div>
-        
-</header >
+<header class="container-fluid" id="hero">
+    <div class="row" id="home-logo">
+        <div class="col-3">
+            <img src="{% static 'images/logo-dark.webp' %}">
+        </div>
+    </div>
+
+</header>
 
 <!-- Paginated workshop content -->
-<section class="container-fluid">
-    <h2><span class="display-1 ">THE</span><span class="display-3 "> home of </span><span class="display-1 ">chocolate </span>
-                    <span class="display-3 ">creativity!</span></h2>
+<section class="container-fluid section">
+    <div class="row" id="home-title">
+        <div class="col-12">
+            <h1><span class="display-1 ">THE</span><span class="display-3 "> home of </span><span
+                    class="display-1 ">chocolate </span>
+                <span class="display-3 ">creativity!</span>
+            </h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <!-- list of workshops-->
+            <div class="col-12 mt-3 left">
+                <div class="row">
+                    {% for workshop in workshop_list %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="image-container">
+                                    {% if "placeholder_workshop" in workshop.primary_photo.url %}
+                                    <img class="card-img-top" src="{% static 'images/logo-dark.webp' %}"
+                                        alt="placeholder image">
+                                    {% else %}
+                                    <img class="card-img-top" src=" {{ workshop.primary_photo.url }}"
+                                        alt="{{ workshop.session_name }}">
+                                    {% endif %}
+                                    <div class="workshop-date">
+                                        <p class="date">{{ workshop.event_date }}</p>
+                                    </div>
+                                    <div class="age-cat">
+                                            {% if workshop.category.target_audience == "CH" %}
+                                            <img src="{% static 'images/orange-shed.webp' %}" alt="orange coloured logo symbol">
+                                            <span class="child">Children</span>
+                                            {% elif workshop.category.target_audience == "FA" %}
+                                            <img src="{% static 'images/red-shed.webp' %}" alt="red coloured logo symbol">
+                                            <span class="family">Family</span>
+                                            {% else %}
+                                            <img src="{% static 'images/chocolate-shed.webp' %}" alt="chocolate coloured logo symbol">
+                                            <span class="adult">Adults</span>
+                                            {% endif %}
+                                    </div>
+
+                                    
+                                </div>
+                                <a href="#" class="workshop-link">
+                                    <h2 class="card-title">{{ workshop.session_name }}</h2>
+
+                                    <p class="card-text">{{ workshop.excerpt |safe }}
+                                    </p>
+                                </a>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="row">
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        <!-- {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo; PREVIOUS</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %} -->
+    </div>
+
 
 </section>
 
 
 <!-- gallery carosuel of images-->
-<div class="carousel slide carosuel-fade" id="gallery-home-page" data-bs-ride="carousel">
-    <div class="carousel-inner">
-    <div class="carousel-item" data-bs-interval="2000">
-      <img src="{% static 'images/home-gallery1.webp' %}" class="d-block w-100" alt="child pouring molten chocolate into a colourful mould">
+<div class="section container-fluid">
+    <div class="carousel slide carosuel-fade" id="gallery-home-page" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="{% static 'images/home-gallery1.webp' %}" class="d-block w-100"
+                    alt="child pouring molten chocolate into a colourful mould">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="{% static 'images/home-gallery2.webp' %}" class="d-block w-100"
+                    alt="chocolate truffles made during a workshop">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="{% static 'images/home-gallery3.webp' %}" class="d-block w-100"
+                    alt="chocolate bars and lollipop made during a workshop">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="{% static 'images/home-gallery4.webp' %}" class="d-block w-100"
+                    alt="chocolate dinosaur scene made during a workshop">
+            </div>
+        </div>
     </div>
-    <div class="carousel-item" data-bs-interval="2000">
-      <img src="{% static 'images/home-gallery2.webp' %}" class="d-block w-100" alt="chocolate truffles made during a workshop">
-    </div>
-    <div class="carousel-item" data-bs-interval="2000">
-      <img src="{% static 'images/home-gallery3.webp' %}" class="d-block w-100" alt="chocolate bars and lollipop made during a workshop">
-    </div>
-        <div class="carousel-item" data-bs-interval="2000">
-      <img src="{% static 'images/home-gallery4.webp' %}" class="d-block w-100" alt="chocolate dinosaur scene made during a workshop">
-    </div>
-  </div>
 </div>
-
 
 <!-- area to display feedback from past customers -->
 
