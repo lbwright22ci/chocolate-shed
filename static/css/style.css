@@ -27,8 +27,8 @@ body{
     background-color: var(--primary-background-color); 
     font-family: var(--primary-font);
     color:var(--primary-text-color);
-    font-size: 1rem;
-    margin-top:2rem;
+    font-size: 1.8rem;
+    margin-top:5rem;
 }
 
 /* Buttons*/
@@ -73,17 +73,17 @@ body{
 .footer{
     background-color: var(--secondary-text-color);
     color: var(--primary-background-color);
-    font-size: 3rem;
+    font-size: 1.8rem;
     font-family: var(--primary-font);
 }
 
 .navbar{
-    height:8rem;
+    height:7.2rem;
     box-shadow: 0 0.5rem 0.5rem var(--shadow-color);
 }
 
 .navbar-brand img{
-    max-height: 6rem;
+    max-height: 4.8rem;
     padding-left: 4rem;
 }
 
@@ -93,7 +93,11 @@ body{
     color: var(--primary-background-color);
 }
 
+.navbar-nav .nav-link.active{
+    text-decoration: underline;
+}
 .navbar a:hover,
+.navbar-nav .nav-link.active:hover,
 .footer a:hover{
     color: var(--second-highlight);
     font-weight: bold;
@@ -116,7 +120,7 @@ body{
 .dropdown-menu.show{
     color:var(--primary-background-color);
     background-color: var(--secondary-text-color);
-    font-size: 3rem;
+    font-size: 1.8rem;
     margin-left: -4rem;
     padding-left:6rem;
     padding-right:2rem;
@@ -135,6 +139,7 @@ body{
 }
 .footer .fa-brands{
     padding:1.5rem;
+    font-size:3rem;
 }
 
 /* Media queries */
