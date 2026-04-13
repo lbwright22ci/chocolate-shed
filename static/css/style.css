@@ -28,7 +28,20 @@ body{
     font-family: var(--primary-font);
     color:var(--primary-text-color);
     font-size: 1.8rem;
-    margin-top:5rem;
+    margin-top:7.2rem;
+}
+
+.display-1, 
+.display-3{
+    font-family: var(--heading-font);
+    font-weight:bold;
+}
+
+.display-1{
+    font-size:4.8rem;
+}
+.display-3{
+    font-size: 3.2rem;
 }
 
 /* Buttons*/
@@ -142,10 +155,42 @@ body{
     font-size:3rem;
 }
 
+/*Home page*/
+/*hero image*/
+#hero{
+    background: url("../images/chocolate-bars.webp") no-repeat center center/cover fixed;
+    min-height: 40vh;
+    font-family: var(--heading-font);
+    padding-top:4rem;
+    padding-bottom:4rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+
+#home-logo{
+    background-color: #fbfceedd;
+    border-radius: 10px 0 0 10px;
+    padding:1rem 3rem 1rem 3rem;
+    text-align: start;
+}
+
+#home-logo img{
+    max-height: 16vh;
+}
+
+
+
+/*workshop listings*/
+
+/*gallery*/
+
+
 /* Media queries */
+
+
 /* Large screens 992px and above: laptops*/
 @media screen and (min-width:992px) {
-    .navbar-collapse{
 
-    }
 }

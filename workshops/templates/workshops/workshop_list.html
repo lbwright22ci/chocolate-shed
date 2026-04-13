@@ -3,16 +3,41 @@
 {% block content %}
 
 <!-- Hero image on home page-->
-<header class = container-fluid id = "hero">
-
-
+<header class = "container-fluid" id = "hero">
+            <div class="row" id="home-logo">
+                <div class="col-3">
+                    <img src="{% static 'images/logo-dark.webp' %}">
+                </div>
+            </div>
+        
 </header >
 
 <!-- Paginated workshop content -->
+<section class="container-fluid">
+    <h2><span class="display-1 ">THE</span><span class="display-3 "> home of </span><span class="display-1 ">chocolate </span>
+                    <span class="display-3 ">creativity!</span></h2>
 
+</section>
 
 
 <!-- gallery carosuel of images-->
+<div class="carousel slide carosuel-fade" id="gallery-home-page" data-bs-ride="carousel">
+    <div class="carousel-inner">
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static 'images/home-gallery1.webp' %}" class="d-block w-100" alt="child pouring molten chocolate into a colourful mould">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static 'images/home-gallery2.webp' %}" class="d-block w-100" alt="chocolate truffles made during a workshop">
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static 'images/home-gallery3.webp' %}" class="d-block w-100" alt="chocolate bars and lollipop made during a workshop">
+    </div>
+        <div class="carousel-item" data-bs-interval="2000">
+      <img src="{% static 'images/home-gallery4.webp' %}" class="d-block w-100" alt="chocolate dinosaur scene made during a workshop">
+    </div>
+  </div>
+</div>
+
 
 <!-- area to display feedback from past customers -->
 
