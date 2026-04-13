@@ -24,12 +24,55 @@ html{
 }
 
 body{
-    background-color: var(--primary-background-color);
+    background-color: var(--primary-background-color); 
     font-family: var(--primary-font);
     color:var(--primary-text-color);
-    font-size: 1rem;
-    margin-top:2rem;
+    font-size: 1.8rem;
+    margin-top:7.2rem;
 }
+
+.section{
+    padding-top:2rem;
+    padding-bottom:2rem;
+}
+
+.display-1, 
+.display-3{
+    font-family: var(--heading-font);
+    font-weight:bold;
+}
+
+.display-1{
+    font-size:4.8rem;
+}
+.display-3{
+    font-size: 3.2rem;
+}
+
+.image-container{
+    position: relative;
+}
+
+.workshop-date{
+    position:absolute;
+    top:10%;
+    left:-0.2rem;
+    background-color: var(--primary-text-color);
+    color: var(--primary-background-color);
+}
+
+.age-cat{
+    position:absolute;
+    bottom:0;
+    right:4rem;
+    font-family: var(--heading-font);
+    font-weight: bold;
+}
+
+.child{
+    color:var(--third-highlight);
+}
+
 
 /* Buttons*/
 .btn-main{
@@ -60,4 +103,124 @@ body{
 .btn-second:hover{
     background-color: var(--secondary-background-color);
     color:var(--primary-text-color);
+}
+
+/* Navbar */
+
+.navbar .container-fluid{
+    --bs-gutter-x:0;
+    margin-right:1.5rem;
+}
+
+.navbar, 
+.footer{
+    background-color: var(--secondary-text-color);
+    color: var(--primary-background-color);
+    font-size: 1.8rem;
+    font-family: var(--primary-font);
+}
+
+.navbar{
+    height:7.2rem;
+    box-shadow: 0 0.5rem 0.5rem var(--shadow-color);
+}
+
+.navbar-brand img{
+    max-height: 4.8rem;
+    padding-left: 4rem;
+}
+
+.navbar a,
+.navbar-nav .nav-link.active,
+.footer a{
+    color: var(--primary-background-color);
+}
+
+.navbar-nav .nav-link.active{
+    text-decoration: underline;
+}
+.navbar a:hover,
+.navbar-nav .nav-link.active:hover,
+.footer a:hover{
+    color: var(--second-highlight);
+    font-weight: bold;
+}
+
+.navbar-toggler{
+    color: var(--primary-background-color);
+    border: 1px solid var(--primary-background-color);
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.navbar-collapse.show{
+    background-color: var(--secondary-text-color);
+    align-items: flex-start;
+    padding-left: 4rem;
+    margin-right:5.5rem;
+}
+
+.dropdown-menu.show{
+    color:var(--primary-background-color);
+    background-color: var(--secondary-text-color);
+    font-size: 1.8rem;
+    margin-left: -4rem;
+    padding-left:6rem;
+    padding-right:2rem;
+}
+
+.dropdown-divider{
+    border-top: 2px solid var(--primary-background-color);
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+/* Footer */
+.footer{
+    height: 6.1rem;
+    box-shadow: 0 0.5rem 0.5rem var(--shadow-color) inset;
+}
+.footer .fa-brands{
+    padding:1.5rem;
+    font-size:3rem;
+}
+
+/*Home page*/
+/*hero image*/
+#hero{
+    background: url("../images/chocolate-bars.webp") no-repeat center center/cover fixed;
+    min-height: 40vh;
+    font-family: var(--heading-font);
+    padding-top:4rem;
+    padding-bottom:4rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+
+#home-logo{
+    background-color: #fbfceedd;
+    border-radius: 10px 0 0 10px;
+    padding:1rem 3rem 1rem 3rem;
+    text-align: start;
+}
+
+#home-logo img{
+    max-height: 16vh;
+}
+
+
+
+/*workshop listings*/
+
+/*gallery*/
+
+
+/* Media queries */
+
+
+/* Large screens 992px and above: laptops*/
+@media screen and (min-width:992px) {
+
 }

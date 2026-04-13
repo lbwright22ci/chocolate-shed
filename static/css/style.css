@@ -32,8 +32,8 @@ body{
 }
 
 .section{
-    padding-top:2rem;
-    padding-bottom:2rem;
+    padding:2rem;
+    
 }
 
 .display-1, 
@@ -49,29 +49,7 @@ body{
     font-size: 3.2rem;
 }
 
-.image-container{
-    position: relative;
-}
 
-.workshop-date{
-    position:absolute;
-    top:10%;
-    left:-0.2rem;
-    background-color: var(--primary-text-color);
-    color: var(--primary-background-color);
-}
-
-.age-cat{
-    position:absolute;
-    bottom:0;
-    right:4rem;
-    font-family: var(--heading-font);
-    font-weight: bold;
-}
-
-.child{
-    color:var(--third-highlight);
-}
 
 
 /* Buttons*/
@@ -210,9 +188,118 @@ body{
     max-height: 16vh;
 }
 
+#home-title{
+    margin-bottom:4rem;
+}
 
 
 /*workshop listings*/
+
+.image-container{
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.card{
+    border-radius: 0.5rem;
+    background-color: var(--primary-background-color);
+    overflow-x:hidden;
+}
+
+.card-child{
+    border: 1px solid var(--third-highlight);
+    box-shadow:1rem 1rem 2rem var(--secondary-background-color) ;
+}
+
+.card-family{
+    border: 1px solid var(--text-highlight-color);
+    box-shadow:1rem 1rem 2rem var(--third-highlight) ;
+}
+
+.card-adult{
+    border: 1px solid var(--secondary-text-color);
+    box-shadow:1rem 1rem 2rem var(--shadow-color) ;
+}
+
+.card-img-top{
+    width:100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    z-index: 75;
+}
+
+.workshop-date{
+    position:absolute;
+    top:-1.5rem;
+    left:0rem;
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+    font-family: var(--heading-font);
+    font-weight:bold;
+    padding-left:1rem;
+    padding-right:1rem;
+}
+
+.low-stock{
+    position: absolute;
+    top:10%;
+    left:-4px;
+    background-color: var(--text-highlight-color);
+    color:var(--primary-background-color);
+    text-transform: capitalize;
+    font-size: 1.8rem;
+    padding-left:1rem;
+    padding-right:1rem;
+}
+
+.low-stock p{
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+}
+
+.cover-bottom-corner{
+    background-color: var(--primary-background-color);
+    position:absolute;
+    bottom:-2.5rem;
+    right:-3rem;
+    height:8rem;
+    width:8rem;
+    border-radius: 4rem;
+    z-index: 80;
+}
+.age-cat-text{
+    position: absolute;
+    font-family: var(--heading-font);
+    font-weight: bold;
+    text-align: end;
+    margin-right: 4rem;
+    padding-left:2rem;
+    border-radius: 2rem 0 0 0;
+    right:0;
+    bottom:-2rem;
+    z-index: 100;
+    background-color: var(--primary-background-color);
+}
+
+.age-cat-symbol img{
+    position:absolute;
+    bottom:-2rem;
+    right:-0.5rem;
+    height:6rem;
+    z-index: 90;
+}
+
+.adult{
+    color:var(--secondary-text-color);
+}
+
+.family{
+    color:var(--second-highlight);
+}
+
+.child{
+    color:var(--third-highlight);
+}
 
 /*gallery*/
 
