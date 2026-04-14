@@ -14,7 +14,7 @@
 
 <!-- Paginated workshop content -->
 <section class="container-fluid section">
-    <div class="row" id="home-title">
+    <div class="row text-center" id="home-title">
         <div class="col-12">
             <h1><span class="display-1 ">THE</span><span class="display-3 "> home of </span><span
                     class="display-1 ">chocolate </span>
@@ -49,7 +49,7 @@
                                                         alt="placeholder image">
                                         {% else %}
                                         <img class="card-img-top" src=" {{ workshop.primary_photo.url }}"
-                                                        alt="{{ workshop.session_name }}">
+                                                        alt="{{ workshop.activity.session_name }}">
                                         {% endif %}
                                                     <!--add here display for low ticket nummbers-->
                                         <div class="low-stock">
@@ -82,10 +82,12 @@
                                         </div>
                                     </div>
                                     <a href="#" class="workshop-link">
-                                        <h2 class="card-title display-3">{{ workshop.session_name }}</h2>
-                                        <p class="card-text">{{ workshop.excerpt |safe }} </p>
-                                        <button class="btn btn-second">Find out more!</button>
+                                        <h2 class="card-title display-4">{{ workshop.activity.session_name }}</h2>
+                                        <p class="card-text">{{ workshop.activity.excerpt }} </p>
                                     </a>
+                                    <div class="card-btn-wrapper">
+                                        <button class="btn btn-second">Find out more!</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -99,19 +101,20 @@
                     </div>
                 </div>
             </div>
-                    <!-- {% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
+        </div>
+        {% if is_paginated %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link"> &laquo; PREVIOUS</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-pag"> &laquo; PREVIOUS</a></li>
             {% endif %}
             {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                <li><a href="?page={{ page_obj.next_page_number }}" class=" btn btn-pag"> NEXT &raquo;</a></li>
             {% endif %}
-        </ul>
-    </nav>
-    {% endif %} -->
-                </div>
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
 
 
 </section>

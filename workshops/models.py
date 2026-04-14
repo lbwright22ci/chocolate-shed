@@ -26,26 +26,34 @@ class WorkshopType(models.Model):
     def __str__(self):
         return f"{self.workshop_duration} min {self.get_target_audience_display()}"
 
+class WorkshopActivity(models.Model):
+    """ Stores generic workshop information for sessions which have the same activity."""
+    session_name = models.CharField(max_length=100)
+    excerpt = models.CharField(max_length= 150)
+    full_description = models.TextField()
+
+    def __str__(self):
+        return f"{self.session_name}"
+
 class Workshop(models.Model):
-    """ Stores a single workshop entry related to :model:`WorkshopCategory`"""
+    """ Stores a single workshop entry related to :model:`WorkshopCategory`
+    and :model: `WorkshopActivity`"""
 
     STATUS = ( (0, 'Draft'), (1, 'Open'), (2, 'Cancelled'), (3, 'Closed'))
 
     category = models.ForeignKey(WorkshopType, on_delete=models.CASCADE, related_name= 'category')
+    activity = models.ForeignKey(WorkshopActivity, on_delete=models.CASCADE, related_name='activity')
     event_date = models.DateTimeField(unique=True)
-    session_name = models.CharField(max_length=200, unique=True)
     location = models.CharField(max_length=400, default='on site')
-    excerpt = models.CharField(max_length= 100)
-    full_description = models.TextField()
     max_places = models.IntegerField(default = 12)
-    primary_photo = CloudinaryField('cover_image', default ='placeholder_workshop' )
+    primary_photo = CloudinaryField('cover_image', default ='placeholder_workshop')
     secondary_photo = CloudinaryField('extra_image', blank = True)
     updated_on = models.DateField(auto_now= True)
     publication_status = models.IntegerField(choices = STATUS, default = 0)
     slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
-        ordering = ['-event_date']
+        ordering = ['event_date']
 
     def __str__(self):
         return f"{self.event_date} workshop for {self.category}"

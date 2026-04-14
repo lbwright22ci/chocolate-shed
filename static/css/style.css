@@ -37,7 +37,8 @@ body{
 }
 
 .display-1, 
-.display-3{
+.display-3,
+.display-4{
     font-family: var(--heading-font);
     font-weight:bold;
 }
@@ -49,6 +50,9 @@ body{
     font-size: 3.2rem;
 }
 
+.display-4{
+    font-size:2.6rem;
+}
 
 
 
@@ -57,9 +61,8 @@ body{
     background-color: var(--text-highlight-color);
     color:var(--primary-background-color);
     font-family: var(--primary-font), sans-serif;
-    font-size: 1.5rem;
-    padding-left:40px;
-    padding-right:40px;
+    font-size: 1.8rem;
+    padding:0.8rem 2rem 0.8rem 2rem;
     box-shadow:2rem 2rem 5rem var(--second-highlight);
 }
 
@@ -72,15 +75,31 @@ body{
     background-color: var(--secondary-text-color);
     color:var(--primary-background-color);
     font-family: var(--primary-font), sans-serif;
-    font-size: 1.5rem;
-    padding-left:40px;
-    padding-right:40px;
+    font-size: 1.8rem;
+    padding:0.8rem 2rem 0.8rem 2rem;
     box-shadow:2rem 2rem 5rem var(--shadow-color);
 }
 
 .btn-second:hover{
     background-color: var(--secondary-background-color);
     color:var(--primary-text-color);
+}
+
+.btn-pag{
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    font-family: var(--primary-font);
+    font-size:1.8rem;
+    text-transform: uppercase;
+    margin-left:1rem;
+    margin-right:1rem;
+    padding:0.8rem 2rem 0.8rem 2rem;
+}
+
+.btn-pag:hover{
+    color: var(--text-highlight-color);
+    border-color: var(--text-highlight-color);
 }
 
 /* Navbar */
@@ -189,6 +208,7 @@ body{
 }
 
 #home-title{
+    margin-top: 2rem;
     margin-bottom:4rem;
 }
 
@@ -208,6 +228,9 @@ body{
 
 .card-wrapper{
     position: relative;
+    margin-bottom:6rem;
+    margin-left: 1rem;
+    margin-right:1rem;
 }
 
 .card-child{
@@ -216,8 +239,8 @@ body{
 }
 
 .card-family{
-    border: 1px solid var(--text-highlight-color);
-    box-shadow:1rem 1rem 2rem var(--third-highlight) ;
+    border: 1px solid var(--second-highlight);
+    box-shadow:1rem 1rem 2rem var(--second-highlight) ;
 }
 
 .card-adult{
@@ -330,6 +353,14 @@ body{
 .workshop-link .card-title:hover{
     color:var(--text-highlight-color);
 }
+
+.card-btn-wrapper{
+    display: flex;
+    margin-top:2rem;
+    margin-bottom:1rem;
+    justify-content: center;
+}
+
 
 /*gallery*/
 
