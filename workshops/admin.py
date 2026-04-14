@@ -13,7 +13,7 @@ class WorkshopAdmin(SummernoteModelAdmin):
     
     """
     prepopulated_fields = {'slug': ('session_name',)}
-    summernote_fields =('excerpt', 'full_description')
+    summernote_fields =('full_description')
     list_filter = ('publication_status', 'category')
     search_fields =('event_date', 'title')
 

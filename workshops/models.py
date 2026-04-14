@@ -35,7 +35,7 @@ class Workshop(models.Model):
     event_date = models.DateTimeField(unique=True)
     session_name = models.CharField(max_length=200, unique=True)
     location = models.CharField(max_length=400, default='on site')
-    excerpt = models.TextField(max_length= 500)
+    excerpt = models.CharField(max_length= 100)
     full_description = models.TextField()
     max_places = models.IntegerField(default = 12)
     primary_photo = CloudinaryField('cover_image', default ='placeholder_workshop' )

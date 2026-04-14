@@ -254,7 +254,7 @@ body{
     left:-4px;
     background-color: var(--text-highlight-color);
     color:var(--primary-background-color);
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-size: 1.8rem;
     padding-left:1rem;
     padding-right:1rem;
@@ -297,7 +297,7 @@ body{
     z-index: 90;
 }
 
-.adult{
+.adults{
     color:var(--secondary-text-color);
 }
 
@@ -307,6 +307,28 @@ body{
 
 .child{
     color:var(--third-highlight);
+}
+
+.workshop-link{
+    text-decoration: none;
+}
+
+.workshop-link p{
+    font-family: var(--primary-font);
+    color:var(--secondary-text-color);
+    font-size: 1.8rem;
+}
+
+.workshop-link p:hover{
+    color:var(--third-highlight);
+}
+
+.card-title{
+    color: var(--primary-text-color);
+}
+
+.workshop-link .card-title:hover{
+    color:var(--text-highlight-color);
 }
 
 /*gallery*/

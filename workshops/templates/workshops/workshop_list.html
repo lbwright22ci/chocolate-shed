@@ -31,7 +31,7 @@
                     <div class="col-md-4">
                         <div class="card-wrapper">
                             <div class="workshop-date">
-                                <p class="date">{{ workshop.event_date|date:'j S M y a'}}</p>
+                                <p class="date">{{ workshop.event_date|date:'jS M y a'}}</p>
                             </div>
                             {% if workshop.category.get_target_audience_display == "children" %}
                             <div class="card mb-4 card-child">
@@ -82,8 +82,9 @@
                                         </div>
                                     </div>
                                     <a href="#" class="workshop-link">
-                                        <h2 class="card-title">{{ workshop.session_name }}</h2>
+                                        <h2 class="card-title display-3">{{ workshop.session_name }}</h2>
                                         <p class="card-text">{{ workshop.excerpt |safe }} </p>
+                                        <button class="btn btn-second">Find out more!</button>
                                     </a>
                                 </div>
                             </div>
