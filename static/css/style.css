@@ -206,6 +206,10 @@ body{
     overflow-x:hidden;
 }
 
+.card-wrapper{
+    position: relative;
+}
+
 .card-child{
     border: 1px solid var(--third-highlight);
     box-shadow:1rem 1rem 2rem var(--secondary-background-color) ;
@@ -231,15 +235,19 @@ body{
 .workshop-date{
     position:absolute;
     top:-1.5rem;
-    left:0rem;
-    background-color: var(--primary-background-color);
-    color: var(--primary-text-color);
-    font-family: var(--heading-font);
-    font-weight:bold;
+    z-index:101;
+    left:1rem;
+        background-color: var(--primary-background-color);
     padding-left:1rem;
     padding-right:1rem;
 }
 
+.date {
+    color: var(--secondary-text-color);
+    font-family: var(--heading-font);
+    font-weight:bold;
+    margin-bottom: 0;
+}
 .low-stock{
     position: absolute;
     top:10%;
