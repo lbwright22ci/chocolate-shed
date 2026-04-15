@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Workshop
+from .models import Workshop, WorkshopType
 
 # Create your views here.
 
@@ -21,3 +21,23 @@ class WorkshopList(generic.ListView):
     paginate_by = 6
     template_name = "workshop_list.hmtl"
 
+class ChildrensWorkshopList(generic.ListView):
+    model= Workshop
+    def get_queryset(self):
+        return super().get_queryset().filter(category__target_audience ="CH", publication_status=1)
+    paginate_by = 6
+    template_name= "workshop_list.html" 
+
+class FamilyWorkshopList(generic.ListView):
+    model= Workshop
+    def get_queryset(self):
+        return super().get_queryset().filter(category__target_audience ="FA", publication_status=1)
+    paginate_by = 6
+    template_name= "workshop_list.html" 
+
+class AdultWorkshopList(generic.ListView):
+    model= Workshop
+    def get_queryset(self):
+        return super().get_queryset().filter(category__target_audience ="AD", publication_status=1)
+    paginate_by = 6
+    template_name= "workshop_list.html" 

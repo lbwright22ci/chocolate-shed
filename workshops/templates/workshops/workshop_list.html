@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% url 'adult_workshops' as adult_workshops_url %}
+{% url 'family_workshops' as family_workshops_url %}
+{% url 'child_workshops' as child_workshops_url %}
 {% block content %}
 
 <!-- Hero image on home page-->
@@ -20,6 +23,17 @@
                     class="display-1 ">chocolate </span>
                 <span class="display-3 ">creativity!</span>
             </h1>
+        </div>
+    </div>
+    <div class="row filter-options justify-content-end">
+        <div class="col-12 text-end">
+            <p>Filter by:   <span id="filter-dropdown-ages"> Age range <i class="fa-solid fa-sort-down"></i></span></p>
+            <ul id="filter-dropdown-reveal-ages" class="hide">
+                <li><a href="{% url 'adult_workshops' %}" aria-label="selects only adult workshops"> Adults</a></li>
+                <li><a href="{% url 'child_workshops' %}" aria-label="selects only children's workshops">Children</a></li>
+                <li><a href="{% url 'family_workshops' %}" aria-label="selects only family workshops">Families</a></li>
+                <li><a href="{% url 'home' %}" aria-label="shows all types of workshop">Show all</a></li>
+            </ul>
         </div>
     </div>
     <div class="container-fluid">
@@ -147,3 +161,10 @@
 <!-- area to display feedback from past customers -->
 
 {% endblock content %}
+
+{% block extra_scripts %}
+    
+    <!-- JavaScript code-->
+    <script src="{% static 'js/workshop_list.js' %}"></script>
+
+{% endblock extra_scripts %}
