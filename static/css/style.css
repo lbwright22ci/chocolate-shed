@@ -16,6 +16,7 @@
     --shadow-color: #cbbb9fff; /* beige*/
     --second-highlight: #78a857ff; /* green*/
     --third-highlight: #f95d12ff; /* orange*/
+    --background-color-semi-transparent: #fbfceedd;
 }
 
 /* Generic style rules*/
@@ -58,7 +59,11 @@ body{
     display: none;
 }
 
-
+.notes{
+    opacity: 75%;
+    font-size: 1.4rem;
+    padding-top:1.5rem;
+}
 /* Buttons*/
 .btn-main{
     background-color: var(--text-highlight-color);
@@ -200,7 +205,7 @@ body{
 
 
 #home-logo{
-    background-color: #fbfceedd;
+    background-color: var(--background-color-semi-transparent);
     border-radius: 10px 0 0 10px;
     padding:1rem 3rem 1rem 3rem;
     text-align: start;
@@ -396,7 +401,6 @@ body{
 .workshop-header{
     position:relative;
     padding:0;
-    overflow-x:hidden;
 }
 
 .workshop-detail-image{
@@ -411,15 +415,56 @@ body{
 }
 
 .cover-bottom-corner.detail-page{
-
+    bottom:-4rem;
+    right:0.5rem;
+    height:12rem;
+    width:12rem;
+    border-radius: 6rem;
 }
-.age-cat-symbol.detail-page{
-
+.age-cat-symbol.detail-page img{
+    right:3rem;
+    bottom:-5rem;
+    height:10rem;
 }
 .age-cat-text.detail-page{
-
+    right:8rem;
 }
 
+.section-at-a-glance .fa-solid{
+    font-size:2.2rem;
+    color:var(--second-highlight);
+    padding:1rem;
+}
+
+.workshop-title{
+    padding-top:2rem;
+    padding-bottom:4rem;
+}
+
+.section-workshop-detail{
+    margin-top: 4rem;
+}
+
+.accordion{
+    padding:4rem;
+    border-width:0;
+}
+.accordion-button{
+    font-size:1.8rem;
+    color:var(--primary-text-color);
+    background-color:var(--background-color-semi-transparent) ;    
+}
+
+.accordion-button:not(.collapsed){
+    color:var(--primary-background-color);
+    font-weight:bold;
+    background-color: var(--secondary-text-color);
+    box-shadow: 0.5rem 0.5rem 0.5rem var(--shadow-color);
+}
+
+.accordion-button:focus{
+    box-shadow: 0.5rem 0.5rem 0.5rem var(--secondary-background-color);
+}
 /* Media queries */
 
 

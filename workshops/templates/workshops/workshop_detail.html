@@ -5,77 +5,200 @@
 {% block content %}
 <!-- to display details of the workshop session -->
 <header class="container-fluid workshop-header">
-    <img class="workshop-detail-image" src="{{ workshop.primary_photo.url }}" alt="{{ workshop.activity.session_name }}">
+    <img class="workshop-detail-image" src="{{ workshop.primary_photo.url }}"
+        alt="{{ workshop.activity.session_name }}">
     <div class="low-stock detail-page">
-                                            <p> Almost sold out!</p>
-                                        </div>
-                                        <div class="cover-bottom-corner detail-page">
-                                        </div>
+        <p> Almost sold out!</p>
+    </div>
+    <div class="cover-bottom-corner detail-page">
+    </div>
     <div class="age-cat-symbol detail-page">
-                                            {% if workshop.category.get_target_audience_display == "children" %}
-                                            <img src="{% static 'images/orange-shed.webp' %}"
-                                                            alt="orange coloured logo symbol">
-                                            {% elif workshop.category.get_target_audience_display == "families" %}
-                                            <img src="{% static 'images/green-shed.webp' %}"
-                                                            alt="green coloured logo symbol">
-                                            {% elif workshop.category.get_target_audience_display == "adults" %}
-                                            <img src="{% static 'images/chocolate-shed.webp' %}"
-                                                            alt="chocolate coloured logo symbol">
-                                            {% endif %}
-                                        </div>
-                                        <div class="age-cat-text detail-page">
-                                        {% if workshop.category.get_target_audience_display == "children" %}
-                                            <p class="child">
-                                        {% elif workshop.category.get_target_audience_display == "families" %}
-                                            <p class="family">
-                                        {% elif workshop.category.get_target_audience_display == "adults" %}
-                                            <p class="adults">
-                                        {% endif %}
-                                                {{ workshop.category.get_target_audience_display }}
-                                            </p>
-                                        </div>
+        {% if workshop.category.get_target_audience_display == "children" %}
+        <img src="{% static 'images/orange-shed.webp' %}" alt="orange coloured logo symbol">
+        {% elif workshop.category.get_target_audience_display == "families" %}
+        <img src="{% static 'images/green-shed.webp' %}" alt="green coloured logo symbol">
+        {% elif workshop.category.get_target_audience_display == "adults" %}
+        <img src="{% static 'images/chocolate-shed.webp' %}" alt="chocolate coloured logo symbol">
+        {% endif %}
+    </div>
+    <div class="age-cat-text detail-page">
+        {% if workshop.category.get_target_audience_display == "children" %}
+        <p class="child">
+            {% elif workshop.category.get_target_audience_display == "families" %}
+        <p class="family">
+            {% elif workshop.category.get_target_audience_display == "adults" %}
+        <p class="adults">
+            {% endif %}
+            {{ workshop.category.get_target_audience_display }}
+        </p>
+    </div>
 </header>
 
 <div class="section container">
     <div class="row">
-        <h1 class="display-1"> {{ workshop.activity.session_name }}</h1>
+        <h1 class="display-1 workshop-title"> {{ workshop.activity.session_name }}</h1>
     </div>
     <div class="row justify-content-center">
-    <div class = "col-12 col-md-10 col-lg-8">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <i class="fa-solid fa-calendar-days"></i> Date: {{ workshop.event_date|date:'l jS M y' }} at {{ workshop.event_date|time:'H:i' }}
-            </div>
-            <div class="col-12 col-md-6">
-                <i class="fa-solid fa-clock"></i> Duration: {{ workshop.category.workshop_duration }} minutes
-            </div>
-            <div class="col-12 col-md-6">
-                <i class="fa-solid fa-location-dot"></i> Location: {% if "on site" in workshop.location.url %} Yew Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ workshop.location }} {% endif %}
-            </div>
-            <div class="col-12 col-md-6">
-                <i class="fa-solid fa-tag"></i> Price per person: £{{ workshop.category.workshop_price }} 
+        <div class="col-12 col-md-10">
+            <div class="row section-at-a-glance">
+                <div class="col-12 col-lg-6">
+                    <i class="fa-solid fa-calendar-days"></i> {{ workshop.event_date|date:'l jS M y' }}, {{ workshop.event_date|time:'H:i' }}
+                </div>
+                <div class="col-12 col-lg-6">
+                    <i class="fa-solid fa-clock"></i> {{ workshop.category.workshop_duration }} minutes
+                </div>
+                <div class="col-12 col-lg-6">
+                    <i class="fa-solid fa-tag"></i> £{{ workshop.category.workshop_price }} per person
+                </div>
+                <div class="col-12 col-lg-6">
+                    <i class="fa-solid fa-person"></i> {% if workshop.category.get_target_audience_display == "children" %} children 6 years upwards, unaccompanied {% elif workshop.category.get_target_audience_display == "families" %} children and adults* {% elif workshop.category.get_target_audience_display == "adults" %} ages 16 and above{% endif %}
+                </div>
+                <div class="col-12">
+                    <i class="fa-solid fa-location-dot"></i> {% if workshop.location == "on site" %} Yew
+                    Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ workshop.location }} {% endif %}
+                </div>
+                <div class="col-12">
+                    <i class="fa-solid fa-star"></i> No prior experience necessary. All materials and equipment included.
+                </div>
+                {% if workshop.category.get_target_audience_display == "families" %}
+                <div class="col-12">
+                    <p class="notes">*(each booking must contain at least one adult and at least on child)</p>
+                </div>
+                {% endif %}
+            </div>    
+        </div>
+
+        <div class="col-12">
+            <div class="row section-workshop-detail">
+                {{ workshop.activity.full_description | safe }}
             </div>
         </div>
-        <div class="row">
-            {{ workshop.activity.full_description | safe }}
+
+        <div class="card-btn-wrapper section">
+            <a href="" class="btn btn-main"> Book now </a>
         </div>
-        <div class="row justify-content-center">
-            <a href="" class="btn-main"> Book now </a>
+
+    </div>
+</div>
+
+<div class="section container">
+    <div class="row">
+        <h2 class="display-3">FAQs</h2>
+        <div class="col">
+            <div class="accordion" id="accordion-faq">
+  <div class="accordion-item">
+    <h3 class="accordiomn-header display-4">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        I (or one of my group) is allergic to...
+      </button>
+    </h3>
+    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordion-faq">
+      <div class="accordion-body">
+        We can accomodate most dietary requirements* but will need at least a week's notice in advance of the workshop.  When you make your booking, please state your allergy and/or chocolate preferences.
+        <p class="notes"> * Nuts, diary and other allergens are handled on the premises and by our suppliers. Hence there is always a risk of trace contamination.  We cannot provide suitable ingredients for those with SOY allergies. </p>
+      </div>
+    </div>
+  </div>
+  {% if workshop.location == "on site" %}
+  <div class="accordion-item">
+    <h3 class="accordiomn-header display-4">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Are there toilets onsite?
+      </button>
+    </h3>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion-faq">
+      <div class="accordion-body">
+        The toilets are located a short walk across the courtyard at Yew Tree Farm, next to the cafe.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3 class="accordiomn-header display-4">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Is there parking onsite?
+      </button>
+    </h3>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion-faq">
+      <div class="accordion-body">
+        Yes, disabled guests can park in the courtyard, directly outside The Chocolate Shed.  Behind the craft centre is a large carpark (free) for everyone to use.  There are even EV charging points.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3 class="accordiomn-header display-4">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        Can you recommend somewhere to have a drink or meal before/after the session?
+      </button>
+    </h3>
+    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordion-faq">
+      <div class="accordion-body">
+        We highly recommend The Cowshed cafe at Yew Tree Farm for sit-in dining.  Alternatively, Yew Tree Farm shop offers freshly made snacks and drinks to takeaway.
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <div class="accordion-item">
+    <h3 class="accordiomn-header display-4">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+        Do we need to bring anything with us?
+      </button>
+    </h3>
+    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordion-faq">
+      <div class="accordion-body">
+        Everything will be provided in the cost of the workshop, including apron.  You may wish to avoid wearing your best clothes in case of spillages.
+      </div>
+    </div>
+  </div>
+  {% if workshop.category.get_target_audience_display == "families" %}
+  <div class="accordion-item">
+    <h3 class="accordiomn-header display-4">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+        I am attending a family workshop with my child, do I need to book a space for me too?
+      </button>
+    </h3>
+    <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordion-faq">
+      <div class="accordion-body">
+         The price is inclusive of one person, please book a place for all those attending so they can not only stay but also join in the fun!
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if workshop.category.get_target_audience_display == "children" %}
+  <div class="accordion-item">
+    <h3 class="accordion-header display-4">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+        Can I stay to watch my children or bring their brother/sister along too?
+      </button>
+    </h3>
+    <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordion-faq">
+      <div class="accordion-body">
+        The price is inclusive of one person, please book a place for all those attending so they can not only stay, but also join in! Due to space limitations we will not be able to accommodate siblings and/or adults without a reservation.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h3 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+        What age range is the workshop suitable for?  Can my 3 year old attend?
+      </button>
+    </h3>
+    <div id="collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordion-faq">
+      <div class="accordion-body">
+        Small hands find creating with chocolate difficult.  For this reason we suggest only children aged 6 and above attend, so that they can get the most out of the session.
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
         </div>
     </div>
-    </div>
-    {% if workshop.secondary_photo %}
-    <div class="row ">
-        <img src="{{ workshop.secondary_photo.url}}" alt ="{{workshop.activity.session_name}}" class="workshop-detail-image">
-    </div>
-    {% endif %}
 </div>
 
 {% endblock content %}
 
 {% block extra_scripts %}
-    
-    <!-- JavaScript code-->
-    <script src="{% static 'js/workshop_detail.js' %}"></script>
+
+<!-- JavaScript code-->
+<script src="{% static 'js/workshop_detail.js' %}"></script>
 
 {% endblock extra_scripts %}
