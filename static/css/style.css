@@ -366,6 +366,7 @@ body{
 
 .filter-options{
     margin-right: 2rem;
+    margin-bottom:1rem;
 }
 .filter-options li{
     list-style: none;
@@ -378,6 +379,14 @@ body{
 
 .filter-options a:hover{
     color:var(--text-highlight-color);
+}
+
+#filter-dropdown-reveal-ages{
+    position:absolute;
+    z-index:101;
+    right:2rem;
+    background-color: var(--primary-background-color);
+    padding:0rem 3rem 1rem 3rem;
 }
 
 /*gallery*/
