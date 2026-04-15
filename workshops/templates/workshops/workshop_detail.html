@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<!-- to display details of the workshop session -->
+<header class="container-fluid workshop-header">
+    <img class="workshop-detail-image" src="{{ workshop.primary_photo.url }}" alt="{{ workshop.activity.session_name }}">
+    <div class="low-stock detail-page">
+                                            <p> Almost sold out!</p>
+                                        </div>
+                                        <div class="cover-bottom-corner detail-page">
+                                        </div>
+    <div class="age-cat-symbol detail-page">
+                                            {% if workshop.category.get_target_audience_display == "children" %}
+                                            <img src="{% static 'images/orange-shed.webp' %}"
+                                                            alt="orange coloured logo symbol">
+                                            {% elif workshop.category.get_target_audience_display == "families" %}
+                                            <img src="{% static 'images/green-shed.webp' %}"
+                                                            alt="green coloured logo symbol">
+                                            {% elif workshop.category.get_target_audience_display == "adults" %}
+                                            <img src="{% static 'images/chocolate-shed.webp' %}"
+                                                            alt="chocolate coloured logo symbol">
+                                            {% endif %}
+                                        </div>
+                                        <div class="age-cat-text detail-page">
+                                        {% if workshop.category.get_target_audience_display == "children" %}
+                                            <p class="child">
+                                        {% elif workshop.category.get_target_audience_display == "families" %}
+                                            <p class="family">
+                                        {% elif workshop.category.get_target_audience_display == "adults" %}
+                                            <p class="adults">
+                                        {% endif %}
+                                                {{ workshop.category.get_target_audience_display }}
+                                            </p>
+                                        </div>
+</header>
+
+<div class="section container">
+    <div class="row">
+        <h1 class="display-1"> {{ workshop.activity.session_name }}</h1>
+    </div>
+    <div class="row justify-content-center">
+    <div class = "col-12 col-md-10 col-lg-8">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <i class="fa-solid fa-calendar-days"></i> Date: {{ workshop.event_date|date:'l jS M y' }} at {{ workshop.event_date|time:'H:i' }}
+            </div>
+            <div class="col-12 col-md-6">
+                <i class="fa-solid fa-clock"></i> Duration: {{ workshop.category.workshop_duration }} minutes
+            </div>
+            <div class="col-12 col-md-6">
+                <i class="fa-solid fa-location-dot"></i> Location: {% if "on site" in workshop.location.url %} Yew Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ workshop.location }} {% endif %}
+            </div>
+            <div class="col-12 col-md-6">
+                <i class="fa-solid fa-tag"></i> Price per person: £{{ workshop.category.workshop_price }} 
+            </div>
+        </div>
+        <div class="row">
+            {{ workshop.activity.full_description | safe }}
+        </div>
+        <div class="row justify-content-center">
+            <a href="" class="btn-main"> Book now </a>
+        </div>
+    </div>
+    </div>
+    {% if workshop.secondary_photo %}
+    <div class="row ">
+        <img src="{{ workshop.secondary_photo.url}}" alt ="{{workshop.activity.session_name}}" class="workshop-detail-image">
+    </div>
+    {% endif %}
+</div>
+
+{% endblock content %}
+
+{% block extra_scripts %}
+    
+    <!-- JavaScript code-->
+    <script src="{% static 'js/workshop_detail.js' %}"></script>
+
+{% endblock extra_scripts %}

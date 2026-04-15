@@ -95,12 +95,12 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <a href="#" class="workshop-link">
+                                    <a href="{% url 'workshop_detail' workshop.slug %}" class="workshop-link">
                                         <h2 class="card-title display-4">{{ workshop.activity.session_name }}</h2>
                                         <p class="card-text">{{ workshop.activity.excerpt }} </p>
                                     </a>
                                     <div class="card-btn-wrapper">
-                                        <button class="btn btn-second">Find out more!</button>
+                                        <button class="btn btn-second" href="{% url 'workshop_detail' workshop.slug %}" >Find out more!</button>
                                     </div>
                                 </div>
                             </div>

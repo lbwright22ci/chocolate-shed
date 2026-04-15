@@ -41,3 +41,7 @@ class AdultWorkshopList(generic.ListView):
         return super().get_queryset().filter(category__target_audience ="AD", publication_status=1)
     paginate_by = 6
     template_name= "workshop_list.html" 
+
+class WorkshopDetailView(generic.DetailView):
+    model= Workshop
+    queryset = Workshop.objects.filter(publication_status=1)

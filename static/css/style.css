@@ -391,11 +391,42 @@ body{
 
 /*gallery*/
 
+/* Worshop details page */
+
+.workshop-header{
+    position:relative;
+    padding:0;
+    overflow-x:hidden;
+}
+
+.workshop-detail-image{
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    width:100%;
+}
+
+.low-stock.detail-page{
+    left:0;
+    font-size:2.6rem;
+}
+
+.cover-bottom-corner.detail-page{
+
+}
+.age-cat-symbol.detail-page{
+
+}
+.age-cat-text.detail-page{
+
+}
 
 /* Media queries */
 
 
 /* Large screens 992px and above: laptops*/
 @media screen and (min-width:992px) {
+    .workshop-detail-image{
+        aspect-ratio: 16/5;
+    }
 
 }
