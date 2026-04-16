@@ -16,6 +16,9 @@
     --shadow-color: #cbbb9fff; /* beige*/
     --second-highlight: #78a857ff; /* green*/
     --third-highlight: #f95d12ff; /* orange*/
+    --background-color-semi-transparent: #fbfceedd;
+    --success-background:#78a85788;
+    --danger-background:#de1b2888;
 }
 
 /* Generic style rules*/
@@ -32,12 +35,12 @@ body{
 }
 
 .section{
-    padding-top:2rem;
-    padding-bottom:2rem;
+    padding:2rem;
 }
 
 .display-1, 
-.display-3{
+.display-3,
+.display-4{
     font-family: var(--heading-font);
     font-weight:bold;
 }
@@ -49,39 +52,26 @@ body{
     font-size: 3.2rem;
 }
 
-.image-container{
-    position: relative;
+.display-4{
+    font-size:2.6rem;
 }
 
-.workshop-date{
-    position:absolute;
-    top:10%;
-    left:-0.2rem;
-    background-color: var(--primary-text-color);
-    color: var(--primary-background-color);
+.hide{
+    display: none;
 }
 
-.age-cat{
-    position:absolute;
-    bottom:0;
-    right:4rem;
-    font-family: var(--heading-font);
-    font-weight: bold;
+.notes{
+    opacity: 75%;
+    font-size: 1.4rem;
+    padding-top:1.5rem;
 }
-
-.child{
-    color:var(--third-highlight);
-}
-
-
 /* Buttons*/
 .btn-main{
     background-color: var(--text-highlight-color);
     color:var(--primary-background-color);
     font-family: var(--primary-font), sans-serif;
-    font-size: 1.5rem;
-    padding-left:40px;
-    padding-right:40px;
+    font-size: 1.8rem;
+    padding:0.8rem 2rem 0.8rem 2rem;
     box-shadow:2rem 2rem 5rem var(--second-highlight);
 }
 
@@ -94,15 +84,31 @@ body{
     background-color: var(--secondary-text-color);
     color:var(--primary-background-color);
     font-family: var(--primary-font), sans-serif;
-    font-size: 1.5rem;
-    padding-left:40px;
-    padding-right:40px;
+    font-size: 1.8rem;
+    padding:0.8rem 2rem 0.8rem 2rem;
     box-shadow:2rem 2rem 5rem var(--shadow-color);
 }
 
 .btn-second:hover{
     background-color: var(--secondary-background-color);
     color:var(--primary-text-color);
+}
+
+.btn-pag{
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    font-family: var(--primary-font);
+    font-size:1.8rem;
+    text-transform: uppercase;
+    margin-left:1rem;
+    margin-right:1rem;
+    padding:0.8rem 2rem 0.8rem 2rem;
+}
+
+.btn-pag:hover{
+    color: var(--text-highlight-color);
+    border-color: var(--text-highlight-color);
 }
 
 /* Navbar */
@@ -185,6 +191,29 @@ body{
     font-size:3rem;
 }
 
+/* forms */
+#contactForm .form-control{
+    font-size: 1.8rem;
+    color:var(--secondary-text-color);
+}
+/* Messages */
+
+.alert-success,
+.alert-danger{
+    --bs-alert-color:var(--primary-text-color);
+    --bs-alert-link-color: var(--primary-text-color);
+    padding-left:6rem;
+    padding-right:6rem;
+}
+.alert-success{
+    --bs-alert-bg:var(--success-background);
+    --bs-alert-border-color:var(--success-background);
+}
+.alert-danger{
+    --bs-alert-bg:var(--danger-background);
+    --bs-alert-border-color:var(--danger-background);
+}
+
 /*Home page*/
 /*hero image*/
 #hero{
@@ -200,7 +229,7 @@ body{
 
 
 #home-logo{
-    background-color: #fbfceedd;
+    background-color: var(--background-color-semi-transparent);
     border-radius: 10px 0 0 10px;
     padding:1rem 3rem 1rem 3rem;
     text-align: start;
@@ -210,17 +239,263 @@ body{
     max-height: 16vh;
 }
 
+#home-title{
+    margin-top: 2rem;
+    margin-bottom:4rem;
+}
 
 
 /*workshop listings*/
 
+.image-container{
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.card{
+    border-radius: 0.5rem;
+    background-color: var(--primary-background-color);
+    overflow-x:hidden;
+}
+
+.card-wrapper{
+    position: relative;
+    margin-bottom:6rem;
+    margin-left: 1rem;
+    margin-right:1rem;
+}
+
+.card-child{
+    border: 1px solid var(--third-highlight);
+    box-shadow:1rem 1rem 2rem var(--secondary-background-color) ;
+}
+
+.card-family{
+    border: 1px solid var(--second-highlight);
+    box-shadow:1rem 1rem 2rem var(--second-highlight) ;
+}
+
+.card-adult{
+    border: 1px solid var(--secondary-text-color);
+    box-shadow:1rem 1rem 2rem var(--shadow-color) ;
+}
+
+.card-img-top{
+    width:100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    z-index: 75;
+}
+
+.workshop-date{
+    position:absolute;
+    top:-1.5rem;
+    z-index:101;
+    left:1rem;
+        background-color: var(--primary-background-color);
+    padding-left:1rem;
+    padding-right:1rem;
+}
+
+.date {
+    color: var(--secondary-text-color);
+    font-family: var(--heading-font);
+    font-weight:bold;
+    margin-bottom: 0;
+}
+.low-stock{
+    position: absolute;
+    top:10%;
+    left:-4px;
+    background-color: var(--text-highlight-color);
+    color:var(--primary-background-color);
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    padding-left:1rem;
+    padding-right:1rem;
+}
+
+.low-stock p{
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+}
+
+.cover-bottom-corner{
+    background-color: var(--primary-background-color);
+    position:absolute;
+    bottom:-2.5rem;
+    right:-3rem;
+    height:8rem;
+    width:8rem;
+    border-radius: 4rem;
+    z-index: 80;
+}
+.age-cat-text{
+    position: absolute;
+    font-family: var(--heading-font);
+    font-weight: bold;
+    text-align: end;
+    margin-right: 4rem;
+    padding-left:2rem;
+    border-radius: 2rem 0 0 0;
+    right:0;
+    bottom:-2rem;
+    z-index: 100;
+    background-color: var(--primary-background-color);
+}
+
+.age-cat-symbol img{
+    position:absolute;
+    bottom:-2rem;
+    right:-0.5rem;
+    height:6rem;
+    z-index: 90;
+}
+
+.adults{
+    color:var(--secondary-text-color);
+}
+
+.family{
+    color:var(--second-highlight);
+}
+
+.child{
+    color:var(--third-highlight);
+}
+
+.workshop-link{
+    text-decoration: none;
+}
+
+.workshop-link p{
+    font-family: var(--primary-font);
+    color:var(--secondary-text-color);
+    font-size: 1.8rem;
+}
+
+.workshop-link p:hover{
+    color:var(--third-highlight);
+}
+
+.card-title{
+    color: var(--primary-text-color);
+}
+
+.workshop-link .card-title:hover{
+    color:var(--text-highlight-color);
+}
+
+.card-btn-wrapper{
+    display: flex;
+    margin-top:2rem;
+    margin-bottom:1rem;
+    justify-content: center;
+}
+
+.filter-options{
+    margin-right: 2rem;
+    margin-bottom:1rem;
+}
+.filter-options li{
+    list-style: none;
+}
+
+.filter-options a{
+    color:var(--primary-text-color);
+    text-decoration: none;
+}
+
+.filter-options a:hover{
+    color:var(--text-highlight-color);
+}
+
+#filter-dropdown-reveal-ages{
+    position:absolute;
+    z-index:101;
+    right:2rem;
+    background-color: var(--primary-background-color);
+    padding:0rem 3rem 1rem 3rem;
+}
+
 /*gallery*/
 
+/* Worshop details page */
 
+.workshop-header{
+    position:relative;
+    padding:0;
+}
+
+.workshop-detail-image{
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    width:100%;
+}
+
+.low-stock.detail-page{
+    left:0;
+    font-size:2.6rem;
+}
+
+.cover-bottom-corner.detail-page{
+    bottom:-4rem;
+    right:0.5rem;
+    height:12rem;
+    width:12rem;
+    border-radius: 6rem;
+}
+.age-cat-symbol.detail-page img{
+    right:3rem;
+    bottom:-5rem;
+    height:10rem;
+}
+.age-cat-text.detail-page{
+    right:8rem;
+}
+
+.section-at-a-glance .fa-solid{
+    font-size:2.2rem;
+    color:var(--second-highlight);
+    padding:1rem;
+}
+
+.workshop-title{
+    padding-top:2rem;
+    padding-bottom:4rem;
+}
+
+.section-workshop-detail{
+    margin-top: 4rem;
+}
+
+.accordion{
+    padding:4rem;
+    border-width:0;
+}
+.accordion-button{
+    font-size:1.8rem;
+    color:var(--primary-text-color);
+    background-color:var(--background-color-semi-transparent) ;    
+}
+
+.accordion-button:not(.collapsed){
+    color:var(--primary-background-color);
+    font-weight:bold;
+    background-color: var(--secondary-text-color);
+    box-shadow: 0.5rem 0.5rem 0.5rem var(--shadow-color);
+}
+
+.accordion-button:focus{
+    box-shadow: 0.5rem 0.5rem 0.5rem var(--secondary-background-color);
+}
 /* Media queries */
 
 
 /* Large screens 992px and above: laptops*/
 @media screen and (min-width:992px) {
+    .workshop-detail-image{
+        aspect-ratio: 16/5;
+    }
 
 }
