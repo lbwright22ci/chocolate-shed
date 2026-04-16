@@ -197,7 +197,9 @@ body{
     color:var(--secondary-text-color);
 }
 /* Messages */
-
+.alert{
+    margin-bottom: 0;
+}
 .alert-success,
 .alert-danger{
     --bs-alert-color:var(--primary-text-color);
