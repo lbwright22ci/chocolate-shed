@@ -11,6 +11,7 @@ class Contact(models.Model):
 
     class Meta:
         ordering =["created_on"]
-        
+
     def __str__(self):
-        return f"Collaboration request from {self.name}"
+        return f"Contact request from {self.name}"
+    

@@ -6,7 +6,7 @@
 <header class = "container section">
     <div class ="row text-center">
         <div class ="col-12">
-            <h1 class="display-1"> Contact us!</h1>
+            <h1 class="display-1"> Get in touch! </h1>
             
         </div>
     </div>
@@ -14,7 +14,15 @@
 
 
 <div class="container section">
-    <div class ="row justify-content-center">
+    <div class ="row">
+        <p> No issue is too big or small!  Please do drop us a message via our contact form or get in touch by 
+            phone or email.  Since we are often busy hosting workshops (and up to our elbows in chocolate!), it
+            might not always be possible to answer the phone- just leave a message and we'll get back to you.
+        </p>
+        <p class="notes"> We endeavour to respond to all queries within 2 working days. Please check your spam or
+            junk email folder if you haven't heard from us. </p>
+        </div>
+        <div class ="row align-items-center">
         <div class="col-12 col-md-6">
             <div class="row section-at-a-glance">
                 <div class="col-12">
@@ -27,6 +35,7 @@
                     <i class="fa-solid fa-phone"></i>  01564 000000 
                 </div>
             </div>
+            
         </div>
         <div class="col-12 col-md-6">
             <form id="contactForm" method="POST" >
@@ -37,7 +46,9 @@
         </div>
     </div>
 </div>
-
+<div class="container section">
+    <img src="{% static 'images/outside-building.webp' %}" class="workshop-detail-image" alt="image of the outside of the Chocolate Shed building">
+</div>
 
 {% endblock content %}
 
