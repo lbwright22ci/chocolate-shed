@@ -1,8 +1,8 @@
 {% load static %}
 
 {% url 'home' as home_url %}
-<!-- {% url 'contact' as contact_url %}
-{% url 'book_now' as booking_url %}
+{% url 'contact' as contact_url %}
+<!-- {% url 'book_now' as booking_url %}
 {% url 'my_account' as account_admin_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_register' as register_url %}
@@ -50,7 +50,7 @@
                         <a class="nav-link {% if request.path == home_url %} active" aria-current="page {% endif %}" aria-label ="Takes you to the home page" href="{% url 'home'%}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == contact_url %} active" aria-current="page {% endif %}" aria-label="takes you to the contact page" href=#>Contact Us</a>
+                        <a class="nav-link {% if request.path == contact_url %} active" aria-current="page {% endif %}" aria-label="takes you to the contact page" href="{% url 'contact' %}">Contact Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == booking_url %} active" aria-current="page {% endif %}" aria-label="takes you to the booking page" href=#>Book A Place!</a>

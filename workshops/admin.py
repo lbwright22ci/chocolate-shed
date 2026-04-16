@@ -13,12 +13,12 @@ class WorkshopActivityAdmin(SummernoteModelAdmin):
     summernote_fields =('full_description')
 
 @admin.register(Workshop)
-class WorkshopAdmin(SummernoteModelAdmin):
+class WorkshopAdmin(admin.ModelAdmin):
     """ Renders all instances of :model:`Workshop` in admin panel 
     
     """
     list_filter = ('publication_status', 'category')
-    search_fields =('event_date', 'title')
-    
+    search_fields =('event_date','activity')
+    list_display =('event_date', 'category__target_audience', 'activity__session_name')
 
 
