@@ -10,7 +10,7 @@ class ContactForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
-        self.fields['comment'].widget = forms.Textarea(attrs={'rows':6})
+        self.fields['comment'].widget = forms.Textarea(attrs={'rows':4})
 
     class Meta:
         model = Contact

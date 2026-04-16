@@ -79,6 +79,18 @@
     </nav>
 
     <!-- messages-->
+    <div class="container-fluid workshop-header">
+        <div class="row">
+            <div class="col-12">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible show" id="msg" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
     <main>
     <!-- main block content-->

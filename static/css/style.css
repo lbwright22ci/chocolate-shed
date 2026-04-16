@@ -17,6 +17,8 @@
     --second-highlight: #78a857ff; /* green*/
     --third-highlight: #f95d12ff; /* orange*/
     --background-color-semi-transparent: #fbfceedd;
+    --success-background:#78a85788;
+    --danger-background:#de1b2888;
 }
 
 /* Generic style rules*/
@@ -34,7 +36,6 @@ body{
 
 .section{
     padding:2rem;
-    
 }
 
 .display-1, 
@@ -188,6 +189,29 @@ body{
 .footer .fa-brands{
     padding:1.5rem;
     font-size:3rem;
+}
+
+/* forms */
+#contactForm .form-control{
+    font-size: 1.8rem;
+    color:var(--secondary-text-color);
+}
+/* Messages */
+
+.alert-success,
+.alert-danger{
+    --bs-alert-color:var(--primary-text-color);
+    --bs-alert-link-color: var(--primary-text-color);
+    padding-left:6rem;
+    padding-right:6rem;
+}
+.alert-success{
+    --bs-alert-bg:var(--success-background);
+    --bs-alert-border-color:var(--success-background);
+}
+.alert-danger{
+    --bs-alert-bg:var(--danger-background);
+    --bs-alert-border-color:var(--danger-background);
 }
 
 /*Home page*/
