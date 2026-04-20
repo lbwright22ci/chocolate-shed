@@ -1,11 +1,14 @@
-{% extends "account/base.html" %}
-
+{% extends "base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Email Addresses" %}{% endblock head_title %}
 
 {% block content %}
-    <h1>{% trans "Email Addresses" %}</h1>
+<div class="container section">
+  <div class="row justify-content-center">
+    <div class="col-12 md-6">
+      <h1 class="display-3">{% trans "Email Addresses" %}</h1>
 {% if emailaddresses %}
 <p>{% trans 'The following email addresses are associated with your account:' %}</p>
 
@@ -31,9 +34,9 @@
   {% endfor %}
 
 <div class="buttonHolder">
-      <button class="secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-      <button class="secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+      <button class="secondaryAction btn btn-second" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+      <button class="secondaryAction btn btn-second" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+      <button class="primaryAction btn btn-second" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
 </div>
 
 </fieldset>
@@ -44,14 +47,17 @@
 {% endif %}
 
   {% if can_add_email %}
-    <h2>{% trans "Add Email Address" %}</h2>
+    <h2 class="display-4">{% trans "Add Email Address" %}</h2>
 
     <form method="post" action="{% url 'account_email' %}" class="add_email">
         {% csrf_token %}
         {{ form.as_p }}
-        <button name="action_add" type="submit">{% trans "Add Email" %}</button>
+        <button class="btn btn-main" name="action_add" type="submit">{% trans "Add Email" %}</button>
     </form>
   {% endif %}
+    </div>
+  </div>
+</div>    
 
 {% endblock content %}
 

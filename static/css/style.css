@@ -34,6 +34,11 @@ body{
     margin-top:7.2rem;
 }
 
+a {
+    color: var(--text-highlight-color);
+}
+
+
 .section{
     padding:2rem;
 }
@@ -197,9 +202,9 @@ body{
     color:var(--secondary-text-color);
 }
 /* Messages */
-.alert{
-    margin-bottom: 0;
-}
+
+
+
 .alert-success,
 .alert-danger{
     --bs-alert-color:var(--primary-text-color);
@@ -214,6 +219,10 @@ body{
 .alert-danger{
     --bs-alert-bg:var(--danger-background);
     --bs-alert-border-color:var(--danger-background);
+}
+
+#msg .alert {
+    --bs-alert-margin-bottom: 0;
 }
 
 /*Home page*/
