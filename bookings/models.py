@@ -3,6 +3,14 @@ from django.contrib.auth.models import User
 from workshops.models import Workshop
 
 # Create your models here.
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    newsletter_consent = models.BooleanField(default=False)
+    staff_status =models.BooleanField(default = False)
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
+
 
 class Reservation(models.Model):
 

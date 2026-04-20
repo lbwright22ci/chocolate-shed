@@ -57,7 +57,8 @@
                             <div class="card mb-4">
                             {% endif %}
                                 <div class="card-body">
-                                    <div class="image-container">
+                                    <a href="{% url 'workshop_detail' workshop.slug %}" class="workshop-link">
+                                        <div class="image-container">
                                         {% if "placeholder_workshop" in workshop.primary_photo.url %}
                                         <img class="card-img-top" src="{% static 'images/logo-dark.webp' %}"
                                                         alt="placeholder image">
@@ -94,7 +95,8 @@
                                                 {{ workshop.category.get_target_audience_display }}
                                             </p>
                                         </div>
-                                    </div>
+                                        </div>
+                                    </a>
                                     <a href="{% url 'workshop_detail' workshop.slug %}" class="workshop-link">
                                         <h2 class="card-title display-4">{{ workshop.activity.session_name }}</h2>
                                         <p class="card-text">{{ workshop.activity.excerpt }} </p>

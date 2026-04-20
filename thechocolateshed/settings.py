@@ -176,15 +176,7 @@ AUTHENTICATION_BACKENDS = [
 
     # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
-    
 ]
-
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
-#LOGIN_REDIRECT_URL= 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1', 'password2']
-ACCOUNT_LOGIN_METHODS = {'email'}
-
 
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
@@ -207,9 +199,17 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERIFIED_EMAIL': True,
     },
 }
-# SOCIALACCOUNT_LOGIN_ON_GET = False
-# SOCIALACCOUNT_AUTO_SIGNUP = False
-# SOCIALACCOUNT_EMAIL_REQUIRED = True
-# SOCIALACCOUNT_EMAIL_VERIFICATION = False
-# SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
-# SOCIALACCOUNT_STORE_TOKENS = False
+SOCIALACCOUNT_LOGIN_ON_GET = False
+SOCIALACCOUNT_AUTO_SIGNUP = False
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = False
+SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
+SOCIALACCOUNT_STORE_TOKENS = False
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", 'password2*']
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SIGNUP_FORM_CLASS= 'bookings.forms.CustomSignupForm'

@@ -38,7 +38,6 @@ a {
     color: var(--text-highlight-color);
 }
 
-
 .section{
     padding:2rem;
 }
@@ -211,6 +210,7 @@ a {
     --bs-alert-link-color: var(--primary-text-color);
     padding-left:6rem;
     padding-right:6rem;
+    --bs-alert-margin-bottom:0;
 }
 .alert-success{
     --bs-alert-bg:var(--success-background);
@@ -221,9 +221,6 @@ a {
     --bs-alert-border-color:var(--danger-background);
 }
 
-#msg .alert {
-    --bs-alert-margin-bottom: 0;
-}
 
 /*Home page*/
 /*hero image*/
@@ -326,10 +323,7 @@ a {
     padding-right:1rem;
 }
 
-.low-stock p{
-    margin-bottom: 0.2rem;
-    margin-top: 0.2rem;
-}
+
 
 .cover-bottom-corner{
     background-color: var(--primary-background-color);
@@ -387,6 +381,13 @@ a {
 
 .workshop-link p:hover{
     color:var(--third-highlight);
+}
+
+.low-stock p,
+.low-stock p:hover{
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+    color:var(--primary-background-color);
 }
 
 .card-title{
