@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from cloudinary.models import CloudinaryField
@@ -56,4 +57,4 @@ class Workshop(models.Model):
         ordering = ['event_date']
 
     def __str__(self):
-        return f"{self.event_date} workshop for {self.category}"
+        return f"{self.activity.session_name} for {self.category.get_target_audience_display()} {self.event_date.strftime("%d-%b-%y %H:%M")}"

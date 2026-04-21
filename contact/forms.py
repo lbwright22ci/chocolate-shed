@@ -4,7 +4,7 @@ from .models import Contact
 
 class ContactForm(forms.ModelForm):
     """
-    Creates :form: from the :model:`cotact.Contact`
+    Creates :form: from the :model:`contact.Contact`
     Fields collected by the form are 'name', 'email' and 'messsage'
     """
 
