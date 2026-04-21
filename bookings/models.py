@@ -14,10 +14,10 @@ class UserProfile(models.Model):
 
 class Reservation(models.Model):
 
-    """ Stores details of a single reservation related to both :model: `Workshop` and :model: `auth.user`"""
+    """ Stores details of a single reservation related to both :model: `Workshop` and :model: `UserProfile`"""
 
     workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, related_name='session_to_attend')
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "bookee")
+    customer = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name = "bookee")
     adult_tickets = models.IntegerField(verbose_name='Number of adult places booked')
     child_tickets = models.IntegerField(verbose_name ='Number of child places booked')
     created_on = models.DateTimeField(auto_now_add= True)
