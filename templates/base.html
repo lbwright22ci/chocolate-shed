@@ -2,11 +2,12 @@
 
 {% url 'home' as home_url %}
 {% url 'contact' as contact_url %}
-{% url 'bookings' as bookings_url %}
+
 <!-- {% url 'my_account' as account_admin_url %}-->
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %} 
+{% url 'startbooking' as startbooking_url %}
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -53,7 +54,7 @@
                         <a class="nav-link {% if request.path == contact_url %} active" aria-current="page {% endif %}" aria-label="takes you to the contact page" href="{% url 'contact' %}">Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == bookings_url %} active" aria-current="page {% endif %}" aria-label="takes you to the booking page" href="{% url 'contact' %}">Book A Place!</a>
+                        <a class="nav-link {% if request.path == bookings_url %} active" aria-current="page {% endif %}" aria-label="takes you to the booking page" href="{% url 'startbooking' %}">Book A Place!</a>
                     </li>
                     
                 </ul>

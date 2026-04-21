@@ -18,8 +18,7 @@ class Reservation(models.Model):
 
     workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, related_name='session_to_attend')
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "bookee")
-    adult_tickets = models.IntegerField(verbose_name='Number of adult places booked')
-    child_tickets = models.IntegerField(verbose_name ='Number of child places booked')
+    tickets = models.IntegerField()
     created_on = models.DateTimeField(auto_now_add= True)
     updated_on = models.DateTimeField(auto_now= True)
     paid = models.BooleanField(default = False)
@@ -29,5 +28,6 @@ class Reservation(models.Model):
 
     class Meta:
         ordering= ["-updated_on"]
+        
     def __str__(self):
         return f"Booking by {self.customer} for {self.workshop.category} on {self.workshop.event_date}"
