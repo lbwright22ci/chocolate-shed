@@ -196,10 +196,16 @@ a {
 }
 
 /* forms */
-#contactForm .form-control{
+.form-control,
+.form-select{
     font-size: 1.8rem;
     color:var(--secondary-text-color);
 }
+.form-check-input{
+    width:1.8rem;
+    height:1.8rem;
+}
+
 /* Messages */
 
 

@@ -12,22 +12,29 @@
             <h1 class="display-3"> Book Now!</h1>
         </div>
     </div>
-    <div class="row">
-            {% if user.is_authenticated %}
-        <form id="RevervationForm" method="POST" >
+    <div class="row justify-content-center section">
+
+        {% if user.is_authenticated %}
+        <div class="col-10 col-md-8 col-lg-6">
+            <form id="RevervationForm" method="POST">
                 {{ booking_form | crispy }}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-main"> Next </button>
+                <button type="submit" class="btn btn-pag"> Next </button>
             </form>
-            {% else %}
+        </div>
+        {% else %}
+        <div class="col-10 col-md-8 col-lg-7 text-center">
             <p> Please register for an account or sign in to book a place on a workshop: </p>
-            <div class="col-6">
-                <a class="btn btn-second" type="submit" href="{% url 'account_signup' %}"> Register </a>
-            </div>
-            <div class="col-6">
-                <a class="btn btn-second" type="submit" href="{% url 'account_login' %}"> Sign in </a>
-            </div>
-            {% endif %}
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_signup' %}"> Register </a>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_login' %}"> Sign in </a>
+        </div>
+
+        {% endif %}
+
     </div>
 
 

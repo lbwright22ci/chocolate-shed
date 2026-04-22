@@ -16,15 +16,15 @@ class Reservation(models.Model):
 
     """ Stores details of a single reservation related to both :model: `Workshop` and :model: `auth.User`"""
 
-    workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, related_name='session_to_attend')
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "bookee")
-    tickets = models.IntegerField()
+    workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, related_name='workshop')
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "customer")
+    tickets = models.IntegerField( verbose_name ="Number of tickets to reserve")
     created_on = models.DateTimeField(auto_now_add= True)
     updated_on = models.DateTimeField(auto_now= True)
     paid = models.BooleanField(default = False)
     feedbackSubmitted = models.BooleanField(default = False)
-    has_dietary_requirements = models.BooleanField(default=False)
-    additional_information = models.TextField(blank=True, verbose_name="If 'yes' above, please give details of any allergies (eg. latose, gluten, nuts) or dietary requirements (eg. vegan, Halal, vegetarian)")
+    has_dietary_requirements = models.BooleanField(default=False, verbose_name="None of those attending have specific dietary needs or allergies")
+    additional_information = models.TextField(blank=True, verbose_name="If 'no' above, please give details of any allergies (eg. latose, gluten, nuts) or dietary requirements (eg. vegan, Halal, vegetarian)")
     consent_given = models.BooleanField(default = False, verbose_name="I agree to the terms and conditions of booking and have supplied accurate information about the dietary needs and allergies for those attending")
 
     class Meta:

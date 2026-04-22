@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+
+{% block content %}
+
+<div class=" container section">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="display-3"> My Bookings </h1>
+        </div>
+        <div class="col-10">
+            <p> Welcome {{ user.email }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container section">
+    <div class="row">
+        <p> These are the workshops you have coming up: </p>
+    </div>
+    {% for session in reservation_list %}
+    {% if session.workshop.publication_status == 1 %}
+    <div class="row">
+        <div class="col-12">
+            <h2 class="display-3">{{ session.workshop.activity.session_name }}</h2>
+        </div>
+        <div class="col-12 col-lg-6">
+            <i class="fa-solid fa-calendar-days"></i> {{ session.workshop.event_date|date:'l jS M y' }}, {{ session.workshop.event_date|time:'H:i' }}
+        </div>
+        <div class="col-12 col-lg-6">
+            <i class="fa-solid fa-clock"></i> {{ session.workshop.category.workshop_duration }} minutes
+        </div>
+        <div class="col-12 col-lg-6">
+            <i class="fa-solid fa-tag"></i> £{{ session.workshop.category.workshop_price }} per person
+        </div>
+
+        <div class="col-12">
+            <i class="fa-solid fa-location-dot"></i> {% if session.workshop.location == "on site" %} Yew
+            Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ session.workshop.location }} {% endif %}
+        </div>
+        <div class="col-12">
+            <p> Number of tickets booked: {{ session.tickets }}</p>
+            {% if not session.has_dietary_requirements %}
+
+            <p> None of those attending have any special dietary requirements and are happy to use milk, white or dark
+                chocolate.</p>
+            {% else %}
+            <p> Details of my dietary requirements are:</p>
+            <p> {{ session.additional_information }}</p>
+            {% endif %}
+        </div>
+        <div class="col-6">
+            <a class="btn btn-second" href="#"> Update </a>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-main" href="#"> Delete </a>
+        </div>
+        <hr>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+
+<div class="container section">
+    <div class="row">
+        <p> These are the workshops you have attended in the past: </p>
+    </div>
+    {% for session in reservation_list %}
+    {% if reservation.workshop.publication_status == 3 %}
+    <div class="row">
+        <div class="col-12">
+            <h2 class="display-3">{{ session.workshop.activity.session_name }}</h2>
+        </div>
+        <div class="col-12 col-lg-6">
+            <i class="fa-solid fa-calendar-days"></i> {{ session.workshop.event_date|date:'l jS M y' }}, {{
+            session.workshop.event_date|time:'H:i' }}
+        </div>
+        <div class="col-12 col-lg-6">
+            <i class="fa-solid fa-clock"></i> {{ session.workshop.category.workshop_duration }} minutes
+        </div>
+        <div class="col-12">
+            <i class="fa-solid fa-location-dot"></i> {% if session.workshop.location == "on site" %} Yew
+            Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ session.workshop.location }} {% endif %}
+        </div>
+        <div class="col-12">
+            <p> Number of tickets booked: {{ session.tickets }}</p>
+        </div>
+        {% if not session.feedbackSubmitted %}
+        <div class="col-6">
+            <a class="btn btn-second" href="#"> Submit Feedback </a>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <p> Your feedback for this session was:</p>
+        </div>
+        {% endif %}
+        <hr>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+
+
+{% endblock content %}
+
+<!-- {% block extra_scripts %}
+<script src="{% static 'js/booking_two.js' %}"></script>
+{% endblock extra_scripts %} -->

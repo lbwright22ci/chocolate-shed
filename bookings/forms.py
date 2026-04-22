@@ -25,3 +25,4 @@ class ReservationForm(forms.ModelForm):
         workshop_name = kwargs.pop('workshop_name')
         super(ReservationForm, self).__init__(*args, **kwargs)
         self.fields['workshop'].queryset = Workshop.objects.filter(activity = workshop_name, publication_status =1)
+        self.fields['additional_information'].widget = forms.Textarea(attrs={'rows':4})
