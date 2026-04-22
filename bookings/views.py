@@ -21,7 +21,7 @@ def booking(request):
     if request.method == 'POST' :
         form_one = WorkshopActivityForm(data=request.POST)
         if form_one.is_valid():
-            if(Workshop.objects.filter(pk=int(request.POST.get('activity')), publication_status = 1).count() == 0):
+            if(Workshop.objects.filter(activity=int(request.POST.get('activity')), publication_status = 1).count() == 0):
                messages.error (request, 'Sorry there are no dates available for this activity at the moment')
             else:
                 workshop_name = request.POST.get('activity')
