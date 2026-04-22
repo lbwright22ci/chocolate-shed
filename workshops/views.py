@@ -1,8 +1,9 @@
-#from datetime import datetime, timedelta
+from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 from .models import Workshop, WorkshopType
 
 # Create your views here.
@@ -17,6 +18,19 @@ from .models import Workshop, WorkshopType
     # workshop.ojects.filter(event_date -cancellation_period < today and session_to_attend.count() == 0).update(publication_status = 3)
 
 class WorkshopList(generic.ListView):
+
+    for wp in Workshop.objects.filter(publication_status=1):
+        if wp.tickets_sold > wp.max_places -3 :
+            wp.low_stock = True
+            wp.save()
+        if wp.event_date < timezone.now()-timedelta(days=2):
+            wp.publication_status = 3
+            wp.save()
+        elif wp.tickets_sold == 0:
+            if wp.event_date < timezone.now()-timedelta(days=21):
+                wp.publication_status = 2
+                wp.save()
+    
     queryset = Workshop.objects.filter(publication_status = 1)
     paginate_by = 6
     template_name = "workshop_list.hmtl"

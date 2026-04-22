@@ -66,10 +66,11 @@
                                         <img class="card-img-top" src=" {{ workshop.primary_photo.url }}"
                                                         alt="{{ workshop.activity.session_name }}">
                                         {% endif %}
-                                                    <!--add here display for low ticket nummbers-->
+                                        {% if workshop.low_stock %}
                                         <div class="low-stock">
                                             <p> Almost sold out!</p>
                                         </div>
+                                        {% endif %}
                                         <div class="cover-bottom-corner">
                                         </div>
                                         <div class="age-cat-symbol">

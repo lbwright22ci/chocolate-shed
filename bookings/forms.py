@@ -16,12 +16,12 @@ class WorkshopActivityForm(forms.ModelForm):
     class Meta:
         model = Workshop
         fields = ['activity']
-
+    
 class ReservationForm(forms.ModelForm):
     class Meta: 
         model = Reservation
-        fields = ['workshop', 'tickets', 'additional_information', 'consent_given']
+        fields = ['workshop', 'tickets', 'has_dietary_requirements', 'additional_information', 'consent_given']
     def __init__(self, *args, **kwargs):
         workshop_name = kwargs.pop('workshop_name')
         super(ReservationForm, self).__init__(*args, **kwargs)
-        self.fields['workshop'].queryset = Workshop.objects.filter(activity = workshop_name)
+        self.fields['workshop'].queryset = Workshop.objects.filter(activity = workshop_name, publication_status =1)

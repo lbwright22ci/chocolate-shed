@@ -7,9 +7,11 @@
 <header class="container-fluid workshop-header">
     <img class="workshop-detail-image" src="{{ workshop.primary_photo.url }}"
         alt="{{ workshop.activity.session_name }}">
+    {% if workshop.low_stock %}
     <div class="low-stock detail-page">
         <p> Almost sold out!</p>
     </div>
+    {% endif %}
     <div class="cover-bottom-corner detail-page">
     </div>
     <div class="age-cat-symbol detail-page">

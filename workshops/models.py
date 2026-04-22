@@ -52,6 +52,8 @@ class Workshop(models.Model):
     updated_on = models.DateField(auto_now= True)
     publication_status = models.IntegerField(choices = STATUS, default = 0)
     slug = models.SlugField(max_length=200, unique=True)
+    tickets_sold = models.IntegerField(default = 0)
+    low_stock = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['event_date']
