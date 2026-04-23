@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 from django.contrib.auth.models import User
 from workshops.models import Workshop
 
@@ -23,12 +24,12 @@ class Reservation(models.Model):
     updated_on = models.DateTimeField(auto_now= True)
     paid = models.BooleanField(default = False)
     feedbackSubmitted = models.BooleanField(default = False)
-    has_dietary_requirements = models.BooleanField(default=False, verbose_name="None of those attending have specific dietary needs or allergies")
-    additional_information = models.TextField(blank=True, verbose_name="If 'no' above, please give details of any allergies (eg. latose, gluten, nuts) or dietary requirements (eg. vegan, Halal, vegetarian)")
+    has_dietary_requirements = models.BooleanField(default=False, verbose_name="Members of my booking have specific dietary needs or allergies")
+    additional_information = models.TextField(blank=True, verbose_name="If 'yes' above, please give details of any allergies (eg. latose, gluten, nuts) or dietary requirements (eg. vegan, Halal, vegetarian)")
     consent_given = models.BooleanField(default = False, verbose_name="I agree to the terms and conditions of booking and have supplied accurate information about the dietary needs and allergies for those attending")
 
     class Meta:
         ordering= ["-updated_on"]
 
     def __str__(self):
-        return f"Booking by {self.customer} for {self.workshop.category} on {self.workshop.event_date}"
+        return f"Booking by {self.customer} for {self.workshop.category} on {self.workshop.event_date.strftime("%d-%b-%y %H:%M")}"

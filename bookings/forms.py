@@ -4,9 +4,13 @@ from .models import UserProfile, Reservation
 from workshops.models import Workshop, WorkshopActivity, WorkshopType
 
 class CustomSignupForm(forms.Form):
+    first_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
+    last_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
     newsletter_consent = forms.BooleanField()
-    def signup(self, request, user):
 
+    def signup(self, request, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
         user.save()
         profile = UserProfile(user=user)
         profile.newsletter_consent = self.cleaned_data.get('newsletter_consent', False)

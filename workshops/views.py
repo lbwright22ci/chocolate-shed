@@ -20,7 +20,7 @@ from .models import Workshop, WorkshopType
 class WorkshopList(generic.ListView):
 
     for wp in Workshop.objects.filter(publication_status=1):
-        if wp.tickets_sold > wp.max_places -3 :
+        if wp.tickets_sold > (wp.max_places - 3) :
             wp.low_stock = True
             wp.save()
         if wp.event_date < timezone.now()-timedelta(days=2):

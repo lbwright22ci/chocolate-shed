@@ -54,8 +54,9 @@ def submitbooking(request):
                 messages.success(request, 'booking made!')
                 #update number of tickets sold on this workshop
                 workshop_pending.tickets_sold = workshop_pending.tickets_sold + int(request.POST.get('tickets'))
+                workshop_pending.save()
 
-                return redirect(my_bookingsList)
+                return redirect('my_bookingsList')
 
             else:
                 messages.error(request, f'Sorry there are only { workshop_pending.max_places - workshop_pending.tickets_sold } tickets left')

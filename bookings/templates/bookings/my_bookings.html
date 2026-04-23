@@ -11,7 +11,7 @@
             <h1 class="display-3"> My Bookings </h1>
         </div>
         <div class="col-10">
-            <p> Welcome {{ user.email }}</p>
+            <p> Welcome {{ user.first_name }}</p>
         </div>
     </div>
 </div>
@@ -20,9 +20,20 @@
     <div class="row">
         <p> These are the workshops you have coming up: </p>
     </div>
+        <div class="col-12">
+            Payment for your workshop can be made in person on the day prior to the session starting or in advance 
+            by BACS.  Our details are: 'bank',  Account Number: 1234 5678 9012 Sort Code: 12-34-56. Please add the reference of 
+            your name and date of the workshop to your payment.
+        </div>
+        <div class="col-12">
+            <p> Please update your booking should the dietary requirements of those attending change.
+                If you have any queries then just get in touch by email: manager@business.com
+            </p>
+        </div>
+
     {% for session in reservation_list %}
     {% if session.workshop.publication_status == 1 %}
-    <div class="row">
+    <div class="row section-at-a-glance">
         <div class="col-12">
             <h2 class="display-3">{{ session.workshop.activity.session_name }}</h2>
         </div>
@@ -42,6 +53,10 @@
         </div>
         <div class="col-12">
             <p> Number of tickets booked: {{ session.tickets }}</p>
+            {% if session.workshop.category.target_audience == 'FA' %}
+            <p class="notes"> This is a family workshop.  Each person attending (both parents/adults and the children) need to have a place reserved to be able to stay and take part.</p>
+            {% endif %}
+
             {% if not session.has_dietary_requirements %}
 
             <p> None of those attending have any special dietary requirements and are happy to use milk, white or dark
@@ -51,6 +66,7 @@
             <p> {{ session.additional_information }}</p>
             {% endif %}
         </div>
+
         <div class="col-6">
             <a class="btn btn-second" href="#"> Update </a>
         </div>

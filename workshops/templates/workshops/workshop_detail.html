@@ -9,7 +9,7 @@
         alt="{{ workshop.activity.session_name }}">
     {% if workshop.low_stock %}
     <div class="low-stock detail-page">
-        <p> Almost sold out!</p>
+        <p> {% if workshop.max_places == workshop.tickets_sold %} Sold out {% else %}Almost sold out{% endif%}!</p>
     </div>
     {% endif %}
     <div class="cover-bottom-corner detail-page">

@@ -69,6 +69,8 @@ a {
     font-size: 1.4rem;
     padding-top:1.5rem;
 }
+
+
 /* Buttons*/
 .btn-main{
     background-color: var(--text-highlight-color);
@@ -209,6 +211,10 @@ a {
 #feedback_consent{
     color:var(--text-highlight-color);
 
+}
+
+options{
+    font-size:1.8rem;
 }
 
 /* Messages */
