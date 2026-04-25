@@ -70,7 +70,18 @@ a {
     padding-top:1.5rem;
 }
 
-
+.red-text{
+    color:var(--text-highlight-color);
+}
+.orange-text{
+    color:var(--third-highlight);
+}
+.green-text{
+    color: var(--second-highlight);
+}
+.bold-text{
+    font-weight:bold;
+}
 /* Buttons*/
 .btn-main{
     background-color: var(--text-highlight-color);
@@ -483,7 +494,8 @@ options{
     right:8rem;
 }
 
-.section-at-a-glance .fa-solid{
+.section-at-a-glance .fa-solid,
+.section-at-a-glance-bookings .fa-solid{
     font-size:2.2rem;
     color:var(--second-highlight);
     padding:1rem;
@@ -517,6 +529,11 @@ options{
 
 .accordion-button:focus{
     box-shadow: 0.5rem 0.5rem 0.5rem var(--secondary-background-color);
+}
+
+/* My bookings page*/
+.section-at-a-glance-bookings{
+    margin-bottom: 1.8rem;
 }
 /* Media queries */
 
