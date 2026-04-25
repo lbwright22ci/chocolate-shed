@@ -45,21 +45,27 @@ def submitbooking(request):
         form_two = ReservationForm(data=request.POST, workshop_name= request.session.get('workshop_name'))
         if form_two.is_valid():
             workshop_pending = Workshop.objects.get(pk=request.POST.get('workshop'))
-            print (workshop_pending.tickets_sold, workshop_pending.max_places, type(int(request.POST.get('tickets'))), int(request.POST.get('tickets')))
-            # need to check if enough tickets are available here
-            if int(request.POST.get('tickets')) <= workshop_pending.max_places - workshop_pending.tickets_sold:
-                reservation = form_two.save(commit=False)
-                reservation.customer = request.user
-                reservation.save()
-                messages.success(request, 'booking made!')
-                #update number of tickets sold on this workshop
-                workshop_pending.tickets_sold = workshop_pending.tickets_sold + int(request.POST.get('tickets'))
-                workshop_pending.save()
+            #if booked on a family workshop there needs to be at least 2 tickets reserved: one for child, one for adult
+            if not ( workshop_pending.category.target_audience == 'FA' and int(request.POST.get('tickets')) == 1):
 
-                return redirect('my_bookingsList')
+                # need to check if enough tickets are available here
+                if int(request.POST.get('tickets')) <= workshop_pending.max_places - workshop_pending.tickets_sold:
 
+
+                    reservation = form_two.save(commit=False)
+                    reservation.customer = request.user
+                    reservation.save()
+                    messages.success(request, 'booking made!')
+                    #update number of tickets sold on this workshop
+                    workshop_pending.tickets_sold = workshop_pending.tickets_sold + int(request.POST.get('tickets'))
+                    workshop_pending.save()
+
+                    return redirect('my_bookingsList')
+
+                else:
+                    messages.error(request, f'Sorry there are only { workshop_pending.max_places - workshop_pending.tickets_sold } tickets left')
             else:
-                messages.error(request, f'Sorry there are only { workshop_pending.max_places - workshop_pending.tickets_sold } tickets left')
+                messages.error(request, "The minimum booking for a family workshop is two: one adult & one child")
         else:
             messages.error(request, "There was an error submitting this form")
 

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% url 'startbooking' as startbooking_url %}
 
 {% block content %}
 <!-- to display details of the workshop session -->
@@ -77,7 +78,7 @@
         </div>
 
         <div class="card-btn-wrapper section">
-            <a href="" class="btn btn-main"> Book now </a>
+            <a href="{% url 'startbooking' %}" class="btn btn-main"> Book now </a>
         </div>
 
     </div>
