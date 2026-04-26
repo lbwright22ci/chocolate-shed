@@ -11,13 +11,14 @@ from .forms import WorkshopActivityForm, ReservationForm, UserProfileForm
 
 def my_account(request):
     current_user = UserProfile.objects.get(user__id = request.user.id)
+    print (current_user.newsletter_consent)
     sessions_attended = Reservation.objects.filter(customer = request.user, workshop__publication_status = 3).count()
     sessions_pending = Reservation.objects.filter(customer = request.user, workshop__publication_status = 1).count()
     return render(
         request,
         "bookings/my_account.html",
         {
-         "currrent_user":current_user,
+         "current_user": current_user,
          "sessions_attended": sessions_attended,
          "sessions_pending":sessions_pending
         },
@@ -27,12 +28,7 @@ def update_mailing(request):
     userprofile = UserProfile.objects.get(user__id = request.user.id)
 
     form = UserProfileForm(instance=userprofile)
-    sessions_attended = Reservation.objects.filter(customer = request.user, workshop__publication_status = 3).count()
-    if sessions_attended == 0 :
-        sessions_attended = False
-    else:
-        sessions_attended = True
-        
+
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST)
         if form.is_valid():
@@ -52,7 +48,7 @@ def update_mailing(request):
         request,
         'bookings/newsletter_update.html',
         {"form":form,
-         "sessions_attended":sessions_attended},
+        },
         )
 
 

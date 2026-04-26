@@ -433,6 +433,10 @@ options{
     justify-content: center;
 }
 
+#filter{
+    margin-bottom: 2rem;
+}
+
 .filter-options{
     margin-right: 2rem;
     margin-bottom:1rem;

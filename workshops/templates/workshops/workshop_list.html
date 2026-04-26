@@ -19,15 +19,15 @@
 <section class="container-fluid section">
     <div class="row text-center" id="home-title">
         <div class="col-12">
-            <h1><span class="display-1 ">THE</span><span class="display-3 "> home of </span><span
+            <h1><span class="display-1 red-text">THE</span><span class="display-3 "> home of </span><span
                     class="display-1 ">chocolate </span>
-                <span class="display-3 ">creativity!</span>
+                <span class="display-3"><span class="red-text">c</span><span class="green-text">r</span><span class="orange-text">e</span>a<span class="red-text">t</span><span class="green-text">i</span><span class="orange-text">v</span>i<span class="red-text">t</span><span class="green-text">y</span>!</span>
             </h1>
         </div>
     </div>
     <div class="row filter-options justify-content-end">
         <div class="col-12 text-end">
-            <p>Filter by:   <span id="filter-dropdown-ages"> Age range <i class="fa-solid fa-sort-down"></i></span></p>
+            <p id="filter">Filter by:   <span id="filter-dropdown-ages"> Age range <i class="fa-solid fa-sort-down"></i></span></p>
             <ul id="filter-dropdown-reveal-ages" class="hide">
                 <li><a href="{% url 'adult_workshops' %}" aria-label="selects only adult workshops"> Adults</a></li>
                 <li><a href="{% url 'child_workshops' %}" aria-label="selects only children's workshops">Children</a></li>
@@ -42,7 +42,7 @@
             <div class="col-12">
                 <div class="row">
                     {% for workshop in workshop_list %}
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-4">
                         <div class="card-wrapper">
                             <div class="workshop-date">
                                 <p class="date">{{ workshop.event_date|date:'jS M y a'}}</p>
@@ -109,10 +109,6 @@
                             </div>
                         </div>
                     </div>
-                    {% if forloop.counter|divisibleby:3 %}
-                    </div>
-                    <div class="row">
-                    {% endif %}
                     {% endfor %}
                     
                     </div>

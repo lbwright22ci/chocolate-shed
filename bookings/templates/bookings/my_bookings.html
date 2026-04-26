@@ -71,7 +71,7 @@
                 chocolate.</p>
             {% else %}
             <p class="bold-text"> Details of my dietary requirements are:</p>
-            <p> {{ session.additional_information }}</p>
+            <p> {{ session.additional_information | safe }}</p>
             {% endif %}
         </div>
         <div class="col-12">
@@ -91,28 +91,21 @@
 
 </div>
 
-{% if sessions_attended %}
-<div class="container section">
+<div class="container section" id="past-workshops">
     <div class="row">
         <p class="display-4"> These are the workshops you have attended in the past: </p>
+        <p> We'd love to hear your feedback!</p>
     </div>
     {% for session in reservation_list %}
-    {% if reservation.workshop.publication_status == 3 %}
-    <div class="row">
+    {% if session.workshop.publication_status == 3 %}
+    <div class="row justify-content-center">
         <div class="col-12">
-            <h2 class="display-3">{{ session.workshop.event_date|date:'l jS M y' }}, {{ session.workshop.event_date|time:'H:i' }}</h2>
-            <h3 class="display-4">{{ session.workshop.activity.session_name }} </h3>
+            <h2 class="display-4">{{ session.workshop.activity.session_name }}: {{ session.workshop.event_date|date:'jS M y' }}, {{ session.workshop.event_date|time:'H:i' }}</h2>
         </div>
         <div class="col-10 col-md-8">
             <div class="row section-at-a-glance-bookings">
                 <div class="col-12 col-lg-6">
-                    <i class="fa-brands fa-readme"></i> <a href="{ url 'workshop_detail' session.workshop.slug }">More information</a>
-                </div>
-                <div class="col-12 col-lg-6">
                     <i class="fa-solid fa-clock"></i> {{ session.workshop.category.workshop_duration }} minutes
-                </div>
-                <div class="col-12 col-lg-6">
-                    <i class="fa-solid fa-tag"></i> £{{ session.workshop.category.workshop_price }} per person
                 </div>
                 <div class="col-12">
                     <i class="fa-solid fa-location-dot"></i> {% if session.workshop.location == "on site" %} Yew
@@ -121,7 +114,7 @@
             </div>
         </div>
         <div class="col-12">
-            <p> Number of tickets booked: {{ session.tickets }}</p>
+            <p><span class="bold-text"> Number of tickets booked:</span> {{ session.tickets }}</p>
         </div>
         {% if not session.feedbackSubmitted %}
         <div class="col-6">
@@ -132,13 +125,13 @@
             <p> Your feedback for this session was:</p>
         </div>
         {% endif %}
-        <hr>
+        <hr class="section">
     </div>
     {% endif %}
     {% endfor %}
 
 </div>
-{% endif %}
+
 
 {% else %}
 <div class="container section">

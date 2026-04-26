@@ -48,7 +48,7 @@
             <h2 class="display-4"> Newsletter</h2>
             <div class="row">
                 <div class="col-12 col-md-6">
-                    {{ current_user.newsletter_consent }}
+    
                     {%  if current_user.newsletter_consent %}
                     <p> You are subscribed to our mailing list </p>
                     {% else %}
@@ -70,7 +70,7 @@
         <div class="col-12">
             <h2 class="display-4"> Workshops </h2>
             <p> You have {{ sessions_pending }} reservations coming up!  Find more details <a href="{% url 'my_bookingsList' %}">here</a>. </p>
-            <p> You have attended {{ sessions_attended }} workshops in the past </p>
+            <p> You have attended {{ sessions_attended }} workshops in the past. <a href="{% url 'my_bookingsList' %}">We'd love to hear your feedback!</a> </p>
         </div>
     </div>
 </div>
