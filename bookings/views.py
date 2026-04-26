@@ -4,16 +4,57 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
 from workshops.models import Workshop
-from .models import Reservation
-from .forms import WorkshopActivityForm, ReservationForm
+from .models import Reservation, UserProfile
+from .forms import WorkshopActivityForm, ReservationForm, UserProfileForm
 
 # Create your views here.
 
-# def booking(request):
-#     return HttpResponse("this page is working")
+def my_account(request):
+    current_user = UserProfile.objects.get(user__id = request.user.id)
+    sessions_attended = Reservation.objects.filter(customer = request.user, workshop__publication_status = 3).count()
+    sessions_pending = Reservation.objects.filter(customer = request.user, workshop__publication_status = 1).count()
+    return render(
+        request,
+        "bookings/my_account.html",
+        {
+         "currrent_user":current_user,
+         "sessions_attended": sessions_attended,
+         "sessions_pending":sessions_pending
+        },
+    )
 
-# def submitBooking(request):
-#     return HttpResponse("this page is working")
+def update_mailing(request):
+    userprofile = UserProfile.objects.get(user__id = request.user.id)
+
+    form = UserProfileForm(instance=userprofile)
+    sessions_attended = Reservation.objects.filter(customer = request.user, workshop__publication_status = 3).count()
+    if sessions_attended == 0 :
+        sessions_attended = False
+    else:
+        sessions_attended = True
+        
+    if request.method == 'POST':
+        form = UserProfileForm(data=request.POST)
+        if form.is_valid():
+            temp = request.POST.get('newsletter_consent')
+            
+            if temp == "on":
+                userprofile.newsletter_consent = True
+            else:
+                userprofile.newsletter_consent = False
+            userprofile.save()
+            
+            messages.success(request, 'Mailing list preferences updated!')
+            return redirect('my_account')
+        else:
+            messages.error(request, 'There was an error updating your mailing details')
+    return render(
+        request,
+        'bookings/newsletter_update.html',
+        {"form":form,
+         "sessions_attended":sessions_attended},
+        )
+
 
 def booking(request):
 

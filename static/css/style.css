@@ -495,7 +495,8 @@ options{
 }
 
 .section-at-a-glance .fa-solid,
-.section-at-a-glance-bookings .fa-solid{
+.section-at-a-glance-bookings .fa-solid,
+.section-at-a-glance-bookings .fa-brands{
     font-size:2.2rem;
     color:var(--second-highlight);
     padding:1rem;

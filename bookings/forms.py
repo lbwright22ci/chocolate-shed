@@ -6,7 +6,7 @@ from workshops.models import Workshop, WorkshopActivity, WorkshopType
 class CustomSignupForm(forms.Form):
     first_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
-    newsletter_consent = forms.BooleanField()
+    newsletter_consent = forms.BooleanField(required = False)
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
@@ -15,6 +15,12 @@ class CustomSignupForm(forms.Form):
         profile = UserProfile(user=user)
         profile.newsletter_consent = self.cleaned_data.get('newsletter_consent', False)
         profile.save()
+
+class UserProfileForm(forms.ModelForm):
+    newsletter_consent = forms.BooleanField(required=False)
+    class Meta:
+        model = UserProfile
+        fields = ['newsletter_consent']
 
 class WorkshopActivityForm(forms.ModelForm):
     class Meta:

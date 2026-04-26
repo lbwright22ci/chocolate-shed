@@ -29,7 +29,7 @@ class Reservation(models.Model):
     consent_given = models.BooleanField(default = False, verbose_name="I agree to the terms and conditions of booking and have supplied accurate information about the dietary needs and allergies for those attending")
 
     class Meta:
-        ordering= ["-updated_on"]
+        ordering= ["workshop__event_date"]
 
     def __str__(self):
         return f"Booking by {self.customer} for {self.workshop.category} on {self.workshop.event_date.strftime("%d-%b-%y %H:%M")}"

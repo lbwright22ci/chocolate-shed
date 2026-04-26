@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'password_change' as password_change_url %}
+{% url 'email' as email_url %}
+{% url 'update_mailing' as update_mailing_url %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class=" container section">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="display-3 "> Update mailing list preferences </h1>
+        </div>
+        <div class="col-12">
+            <p class="bold-text"> <i class="fa-solid fa-face-smile orange-text"></i> Welcome {{ user.first_name }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <form id="UserProfileForm" method="POST">
+                {{ form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-second"> Update! </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+            <hr>
+
+            
+       {% else %}
+<div class="container section">
+    <div class="row">
+        <div class="col-10 col-md-8 col-lg-7 text-center">
+            <p> Please register for an account or sign in: </p>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_signup' %}"> Register </a>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_login' %}"> Sign in </a>
+        </div>
+    </div>
+</div>
+        {% endif %}
+
+{% endblock content %}

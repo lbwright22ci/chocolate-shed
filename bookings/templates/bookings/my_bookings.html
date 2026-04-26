@@ -5,6 +5,8 @@
 
 {% block content %}
 
+
+{% if user.is_authenticated %}
 <div class=" container section">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -36,12 +38,13 @@
     {% if session.workshop.publication_status == 1 %}
     <div class="row justify-content-center">
         <div class="col-12">
-            <h2 class="display-3">{{ session.workshop.activity.session_name }}</h2>
+            <h2 class="display-4">{{ session.workshop.activity.session_name }}: {{ session.workshop.event_date|date:'jS M y' }}, {{ session.workshop.event_date|time:'H:i' }}</h2>
+            
         </div>
         <div class="col-10 col-md-8">
             <div class="row section-at-a-glance-bookings">
                 <div class="col-12 col-lg-6">
-                    <i class="fa-solid fa-calendar-days"></i> {{ session.workshop.event_date|date:'l jS M y' }}, {{ session.workshop.event_date|time:'H:i' }}
+                    <i class="fa-brands fa-readme"></i> <a href="{% url 'workshop_detail' session.workshop.slug %}"> More information </a>
                 </div>
                 <div class="col-12 col-lg-6">
                     <i class="fa-solid fa-clock"></i> {{ session.workshop.category.workshop_duration }} minutes
@@ -74,15 +77,13 @@
         <div class="col-12">
             <div class="row section justify-content-center justify-content-md-end">
                 <div class="col-12 col-md-4 section text-center text-md-end">
-                    
-                            <a class="btn btn-second" href="#"> Update details </a>
+                    <a class="btn btn-second" href="#"> Update details </a>
                 </div>
                 <div class="col-12 col-md-4 section text-center text-md-end">
-        <a class="btn btn-main" href="#"> Cancel booking </a>
-    </div>
+                    <a class="btn btn-main" href="#"> Cancel booking </a>
+                </div>
             </div>
         </div>
-
     <hr class = "section">
 </div>
 {% endif %}
@@ -90,6 +91,7 @@
 
 </div>
 
+{% if sessions_attended %}
 <div class="container section">
     <div class="row">
         <p class="display-4"> These are the workshops you have attended in the past: </p>
@@ -98,12 +100,13 @@
     {% if reservation.workshop.publication_status == 3 %}
     <div class="row">
         <div class="col-12">
-            <h2 class="display-3">{{ session.workshop.activity.session_name }}</h2>
+            <h2 class="display-3">{{ session.workshop.event_date|date:'l jS M y' }}, {{ session.workshop.event_date|time:'H:i' }}</h2>
+            <h3 class="display-4">{{ session.workshop.activity.session_name }} </h3>
         </div>
         <div class="col-10 col-md-8">
             <div class="row section-at-a-glance-bookings">
                 <div class="col-12 col-lg-6">
-                    <i class="fa-solid fa-calendar-days"></i> {{ session.workshop.event_date|date:'l jS M y' }}, {{ session.workshop.event_date|time:'H:i' }}
+                    <i class="fa-brands fa-readme"></i> <a href="{ url 'workshop_detail' session.workshop.slug }">More information</a>
                 </div>
                 <div class="col-12 col-lg-6">
                     <i class="fa-solid fa-clock"></i> {{ session.workshop.category.workshop_duration }} minutes
@@ -135,7 +138,25 @@
     {% endfor %}
 
 </div>
+{% endif %}
 
+{% else %}
+<div class="container section">
+    <div class="row">
+        <div class="col-10 col-md-8 col-lg-7 text-center">
+            <p> Please register for an account or sign in: </p>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_signup' %}"> Register </a>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_login' %}"> Sign in </a>
+        </div>
+    </div>
+</div>
+        
+
+{% endif %}
 
 {% endblock content %}
 

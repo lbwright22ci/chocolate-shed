@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_change_password' as change_password_url %}
+{% url 'account_email' as email_url %}
+{% url 'update_mailing' as update_mailing_url %}
+{% url 'my_bookingsList' as my_bookingsList_url %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class=" container section">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="display-1 text-center"> My Account! </h1>
+        </div>
+        <div class="col-12">
+            <p class="bold-text"> <i class="fa-solid fa-face-smile orange-text"></i> Welcome {{ user.first_name }}</p>
+        </div>
+    </div>
+</div>
+<div class="container section">
+    <div class="row">
+        <div class ="col-12">
+            <h2 class=" display-4"> Account Details</h2>
+            <p><span class="bold-text">Name:</span> {{ user.first_name }} {{user.last_name }} </p>
+            <p><span class="bold-text"> email: </span> {{ user.email }} </p>
+        </div>
+        <div class="row section justify-content-center justify-content-md-end">
+            <div class="col-12 col-md-4 section text-center text-md-end">
+                <a href="{% url 'account_email' %}" class="btn btn-second"> Update email </a>
+            </div>
+            <div class="col-12 col-md-4 section text-center text-md-end">    
+                <a href ="{% url 'account_change_password' %}" class="btn btn-second"> Update password </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr>
+
+<div class="container section">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="display-4"> Newsletter</h2>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    {{ current_user.newsletter_consent }}
+                    {%  if current_user.newsletter_consent %}
+                    <p> You are subscribed to our mailing list </p>
+                    {% else %}
+                    <p> You are not subscribed to our mailing list </p>
+                    {% endif %}
+                </div>
+                <div class="col-12 col-md-6 text-center">
+                    <a class="btn btn-second" href="{% url 'update_mailing' %}"> Change</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container section">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="display-4"> Workshops </h2>
+            <p> You have {{ sessions_pending }} reservations coming up!  Find more details <a href="{% url 'my_bookingsList' %}">here</a>. </p>
+            <p> You have attended {{ sessions_attended }} workshops in the past </p>
+        </div>
+    </div>
+</div>
+            
+{% else %}
+<div class="container section">
+    <div class="row">
+        <div class="col-10 col-md-8 col-lg-7 text-center">
+            <p> Please register for an account or sign in: </p>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_signup' %}"> Register </a>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_login' %}"> Sign in </a>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock content %}
