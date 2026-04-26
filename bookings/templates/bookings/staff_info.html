@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+{% if user.is_authenticated and current_user.staff_status %}
+<div class=" container section">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="display-1 text-center"> Staff information </h1>
+        </div>
+        <div class="col-12">
+            <p class="bold-text"> <i class="fa-solid fa-face-smile orange-text"></i> Welcome {{ user.first_name }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container section">
+
+    <div class="row">
+        {% if user.is_staff %}
+        <div class="col-12">
+            <p class="display-4"> Quick access links: </p>
+        </div>
+        
+        <div class="col-12">
+            <ul>
+                <li> Edit workshop details or create a new listing </li>
+                <li> Make a new booking through the back end </li>
+                <li> Update payment status of reservations </li>
+                <li> View 'Contact us' form entries </li>
+                <li> View and approve feedback comments </li>
+            </ul>
+        </div>
+        {% endif %}
+        <div class="col-12">
+            <p class="display-4"> These are the workshops you have coming up: </p>
+        </div>
+    </div>
+    {% for wp in workshopList %}
+    
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h2 class="display-4">{{ wp.activity.session_name }}: {{ wp.event_date|date:'jS M y' }}, {{ wp.event_date|time:'H:i' }}</h2>
+        </div>
+        <div class="col-10 col-md-8">
+            <div class="row section-at-a-glance-bookings">
+                <div class="col-12 col-lg-6">
+                    <i class="fa-solid fa-clock"></i> {{ wp.category.workshop_duration }} minutes
+                </div>
+                <div class="col-12">
+                    <i class="fa-solid fa-location-dot"></i> {% if wp.location == "on site" %} Yew
+                    Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ wp.location }} {% endif %}
+                </div>
+                <div class="col-12 col-lg-6">
+                    <p><span class="bold-text">Total number of tickets reserved:</span>{{ wp.tickets_sold }}/ {{ wp.max_places }}</p>
+                </div>
+            </div>
+        </div>
+        {% if wp.tickets_sold %}
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="c1" scope="col">Updated on</th>
+                        <th class="c3" scope="col">Name</th>
+                        <th class="c3" scope="col">email</th>
+                        <th class="c1" scope="col">Tickets</th>
+                        <th class="c1" scope="col">Allergies?</th>
+                        <th class="c2" scope="col">Details</th>
+                        <th class="c1" scope="col">Consent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    {% if booking.workshop == wp %}
+                    <tr>
+                        <th scope="row"> {{ booking.updated_on|date:'j m Y' }} </th>
+                        <td> {{ booking.customer.first_name }} {{ booking.customer.last_name }}</td>
+                        <td> {{ booking.customer.email }}</td>
+                        <td class="text-center"> {{ booking.tickets }} </td>
+                        <td class="text-center"> {% if booking.has_dietary_requirements %} <span class="red-text"><i class="fa-solid fa-circle-check"></i></span>
+                        {% else %} <span class="green-text"><i class="fa-solid fa-circle-xmark"></i></span>
+                        {% endif %}</td>
+                        <td > {% if booking.has_dietary_requirements %} {{ booking.additional_information|safe }} {% else %} None {% endif %}</td>
+                        <td class="text-center"> {% if booking.consent_given %} <span class="green-text"><i class="fa-solid fa-circle-check"></i></span>
+                        {% else %} <span class="red-text"><i class="fa-solid fa-circle-xmark"></i></span>
+                        {% endif %}</td></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+        <hr class = "section">
+    </div>
+    
+    {% endfor %}
+</div>
+
+{% else %}
+<div class="container section">
+    <div class="row">
+        <div class="col-10 col-md-8 col-lg-7 text-center">
+            <p> You must be staff to access this page! </p>
+        </div>
+    </div>
+</div>
+        
+
+{% endif %}
+
+{% endblock content %}
+
+<!-- {% block extra_scripts %}
+<script src="{% static 'js/booking_two.js' %}"></script>
+{% endblock extra_scripts %} -->

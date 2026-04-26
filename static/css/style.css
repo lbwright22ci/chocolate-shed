@@ -540,6 +540,17 @@ options{
 .section-at-a-glance-bookings{
     margin-bottom: 1.8rem;
 }
+
+/* staff page */
+.c1{
+    width: 10%;
+}
+.c2{
+    width:20%;
+}
+.c3{
+    width:15%;
+}
 /* Media queries */
 
 

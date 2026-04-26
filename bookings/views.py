@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from django.db.models import Sum
@@ -128,3 +129,18 @@ class my_bookingsList(generic.ListView):
     def get_queryset(self):
         return super().get_queryset().filter(customer = self.request.user)
     
+def staff_page(request):
+    workshopList = Workshop.objects.filter(publication_status = 1)
+    bookings = Reservation.objects.filter(workshop__publication_status = 1)
+    # max_date = timezone.today() + timedelta(days=90)
+    current_user = UserProfile.objects.get(user__id = request.user.id)
+
+    return render(
+        request,
+        'bookings/staff_info.html',
+        {"workshopList": workshopList,
+         "bookings": bookings,
+        #  "max_date": max_date,
+         "current_user": current_user,
+         },
+    )
