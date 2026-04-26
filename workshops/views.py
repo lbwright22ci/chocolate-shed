@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.views import generic
+from django.db.models import Sum
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from .models import Workshop, WorkshopType
+from bookings.models import Reservation
 
 # Create your views here.
 
@@ -19,6 +21,16 @@ from .models import Workshop, WorkshopType
 
 class WorkshopList(generic.ListView):
 
+
+    for wp in Workshop.objects.all():
+        wp_total = Reservation.objects.filter(workshop=wp).aggregate(tot=Sum('tickets'))['tot']
+
+        if wp_total:
+            wp.tickets_sold = wp_total
+        else:
+            wp.tickets_sold = 0
+        wp.save()
+        
     for wp in Workshop.objects.filter(publication_status=1):
         if wp.tickets_sold > (wp.max_places - 3) :
             wp.low_stock = True

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
+from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
@@ -77,6 +78,15 @@ def submitbooking(request):
     workshop_name = request.session.get('workshop_name')
 
     form_two = ReservationForm(workshop_name=request.session.get('workshop_name'))
+    
+    for wp in Workshop.objects.all():
+        wp_total = Reservation.objects.filter(workshop=wp).aggregate(tot=Sum('tickets'))['tot']
+
+        if wp_total:
+            wp.tickets_sold = wp_total
+        else:
+            wp.tickets_sold = 0
+        wp.save()
 
     if request.method =="POST":
         form_two = ReservationForm(data=request.POST, workshop_name= request.session.get('workshop_name'))
@@ -87,8 +97,6 @@ def submitbooking(request):
 
                 # need to check if enough tickets are available here
                 if int(request.POST.get('tickets')) <= workshop_pending.max_places - workshop_pending.tickets_sold:
-
-
                     reservation = form_two.save(commit=False)
                     reservation.customer = request.user
                     reservation.save()
@@ -98,7 +106,6 @@ def submitbooking(request):
                     workshop_pending.save()
 
                     return redirect('my_bookingsList')
-
                 else:
                     messages.error(request, f'Sorry there are only { workshop_pending.max_places - workshop_pending.tickets_sold } tickets left')
             else:
@@ -113,7 +120,7 @@ def submitbooking(request):
     )
 
 class my_bookingsList(generic.ListView):
-    
+
     model = Reservation
     template_name = 'bookings/my_bookings.html'
     

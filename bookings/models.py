@@ -33,3 +33,4 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f"Booking by {self.customer} for {self.workshop.category} on {self.workshop.event_date.strftime("%d-%b-%y %H:%M")}"
+
