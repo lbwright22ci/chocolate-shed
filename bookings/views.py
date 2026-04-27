@@ -132,7 +132,6 @@ class my_bookingsList(generic.ListView):
 def staff_page(request):
     workshopList = Workshop.objects.filter(publication_status = 1)
     bookings = Reservation.objects.filter(workshop__publication_status = 1)
-    # max_date = timezone.today() + timedelta(days=90)
     current_user = UserProfile.objects.get(user__id = request.user.id)
 
     return render(
@@ -140,7 +139,6 @@ def staff_page(request):
         'bookings/staff_info.html',
         {"workshopList": workshopList,
          "bookings": bookings,
-        #  "max_date": max_date,
          "current_user": current_user,
          },
     )

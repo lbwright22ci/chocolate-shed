@@ -28,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['.herokuapp.com', '.127.0.0.1',]
@@ -208,7 +208,7 @@ SOCIALACCOUNT_STORE_TOKENS = False
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", 'password2*']
 ACCOUNT_LOGIN_METHODS = {"email"}
