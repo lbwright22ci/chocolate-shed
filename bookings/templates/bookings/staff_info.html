@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% url 'admin' %}
 
 {% block content %}
 
@@ -18,33 +19,36 @@
 
 <div class="container section">
 
-    <div class="row">
+    <div class="row justify-content-center">
         {% if user.is_staff %}
         <div class="col-12">
-            <p class="display-4"> Quick access links: </p>
+            <h2 class="display-4"> Quick access links: </h2>
         </div>
         
-        <div class="col-12">
+        <div class="col-8">
             <ul>
-                <li> Edit workshop details or create a new listing </li>
-                <li> Make a new booking through the back end </li>
-                <li> Update payment status of reservations </li>
-                <li> View 'Contact us' form entries </li>
-                <li> View and approve feedback comments </li>
+                <li> <a href="{% url 'admin:workshops_workshop_changelist' %}"><i class="fa-solid fa-file-pen"></i></a> Edit workshop details or create a new listing </li>
+                <li> <a href="{% url 'admin:bookings_reservation_add' %}"><i class="fa-solid fa-file-pen"></i></a> Make a new booking through the back end </li>
+                <li> <a href="{% url 'admin:bookings_reservation_changelist' %}"><i class="fa-solid fa-file-pen"></i></a> Update payment status of reservations </li>
+                <li> <a href="{% url 'admin:contact_contact_changelist' %}"><i class="fa-solid fa-file-pen"></i></a> View 'Contact us' form entries </li>
+                <li> <a href="{% url 'admin:bookings_reservation_changelist' %}"><i class="fa-solid fa-file-pen"></i></a> View and approve feedback comments </li>
             </ul>
         </div>
+        <hr class="section">
+
         {% endif %}
         <div class="col-12">
-            <p class="display-4"> These are the workshops you have coming up: </p>
+            <h2 class="display-3 orange-text"> These are the workshops you have coming up: </h2>
         </div>
     </div>
+
     {% for wp in workshopList %}
     
     <div class="row justify-content-center">
         <div class="col-12">
-            <h2 class="display-4">{{ wp.activity.session_name }}: {{ wp.event_date|date:'jS M y' }}, {{ wp.event_date|time:'H:i' }}</h2>
+            <h3 class="display-4">{{ wp.activity.session_name }}: {{ wp.event_date|date:'jS M y' }}, {{ wp.event_date|time:'H:i' }}</h3>
         </div>
-        <div class="col-10 col-md-8">
+        <div class="col-10">
             <div class="row section-at-a-glance-bookings">
                 <div class="col-12 col-lg-6">
                     <i class="fa-solid fa-clock"></i> {{ wp.category.workshop_duration }} minutes
@@ -54,12 +58,12 @@
                     Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ wp.location }} {% endif %}
                 </div>
                 <div class="col-12 col-lg-6">
-                    <p><span class="bold-text">Total number of tickets reserved:</span>{{ wp.tickets_sold }}/ {{ wp.max_places }}</p>
+                    <p><span class="bold-text">Total number of tickets reserved: </span>{{ wp.tickets_sold }} / {{ wp.max_places }}</p>
                 </div>
             </div>
         </div>
         {% if wp.tickets_sold %}
-        <div class="col-12">
+        <div class="col-10">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -76,7 +80,7 @@
                     {% for booking in bookings %}
                     {% if booking.workshop == wp %}
                     <tr>
-                        <th scope="row"> {{ booking.updated_on|date:'j m Y' }} </th>
+                        <td> {{ booking.updated_on|date:'j m Y' }} </td>
                         <td> {{ booking.customer.first_name }} {{ booking.customer.last_name }}</td>
                         <td> {{ booking.customer.email }}</td>
                         <td class="text-center"> {{ booking.tickets }} </td>
