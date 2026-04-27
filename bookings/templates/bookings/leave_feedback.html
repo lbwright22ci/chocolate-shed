@@ -23,17 +23,17 @@
 <div class="container section">
 
     <div class="row">
-        <p class="display-4"> We'd love to hear your feedback from workshops you've attended in the past!</p>
+        <h2 class="display-3 red-text"> We'd love to hear your feedback from workshops you've attended in the past!</h2>
     </div>
 
     {% for bk in past_bookings %}
     <div class="row justify-content-center">
         <div class="col-12">
-            <h2 class="display-4">{{ bk.workshop.activity.session_name }}: {{ bk.workshop.event_date|date:'jS M y' }}, {{ bk.workshop.event_date|time:'H:i' }}</h2>            
+            <h3 class="display-4">{{ bk.workshop.activity.session_name }}: {{ bk.workshop.event_date|date:'jS M y' }}, {{ bk.workshop.event_date|time:'H:i' }}</h3>            
         </div>
         {% for fd in feedback_sorted %}
-        {% if fd.booking.id == bk.id %}
-        <div class="col-12">
+        {% if fd.booking.id == bk.id  and fd.submitted %}
+        <div class="col-12 col-lg-10">
             <p><span class="bold-text">Rating:</span>
                 {% if fd.feedback_rating == 1 %}
                 <span class="red-text"><i class="fa-solid fa-star"></i></span>
@@ -50,26 +50,34 @@
                 {% endif %} 
             </p>
         </div>
-        <div class="col-12">
+        <div class="col-12 col-lg-10">
             <p><span class="bold-text">Comment:</span> {{fd.feedback_comment | safe }}</p>
         </div>
-        <div class="col-12">
+        <div class="col-12 col-lg-10">
             {% if fd.recommend %}
             <p class="bold-text"> I would recommend this workshop to others. </p>
             {% else %}
             <p class="bold-text"> I would not recommend this workshop to others. </p>
             {% endif %}
         </div>
-
-        {% endif %}
-        {% endfor %}
-        <div class="col-12">
+        <div class="col-12 col-lg-10">
             <div class="row section justify-content-center justify-content-md-end">
                 <div class="col-12 col-md-4 section text-center text-md-end">
-                    <a class="btn btn-second" href="{% url 'feedback_form'  bk.id  %}"> Leave Feedback </a>
+                    <a class="btn btn-second" href="{% url 'feedback_form'  bk.id  %}" > Update </a>
                 </div>
             </div>
         </div>
+        {% elif fd.booking.id == bk.id  and not fd.submitted %}
+        <div class="col-12 col-lg-10">
+            <div class="row section justify-content-center justify-content-md-end">
+                <div class="col-12 col-md-4 section text-center text-md-end">
+                    <a class="btn btn-second" href="{% url 'feedback_form'  bk.id  %}" > Leave feedback </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
         <hr class = "section">
 </div>
 {% endfor %}
@@ -98,6 +106,3 @@
 
 {% endblock content %}
 
-<!-- {% block extra_scripts %}
-<script src="{% static 'js/booking_two.js' %}"></script>
-{% endblock extra_scripts %} -->

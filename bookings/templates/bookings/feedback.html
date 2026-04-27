@@ -3,42 +3,35 @@
 {% load crispy_forms_tags %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
-{% url 'password_change' as password_change_url %}
-{% url 'email' as email_url %}
-{% url 'update_mailing' as update_mailing_url %}
+
 
 {% block content %}
 
 {% if user.is_authenticated %}
 <div class=" container section">
     <div class="row justify-content-center">
-        <div class="col-12">
-            <h1 class="display-3 "> Leave Feedback! </h1>
+        <div class="col-12 text-center">
+            <h1 class="display-3 "> Feedback! </h1>
         </div>
         <div class="col-12">
             <p class="bold-text"> <i class="fa-solid fa-face-smile orange-text"></i> Welcome {{ user.first_name }}</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
         <div class ="col-10">
-            <p> Leaving feedback for {{ review.booking.workshop }}:</p>
-            <p> We will not publish your name or details for any feedback you give.  We may display your comments and workshop rating
+            <p> Leaving feedback for <span class="red-text bold-text">{{ review.booking.workshop.activity.session_name }}</span> hosted <span class="bold-text">{{ review.booking.workshop.event_date|date:'M y'}}</span>:</p>
+            <p class="notes"> We will not publish your name or details for any feedback you give.  We may display your comments and workshop rating
                 on our website for potential future customers to read.
             </p>
         </div>
-        <div class="col-10">
+        <div class="col-12">
             <form id="FeedbackForm" method="POST">
-                {{ form | crispy }}
+                {% crispy form %}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-second"> Update! </button>
             </form>
         </div>
     </div>
 </div>
-
-
-            <hr>
-
             
        {% else %}
 <div class="container section">

@@ -7,6 +7,7 @@
 {% url 'account_email' as email_url %}
 {% url 'update_mailing' as update_mailing_url %}
 {% url 'my_bookingsList' as my_bookingsList_url %}
+{% url 'feedback_page' as feedback_page_url %}
 
 {% block content %}
 
@@ -70,7 +71,7 @@
         <div class="col-12">
             <h2 class="display-4"> Workshops </h2>
             <p> You have {{ sessions_pending }} reservations coming up!  Find more details <a href="{% url 'my_bookingsList' %}">here</a>. </p>
-            <p> You have attended {{ sessions_attended }} workshops in the past. <a href="{% url 'my_bookingsList' %}">We'd love to hear your feedback!</a> </p>
+            <p> You have attended {{ sessions_attended }} workshops in the past. <a href="{% url 'feedback_page' %}">We'd love to hear your feedback!</a> </p>
         </div>
     </div>
 </div>

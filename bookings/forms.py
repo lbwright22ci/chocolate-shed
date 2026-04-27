@@ -1,9 +1,12 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit
+from crispy_forms.bootstrap import InlineRadios, Div
 from django.contrib.auth.models import User
 from .models import UserProfile, Reservation, Feedback
 from workshops.models import Workshop, WorkshopActivity, WorkshopType
 
-RATING = ((1, 'Terrible'), (2, 'Not as good as hoped'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Absolutely brilliant!'))
+RATING = ((1, 'Terrible'), (2, 'Not good'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Absolutely brilliant!'))
 
 class CustomSignupForm(forms.Form):
     first_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
@@ -41,6 +44,19 @@ class ReservationForm(forms.ModelForm):
 
 class FeedbackForm(forms.ModelForm):
     feedback_rating = forms.IntegerField(widget=forms.RadioSelect(choices = RATING))
+
     class Meta:
         model = Feedback
         fields = ['feedback_rating', 'feedback_comment', 'recommend']
+
+    def __init__(self, *args, **kwargs):
+        super(FeedbackForm, self).__init__(*args, **kwargs)
+        self.fields['feedback_comment'].widget = forms.Textarea(attrs={'rows':5})
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            InlineRadios('feedback_rating'),
+            'feedback_comment',
+            'recommend',
+            Submit('submit', 'Update', css_class='btn-second'),
+            
+        )

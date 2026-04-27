@@ -10,6 +10,7 @@
 {% url 'startbooking' as startbooking_url %}
 {% url 'my_bookingsList' as my_bookingsList_url %}
 {% url 'my_account' as my_account_url %}
+{% url 'feedback_page' as feedback_page_url %}
 {% url 'staff_page' as staff_page_url %}
 
 <!DOCTYPE html>
@@ -67,6 +68,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item " aria-label="takes you to account area to manage your account" href="{% url 'my_account' %}""> Settings </a></li>
                         <li><a class="dropdown-item "  aria-label="takes you to account area to manage bookings" href="{% url 'my_bookingsList' %}"> My workshops </a></li>
+                        <li><a class="dropdown-item "  aria-label="takes you to account area to leave feedback for past workshops" href="{% url 'feedback_page' %}"> Leave feedback </a></li>
                         {% if user.is_staff %}
                         <li><a class="dropdown-item "  aria-label="takes you to a staff page" href="{% url 'staff_page' %}"> Staff Area </a></li>
                         {% endif %}
