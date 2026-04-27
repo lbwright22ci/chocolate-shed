@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
 from workshops.models import Workshop
-from .models import Reservation, UserProfile
-from .forms import WorkshopActivityForm, ReservationForm, UserProfileForm
+from .models import Reservation, UserProfile, Feedback
+from .forms import WorkshopActivityForm, ReservationForm, UserProfileForm, FeedbackForm
 
 # Create your views here.
 
@@ -124,7 +124,6 @@ class my_bookingsList(generic.ListView):
 
     model = Reservation
     template_name = 'bookings/my_bookings.html'
-    
 
     def get_queryset(self):
         return super().get_queryset().filter(customer = self.request.user)
@@ -141,4 +140,49 @@ def staff_page(request):
          "bookings": bookings,
          "current_user": current_user,
          },
+    )
+
+def feedback_page(request):
+    current_user = UserProfile.objects.get(user__id = request.user.id)
+    past_bookings = Reservation.objects.filter(customer = request.user.id, workshop__publication_status = 3)
+    feedback_sorted = Feedback.objects.filter(booking__customer = request.user.id, booking__workshop__publication_status = 3)
+
+
+    return render(
+        request,
+        'bookings/leave_feedback.html',
+        {"current_user": current_user,
+         "past_bookings": past_bookings,
+         "feedback_sorted": feedback_sorted,
+          },
+    )
+
+def feedback_form(request, id):
+    review = Feedback.objects.get(booking__id = id)
+    form = FeedbackForm(instance=review)
+
+    if request.method == "POST":
+        form = FeedbackForm(data=request.POST, instance = review)
+        if form.is_valid:
+            temp = request.POST.get('recommend')
+            if temp == "on":
+                review.recommend = True
+            else:
+                review.recommend = False
+            review.feedback_comment = request.POST.get('feedback_comment')
+            review.feedback_rating = request.POST.get('feedback_rating')
+            review.submitted = True
+            review.approved = False
+            review.save() 
+            messages.success(request, 'Thank you for leaving feedback!')
+            return redirect ('feedback_page')
+        else:
+            messages.error(request, 'form not valid')
+
+
+    return render(
+        request,
+        'bookings/feedback.html',
+        {"form":form,
+         "review": review,},
     )

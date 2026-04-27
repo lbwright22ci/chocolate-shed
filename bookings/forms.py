@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import UserProfile, Reservation
+from .models import UserProfile, Reservation, Feedback
 from workshops.models import Workshop, WorkshopActivity, WorkshopType
+
+RATING = ((1, 'Terrible'), (2, 'Not as good as hoped'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Absolutely brilliant!'))
 
 class CustomSignupForm(forms.Form):
     first_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
@@ -36,3 +38,9 @@ class ReservationForm(forms.ModelForm):
         super(ReservationForm, self).__init__(*args, **kwargs)
         self.fields['workshop'].queryset = Workshop.objects.filter(activity = workshop_name, publication_status =1)
         self.fields['additional_information'].widget = forms.Textarea(attrs={'rows':4})
+
+class FeedbackForm(forms.ModelForm):
+    feedback_rating = forms.IntegerField(widget=forms.RadioSelect(choices = RATING))
+    class Meta:
+        model = Feedback
+        fields = ['feedback_rating', 'feedback_comment', 'recommend']

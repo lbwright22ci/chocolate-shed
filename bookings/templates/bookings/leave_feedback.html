@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+<div class=" container section">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="display-1 text-center"> Leave Feedback! </h1>
+        </div>
+        <div class="col-12">
+            <p class="bold-text"> <i class="fa-solid fa-face-smile orange-text"></i> Welcome {{ user.first_name }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container section">
+
+    <div class="row">
+        <p class="display-4"> We'd love to hear your feedback from workshops you've attended in the past!</p>
+    </div>
+
+    {% for bk in past_bookings %}
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h2 class="display-4">{{ bk.workshop.activity.session_name }}: {{ bk.workshop.event_date|date:'jS M y' }}, {{ bk.workshop.event_date|time:'H:i' }}</h2>            
+        </div>
+        {% for fd in feedback_sorted %}
+        {% if fd.booking.id == bk.id %}
+        <div class="col-12">
+            <p><span class="bold-text">Rating:</span>
+                {% if fd.feedback_rating == 1 %}
+                <span class="red-text"><i class="fa-solid fa-star"></i></span>
+                {% elif fd.feedback_rating == 2 %}
+                <span class="red-text"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                {% elif fd.feedback_rating == 3 %}
+                <span class="orange-text"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                {% elif fd.feedback_rating == 4 %}
+                <span class="green-text"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>  
+                {% elif fd.feedback_rating == 5 %}
+                <span class="green-text"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span> 
+                {% else %}
+                No rating left 
+                {% endif %} 
+            </p>
+        </div>
+        <div class="col-12">
+            <p><span class="bold-text">Comment:</span> {{fd.feedback_comment | safe }}</p>
+        </div>
+        <div class="col-12">
+            {% if fd.recommend %}
+            <p class="bold-text"> I would recommend this workshop to others. </p>
+            {% else %}
+            <p class="bold-text"> I would not recommend this workshop to others. </p>
+            {% endif %}
+        </div>
+
+        {% endif %}
+        {% endfor %}
+        <div class="col-12">
+            <div class="row section justify-content-center justify-content-md-end">
+                <div class="col-12 col-md-4 section text-center text-md-end">
+                    <a class="btn btn-second" href="{% url 'feedback_form'  bk.id  %}"> Leave Feedback </a>
+                </div>
+            </div>
+        </div>
+        <hr class = "section">
+</div>
+{% endfor %}
+
+</div>
+
+
+
+{% else %}
+<div class="container section">
+    <div class="row">
+        <div class="col-10 col-md-8 col-lg-7 text-center">
+            <p> Please register for an account or sign in: </p>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_signup' %}"> Register </a>
+        </div>
+        <div class="col-md-6 text-center section">
+            <a class="btn btn-second" type="submit" href="{% url 'account_login' %}"> Sign in </a>
+        </div>
+    </div>
+</div>
+        
+
+{% endif %}
+
+{% endblock content %}
+
+<!-- {% block extra_scripts %}
+<script src="{% static 'js/booking_two.js' %}"></script>
+{% endblock extra_scripts %} -->

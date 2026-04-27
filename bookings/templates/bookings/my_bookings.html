@@ -2,6 +2,7 @@
 {% load static %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
+{% url 'feedback_page' as feedback_page_url %}
 
 {% block content %}
 
@@ -61,7 +62,7 @@
         <div class="col-12">
             <p> <span class="bold-text">Number of tickets booked:</span> {{ session.tickets }}</p>
             {% if session.workshop.category.target_audience == 'FA' %}
-            <p class="notes red-text"> This is a family workshop. Each person attending (both parents/adults and the children)
+            <p class="bold-text red-text"> This is a family workshop. Each person attending (both parents/adults and the children)
                 need to have a place reserved to be able to stay and take part.</p>
             {% endif %}
 
@@ -91,46 +92,6 @@
 
 </div>
 
-<div class="container section" id="past-workshops">
-    <div class="row">
-        <p class="display-4"> These are the workshops you have attended in the past: </p>
-        <p> We'd love to hear your feedback!</p>
-    </div>
-    {% for session in reservation_list %}
-    {% if session.workshop.publication_status == 3 %}
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <h2 class="display-4">{{ session.workshop.activity.session_name }}: {{ session.workshop.event_date|date:'jS M y' }}, {{ session.workshop.event_date|time:'H:i' }}</h2>
-        </div>
-        <div class="col-10 col-md-8">
-            <div class="row section-at-a-glance-bookings">
-                <div class="col-12 col-lg-6">
-                    <i class="fa-solid fa-clock"></i> {{ session.workshop.category.workshop_duration }} minutes
-                </div>
-                <div class="col-12">
-                    <i class="fa-solid fa-location-dot"></i> {% if session.workshop.location == "on site" %} Yew
-                    Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ session.workshop.location }} {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <p><span class="bold-text"> Number of tickets booked:</span> {{ session.tickets }}</p>
-        </div>
-        {% if not session.feedbackSubmitted %}
-        <div class="col-6">
-            <a class="btn btn-second" href="#"> Submit Feedback </a>
-        </div>
-        {% else %}
-        <div class="col-12">
-            <p> Your feedback for this session was:</p>
-        </div>
-        {% endif %}
-        <hr class="section">
-    </div>
-    {% endif %}
-    {% endfor %}
-
-</div>
 
 
 {% else %}

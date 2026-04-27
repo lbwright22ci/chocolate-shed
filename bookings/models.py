@@ -1,7 +1,11 @@
 from django.db import models
 from datetime import datetime
+from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from workshops.models import Workshop
+
+
+RATING = ((0, 'not specified'),(1, 'Terrible'), (2, 'Not as good as hoped'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Absolutely brilliant!'))
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -23,7 +27,6 @@ class Reservation(models.Model):
     created_on = models.DateTimeField(auto_now_add= True)
     updated_on = models.DateTimeField(auto_now= True)
     paid = models.BooleanField(default = False)
-    feedbackSubmitted = models.BooleanField(default = False)
     has_dietary_requirements = models.BooleanField(default=False, verbose_name="Members of my booking have specific dietary needs or allergies")
     additional_information = models.TextField(blank=True, verbose_name="If 'yes' above, please give details of any allergies (eg. latose, gluten, nuts) or dietary requirements (eg. vegan, Halal, vegetarian)")
     consent_given = models.BooleanField(default = False, verbose_name="I agree to the terms and conditions of booking and have supplied accurate information about the dietary needs and allergies for those attending")
@@ -34,3 +37,25 @@ class Reservation(models.Model):
     def __str__(self):
         return f"Booking by {self.customer} for {self.workshop.category} on {self.workshop.event_date.strftime("%d-%b-%y %H:%M")}"
 
+class Feedback(models.Model):
+    booking = models.OneToOneField(Reservation, on_delete=models.CASCADE, related_name ='booking')
+    feedback_rating = models.IntegerField(choices=RATING, default=0)
+    feedback_comment = models.TextField(blank=True)
+    recommend = models.BooleanField(default=False, verbose_name='I would recommend this to others.')
+    updated_on = models.DateField(auto_now=True)
+    approved = models.BooleanField(default=False)
+    submitted = models.BooleanField(default=False)
+
+    class Meta:
+        ordering=["-updated_on"]
+
+    def __str__(self):
+        return f"Feedback by {self.booking.customer} for {self.booking.workshop.category}"
+    
+#create booking Feedback by default when booking is made:
+def create_feedback(sender, instance, created, **kwargs):
+    if created:
+        reservation_feedback = Feedback(booking=instance)
+        reservation_feedback.save()
+
+post_save.connect(create_feedback, sender=Reservation)
