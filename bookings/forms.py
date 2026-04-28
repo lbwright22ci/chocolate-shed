@@ -31,6 +31,9 @@ class WorkshopActivityForm(forms.ModelForm):
     class Meta:
         model = Workshop
         fields = ['activity']
+    def __init__(self, *args, **kwargs):
+        super(WorkshopActivityForm, self).__init__(*args, **kwargs)
+        self.fields['activity'].queryset = WorkshopActivity.objects.filter(activity__publication_status=1).distinct("session_name")
     
 class ReservationForm(forms.ModelForm):
     class Meta: 
