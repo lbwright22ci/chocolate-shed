@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from .models import UserProfile, Reservation, Feedback
 from workshops.models import Workshop, WorkshopActivity, WorkshopType
 
-RATING = ((1, 'Terrible'), (2, 'Not good'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Absolutely brilliant!'))
+RATING = ((1, 'Terrible'), (2, 'Disappointing'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Brilliant!'))
 
 class CustomSignupForm(forms.Form):
     first_name = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))

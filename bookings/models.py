@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from workshops.models import Workshop
 
 
-RATING = ((0, 'not specified'), (1, 'Terrible'), (2, 'Not good'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Absolutely brilliant!'))
+RATING = ((0, 'not specified'), (1, 'Terrible'), (2, 'Disappointing'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Brilliant!'))
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -48,6 +48,7 @@ class Feedback(models.Model):
 
     class Meta:
         ordering=["-booking__workshop__event_date"]
+        verbose_name_plural= "feedback"
 
     def __str__(self):
         return f"Feedback by {self.booking.customer} for {self.booking.workshop.category}"

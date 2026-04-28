@@ -97,7 +97,10 @@ a {
     color:var(--secondary-background-color);
 }
 
-.btn-second{
+.btn-second,
+.btn-primary,
+.btn-primary:active{
+    border-color: var(--secondary-text-color);
     background-color: var(--secondary-text-color);
     color:var(--primary-background-color);
     font-family: var(--primary-font), sans-serif;
@@ -106,7 +109,9 @@ a {
     box-shadow:2rem 2rem 5rem var(--shadow-color);
 }
 
-.btn-second:hover{
+.btn-second:hover,
+.btn-primary:hover{
+    border-color: var(--secondary-background-color);
     background-color: var(--secondary-background-color);
     color:var(--primary-text-color);
 }
@@ -222,6 +227,11 @@ a {
 #feedback_consent{
     color:var(--text-highlight-color);
 
+}
+
+.form-check-input:checked{
+    background-color: var(--secondary-text-color);
+    border-color: var(--secondary-text-color);
 }
 
 options{

@@ -32,9 +32,11 @@ class WorkshopActivity(models.Model):
     session_name = models.CharField(max_length=100)
     excerpt = models.CharField(max_length= 150)
     full_description = models.TextField()
-
+    class Meta:
+        verbose_name_plural ="workshop activities"
     def __str__(self):
         return f"{self.session_name}"
+    
 
 class Workshop(models.Model):
     """ Stores a single workshop entry related to :model:`WorkshopCategory`

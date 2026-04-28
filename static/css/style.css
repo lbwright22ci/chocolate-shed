@@ -98,7 +98,8 @@ a {
 }
 
 .btn-second,
-.btn-primary{
+.btn-primary,
+.btn-primary:active{
     border-color: var(--secondary-text-color);
     background-color: var(--secondary-text-color);
     color:var(--primary-background-color);
@@ -110,6 +111,7 @@ a {
 
 .btn-second:hover,
 .btn-primary:hover{
+    border-color: var(--secondary-background-color);
     background-color: var(--secondary-background-color);
     color:var(--primary-text-color);
 }

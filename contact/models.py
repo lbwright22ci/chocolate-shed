@@ -11,6 +11,7 @@ class Contact(models.Model):
 
     class Meta:
         ordering =["created_on"]
+        verbose_name_plural = "messages"
 
     def __str__(self):
         return f"Contact request from {self.name}"
