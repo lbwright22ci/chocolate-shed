@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let info = e.target.additional_information;
 
         let feedbackMsg = document.getElementById("feedback_consent");
-        console.log(info.value.length);
-        console.log(consent.checked);
+
+        feedbackMsg.innerText= '';
 
         if(!consent.checked){
             feedbackMsg.innerText = " You must agree to terms and conditions in order to confirm your booking";
@@ -19,7 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }else if(allergies.checked && info.value.length==0){
             feedbackMsg.innerText +=" You must provide further information about the allergies or dietary requirements members of your booking have." ;
-        }else{
+        }else if(info.value.length !=0 && allergies.checked == false){
+            feedbackMsg.innerText +="You must tick the 'Members of my group have specific dietary needs or allergies' if you are submitting further information.";
+        }
+        else {
             e.target.submit();
         }
     }

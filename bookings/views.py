@@ -11,6 +11,16 @@ from .forms import WorkshopActivityForm, ReservationForm, UserProfileForm, Feedb
 
 # Create your views here.
 
+def update_workshop_numbers():
+    for wp in Workshop.objects.all():
+        wp_total = Reservation.objects.filter(workshop=wp).aggregate(tot=Sum('tickets'))['tot']
+
+        if wp_total:
+            wp.tickets_sold = wp_total
+        else:
+            wp.tickets_sold = 0
+        wp.save()
+
 def my_account(request):
     current_user = UserProfile.objects.get(user__id = request.user.id)
     print (current_user.newsletter_consent)
@@ -80,14 +90,7 @@ def submitbooking(request):
 
     form_two = ReservationForm(workshop_name=request.session.get('workshop_name'))
     
-    for wp in Workshop.objects.all():
-        wp_total = Reservation.objects.filter(workshop=wp).aggregate(tot=Sum('tickets'))['tot']
-
-        if wp_total:
-            wp.tickets_sold = wp_total
-        else:
-            wp.tickets_sold = 0
-        wp.save()
+    update_workshop_numbers()
 
     if request.method =="POST":
         form_two = ReservationForm(data=request.POST, workshop_name= request.session.get('workshop_name'))
@@ -118,6 +121,52 @@ def submitbooking(request):
         request,
         'bookings/step-two.html',
         {'booking_form':form_two,},
+    )
+
+def update_booking(request, id):
+    original_booking = Reservation.objects.get(id = id)
+    customer = original_booking.customer
+    temp = original_booking.tickets
+    update_workshop_numbers()
+
+    form = ReservationForm(workshop_name=original_booking.workshop.activity, instance = original_booking)
+
+    if request.method =="POST":
+        form = ReservationForm(data=request.POST, workshop_name=original_booking.workshop.activity, instance = original_booking)
+        if form.is_valid():
+            #variables collected by the request
+            tickets_requested = int(request.POST.get('tickets'))
+            ticket_difference = tickets_requested - temp
+            
+            workshop_pending = Workshop.objects.get(pk=request.POST.get('workshop'))
+            
+            #if booked on a family workshop there needs to be at least 2 tickets reserved: one for child, one for adult
+            if not ( workshop_pending.category.target_audience == 'FA' and tickets_requested == 1):
+                
+                # need to check if enough tickets are available here
+                if ticket_difference <= workshop_pending.max_places - workshop_pending.tickets_sold:
+                    original_booking =form.save(commit=False)
+                    original_booking.save()
+                    messages.success(request, 'Booking updated!')
+                    #update number of tickets sold on this workshop
+                    workshop_pending.tickets_sold = workshop_pending.tickets_sold + ticket_difference
+                    workshop_pending.save()
+                    return redirect('my_bookingsList')
+                else:
+                    messages.error(request, f'Sorry there were only { workshop_pending.max_places - workshop_pending.tickets_sold } tickets left for this session and you requested { ticket_difference } extra places')
+                    
+            else:
+                messages.error(request, "The minimum booking for a family workshop is two: one adult & one child")
+        else:
+            messages.error(request, "There was an error submitting this form")
+
+
+    return render(
+        request,
+        "bookings/update_booking.html",
+        {"form":form,
+         "customer": customer,
+         "original_booking":original_booking,},
     )
 
 class my_bookingsList(generic.ListView):
