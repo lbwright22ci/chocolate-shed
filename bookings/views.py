@@ -169,6 +169,22 @@ def update_booking(request, id):
          "original_booking":original_booking,},
     )
 
+def delete_booking(request, id):
+    booking = get_object_or_404(Reservation, pk=id)
+    wk = booking.workshop
+    tk = booking.tickets
+
+    if booking.customer == request.user:
+        booking.delete()
+        #return tickets canceled back to the workshop total available:
+        wk.tickets_sold = wk.tickets_sold - tk
+        wk.save()
+        messages.add_message(request, messages.SUCCESS, f'Your reservation for { wk } has been canceled.  We hope you see you soon at another event.')
+    else:
+        messages.add_message(request, messages.ERROR, 'You do not have access to cancel this booking')
+
+    return HttpResponseRedirect(reverse('my_bookingsList'))
+
 class my_bookingsList(generic.ListView):
 
     model = Reservation

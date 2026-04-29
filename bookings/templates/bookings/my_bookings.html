@@ -78,10 +78,10 @@
         <div class="col-12">
             <div class="row section justify-content-center justify-content-md-end">
                 <div class="col-12 col-md-4 section text-center text-md-end">
-                    <a class="btn btn-second" href="{% url 'update_booking' session.id %}"> Update details </a>
+                    <a class="btn btn-second" href="{% url 'update_booking' session.id %}"> Update </a>
                 </div>
                 <div class="col-12 col-md-4 section text-center text-md-end">
-                    <a class="btn btn-main" href="#"> Cancel booking </a>
+                    <button class="btn btn-main btn-delete" data-booking_id="{{ session.id }}" data-booking_workshop="{{ session.workshop.activity }}" data-booking-tickets="{{ session.tickets }}"> Delete </button>
                 </div>
             </div>
         </div>
@@ -112,8 +112,35 @@
 
 {% endif %}
 
+<!-- Delete booking modal here -->
+<div class="modal fade" id="deleteModal" tabindex="-1"
+  aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="display-4"
+          id="deleteModalLabel"> Cancel Booking</h5>
+        <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body justify-content-center">
+        <p>Are you sure you want to cancel your booking for <span id="wk-del"></span> workshop?
+        </p>
+        <p class="red-text">This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-pag"
+          data-bs-dismiss="modal">Keep</button>
+        <a id="deleteConfirm" href="#" class="btn
+          btn-main">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {% endblock content %}
 
-<!-- {% block extra_scripts %}
-<script src="{% static 'js/booking_two.js' %}"></script>
-{% endblock extra_scripts %} -->
+{% block extra_scripts %}
+<script src="{% static 'js/delete_booking.js' %}"></script>
+{% endblock extra_scripts %}
