@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
-from crispy_forms.bootstrap import InlineRadios, Div
+
 from django.contrib.auth.models import User
 from .models import UserProfile, Reservation, Feedback
 from workshops.models import Workshop, WorkshopActivity, WorkshopType
@@ -55,11 +55,3 @@ class FeedbackForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FeedbackForm, self).__init__(*args, **kwargs)
         self.fields['feedback_comment'].widget = forms.Textarea(attrs={'rows':5})
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            InlineRadios('feedback_rating'),
-            'feedback_comment',
-            'recommend',
-            Submit('submit', 'Update', css_class='btn-second'),
-            
-        )

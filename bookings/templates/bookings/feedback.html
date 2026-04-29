@@ -24,10 +24,11 @@
                 on our website for potential future customers to read.
             </p>
         </div>
-        <div class="col-12">
+        <div class="col-10 col-lg-8">
             <form id="FeedbackForm" method="POST">
-                {% crispy form %}
+                {{ form | crispy }}
                 {% csrf_token %}
+                <button type="submit" class="btn btn-main justify-content-center"> Update! </button>
             </form>
         </div>
     </div>
