@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load math_filters %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'feedback_page' as feedback_page_url %}
@@ -50,9 +51,6 @@
                 <div class="col-12 col-lg-6">
                     <i class="fa-solid fa-clock"></i> {{ session.workshop.category.workshop_duration }} minutes
                 </div>
-                <div class="col-12 col-lg-6">
-                    <i class="fa-solid fa-tag"></i> £{{ session.workshop.category.workshop_price }} per person
-                </div>
                 <div class="col-12">
                     <i class="fa-solid fa-location-dot"></i> {% if session.workshop.location == "on site" %} Yew
                     Tree Farm, Wootton Wawen, B95 6BY {% else %} {{ session.workshop.location }} {% endif %}
@@ -61,6 +59,7 @@
         </div>
         <div class="col-12">
             <p> <span class="bold-text">Number of tickets booked:</span> {{ session.tickets }}</p>
+            <p> <span class="bold-text">Total:</span> £{{ session.tickets|multiply:session.workshop.category.workshop_price|floatformat:2 }} ( £{{ session.workshop.category.workshop_price|floatformat:2 }} per person)</p>
             {% if session.workshop.category.target_audience == 'FA' %}
             <p class="bold-text red-text"> This is a family workshop. Each person attending (both parents/adults and the children)
                 need to have a place reserved to be able to stay and take part.</p>
