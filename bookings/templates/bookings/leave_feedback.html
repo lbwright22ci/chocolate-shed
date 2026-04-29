@@ -65,6 +65,9 @@
                 <div class="col-12 col-md-4 section text-center text-md-end">
                     <a class="btn btn-second" href="{% url 'feedback_form'  bk.id  %}" > Update </a>
                 </div>
+                <div class="col-12 col-md-4 section text-center text-md-end">
+                    <button class="btn btn-main btn-delete" data-feedback_id="{{ fd.id }}"> Delete </button>
+                </div>
             </div>
         </div>
         {% elif fd.booking.id == bk.id  and not fd.submitted %}
@@ -104,5 +107,36 @@
 
 {% endif %}
 
+<!-- Delete feedback modal here -->
+<div class="modal fade" id="deleteModal" tabindex="-1"
+  aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="display-4"
+          id="deleteModalLabel"> Delete feedback comments </h5>
+        <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body justify-content-center">
+        <p>Are you sure you want to delete your feedback?
+        </p>
+        <p class="red-text">This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-pag"
+          data-bs-dismiss="modal">Keep</button>
+        <a id="deleteConfirm" href="#" class="btn
+          btn-main">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 {% endblock content %}
 
+{% block extra_scripts %}
+<script src="{% static 'js/delete_feedback.js' %}"></script>
+{% endblock extra_scripts %}

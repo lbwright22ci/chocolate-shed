@@ -9,6 +9,7 @@ urlpatterns = [
     path('my_bookings/<int:id>', views.update_booking, name="update_booking"),
     path('my_bookings/delete_booking/<int:id>', views.delete_booking, name="delete_booking"),
     path('leave_feedback/', views.feedback_page, name = 'feedback_page'),
+    path('leave_feedback/delete/<int:id>', views.delete_feedback, name="delete_feedback"),
     path('feedback/<int:id>', views.feedback_form, name="feedback_form"),
     path('mailing_list/', views.update_mailing, name='update_mailing'),
     path('staff_info/', views.staff_page, name='staff_page'),

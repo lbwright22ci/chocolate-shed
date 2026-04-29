@@ -222,6 +222,18 @@ def feedback_page(request):
           },
     )
 
+def delete_feedback(request, id):
+    review = Feedback.objects.get(pk = id)
+    review.feedback_comment= " "
+    review.feedback_rating =0
+    review.approved = False
+    review.submitted = False
+    review.recommend = False
+    review.save()
+    messages.add_message(request, messages.SUCCESS, "Your feedback for this workshop has been removed.")
+
+    return HttpResponseRedirect(reverse('feedback_page'))
+
 def feedback_form(request, id):
     review = Feedback.objects.get(booking__id = id)
     form = FeedbackForm(instance=review)
