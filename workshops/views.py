@@ -26,6 +26,9 @@ class WorkshopList(generic.ListView):
         if wp.tickets_sold > (wp.max_places - 3) :
             wp.low_stock = True
             wp.save()
+        else:
+            wp.low_stock = False
+            wp.save()
         if wp.event_date < timezone.now()-timedelta(days=2):
             wp.publication_status = 3
             wp.save()

@@ -561,6 +561,15 @@ options{
 .c3{
     width:15%;
 }
+
+.table{
+    margin-bottom: 0;
+}
+.table-holder{
+    overflow-x: auto;
+    width: 100%;
+    margin-bottom:1rem;
+}
 /* Media queries */
 
 
