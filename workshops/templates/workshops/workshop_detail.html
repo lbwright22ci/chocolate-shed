@@ -85,6 +85,57 @@
 </div>
 
 <div class="section container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="display-3"> Recent reviews </h2>
+    </div>
+    {% for review in feedback %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card feedback-card">
+          <div class="card-body">
+            <p class="card-rating">{% if review.feedback_rating == 1 %}
+                <span class="red-text"><i class="fa-solid fa-star"></i></span>
+                {% elif review.feedback_rating == 2 %}
+                <span class="red-text"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                {% elif review.feedback_rating == 3 %}
+                <span class="orange-text"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                {% elif review.feedback_rating == 4 %}
+                <span class="green-text"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>  
+                {% elif review.feedback_rating == 5 %}
+                <span class="green-text"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span> 
+                {% else %}
+                No rating left 
+                {% endif %} 
+            </p>
+            
+            <figure>
+            <blockquote class="blockquote">
+              <p>{{ review.feedback_comment | safe }}</p>
+            </blockquote>
+              {% if review.recommend %}
+              <p class="bold-text"> I would recommend this workshop to others. </p>
+              {% else %}
+              <p class="bold-text"> I would not recommend this workshop to others. </p>
+              {% endif %}
+            
+            <figurecaption class="blockquote-footer">
+              Review of {{ review.booking.workshop.activity.session_name }} hosted on {{ review.booking.workshop.event_date|date:'l jS M y' }}
+            </figurecaption>
+            </figure> 
+          
+          <div class="text-end">
+            <p class="notes"> Date:{{ review.updated_on|date:'j M y'}}</p>
+          </div>
+          </div>
+        </div>
+      </div>
+    
+    {% endfor %}
+  </div>
+</div>
+
+
+<div class="section container">
     <div class="row">
         <h2 class="display-3">FAQs</h2>
         <div class="col">

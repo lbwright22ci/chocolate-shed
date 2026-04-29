@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from .models import Workshop, WorkshopType
-from bookings.models import Reservation
+from bookings.models import Reservation, Feedback
 
 # Create your views here.
 
@@ -64,4 +64,8 @@ class AdultWorkshopList(generic.ListView):
 
 class WorkshopDetailView(generic.DetailView):
     model= Workshop
-    queryset = Workshop.objects.filter(publication_status=1)
+    queryset = Workshop.objects.filter(publication_status =1)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['feedback'] = Feedback.objects.filter(approved = True).order_by("-updated_on")[:6]
+        return context

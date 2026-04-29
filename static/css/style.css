@@ -443,6 +443,31 @@ options{
     justify-content: center;
 }
 
+.blockquote{
+    font-style: italic;
+    font-size: 1.4rem;
+}
+
+.blockquote-footer{
+    font-size: 1.4rem;
+    color:var(--secondary-text-color);
+}
+
+.card .notes{
+    padding-top:0;
+    padding-bottom:0;
+}
+
+.feedback-card{
+    padding:1rem 1rem 0 1rem;
+    margin:1rem 0;
+    border-color: var(--shadow-color);
+    font-size:1.4rem;
+}
+
+.card-rating{
+    font-size: 2.2rem;
+}
 #filter{
     margin-bottom: 2rem;
 }
