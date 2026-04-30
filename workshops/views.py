@@ -7,39 +7,20 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 from .models import Workshop, WorkshopType
 from bookings.models import Reservation, Feedback
+from bookings.views import update_workshop_numbers, update_publication_status
 
 # Create your views here.
 
-class WorkshopList(generic.ListView):
-
-
-    for wp in Workshop.objects.all():
-        wp_total = Reservation.objects.filter(workshop=wp).aggregate(tot=Sum('tickets'))['tot']
-
-        if wp_total:
-            wp.tickets_sold = wp_total
-        else:
-            wp.tickets_sold = 0
-        wp.save()
-        
-    for wp in Workshop.objects.filter(publication_status=1):
-        if wp.tickets_sold > (wp.max_places - 3) :
-            wp.low_stock = True
-            wp.save()
-        else:
-            wp.low_stock = False
-            wp.save()
-        if wp.event_date < timezone.now()-timedelta(days=2):
-            wp.publication_status = 3
-            wp.save()
-        elif wp.tickets_sold == 0:
-            if wp.event_date < timezone.now()-timedelta(days=21):
-                wp.publication_status = 2
-                wp.save()
-    
+class WorkshopList(generic.ListView):    
     queryset = Workshop.objects.filter(publication_status = 1)
     paginate_by = 6
     template_name = "workshop_list.hmtl"
+
+    def get_context_data(self, **kwargs):
+        update_workshop_numbers()
+        update_publication_status()
+        context = super().get_context_data(**kwargs)
+        return context
 
 class ChildrensWorkshopList(generic.ListView):
     model= Workshop

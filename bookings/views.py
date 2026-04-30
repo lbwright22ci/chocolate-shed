@@ -1,9 +1,11 @@
-from datetime import datetime, timedelta, timezone
+
+from datetime import datetime, timedelta
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
+from django.utils import timezone
 from django.views import generic
 from workshops.models import Workshop
 from .models import Reservation, UserProfile, Feedback
@@ -14,12 +16,24 @@ from .forms import WorkshopActivityForm, ReservationForm, UserProfileForm, Feedb
 def update_workshop_numbers():
     for wp in Workshop.objects.all():
         wp_total = Reservation.objects.filter(workshop=wp).aggregate(tot=Sum('tickets'))['tot']
-
         if wp_total:
             wp.tickets_sold = wp_total
         else:
             wp.tickets_sold = 0
+        if wp.tickets_sold > wp.max_places - 3:
+            wp.low_stock = True
+        else:
+            wp.low_stock = False
         wp.save()
+
+def update_publication_status():
+    for wp in Workshop.objects.filter(publication_status=1):
+        if wp.event_date < timezone.now()+timedelta(days=21) and wp.tickets_sold == 0:
+            wp.publication_status = 2
+            wp.save()
+        elif wp.event_date < timezone.now()+timedelta(days=2):
+            wp.publication_status = 3
+            wp.save()
 
 def my_account(request):
     current_user = UserProfile.objects.get(user__id = request.user.id)
@@ -67,6 +81,8 @@ def update_mailing(request):
 def booking(request):
 
     form_one = WorkshopActivityForm()
+    update_workshop_numbers()
+    update_publication_status()
 
     if request.method == 'POST' :
         form_one = WorkshopActivityForm(data=request.POST)
@@ -91,6 +107,7 @@ def submitbooking(request):
     form_two = ReservationForm(workshop_name=request.session.get('workshop_name'))
     
     update_workshop_numbers()
+    update_publication_status()
 
     if request.method =="POST":
         form_two = ReservationForm(data=request.POST, workshop_name= request.session.get('workshop_name'))
@@ -107,6 +124,10 @@ def submitbooking(request):
                     messages.success(request, 'booking made!')
                     #update number of tickets sold on this workshop
                     workshop_pending.tickets_sold = workshop_pending.tickets_sold + int(request.POST.get('tickets'))
+                    if workshop_pending.tickets_sold > workshop_pending.max_places-3:
+                        workshop_pending.low_stock = True
+                    else:
+                        workshop_pending.low_stock= False
                     workshop_pending.save()
 
                     return redirect('my_bookingsList')
@@ -127,7 +148,9 @@ def update_booking(request, id):
     original_booking = Reservation.objects.get(id = id)
     customer = original_booking.customer
     temp = original_booking.tickets
+
     update_workshop_numbers()
+    update_publication_status()
 
     form = ReservationForm(workshop_name=original_booking.workshop.activity, instance = original_booking)
 
@@ -150,6 +173,10 @@ def update_booking(request, id):
                     messages.success(request, 'Booking updated!')
                     #update number of tickets sold on this workshop
                     workshop_pending.tickets_sold = workshop_pending.tickets_sold + ticket_difference
+                    if workshop_pending.tickets_sold > workshop_pending.max_places-3:
+                        workshop_pending.low_stock = True
+                    else:
+                        workshop_pending.low_stock= False
                     workshop_pending.save()
                     return redirect('my_bookingsList')
                 else:
@@ -178,6 +205,10 @@ def delete_booking(request, id):
         booking.delete()
         #return tickets canceled back to the workshop total available:
         wk.tickets_sold = wk.tickets_sold - tk
+        if wk.tickets_sold > wk_pending.max_places-3:
+            wk.low_stock = True
+        else:
+            wk.low_stock= False
         wk.save()
         messages.add_message(request, messages.SUCCESS, f'Your reservation for { wk } has been canceled.  We hope you see you soon at another event.')
     else:
