@@ -25,13 +25,10 @@
         {% endif %}
     </div>
     <div class="age-cat-text detail-page">
-        {% if workshop.category.get_target_audience_display == "children" %}
-        <p class="child">
-            {% elif workshop.category.get_target_audience_display == "families" %}
-        <p class="family">
-            {% elif workshop.category.get_target_audience_display == "adults" %}
-        <p class="adults">
-            {% endif %}
+        
+        <p class="{% if workshop.category.get_target_audience_display == 'children' %} child
+        {% elif workshop.category.get_target_audience_display == 'families' %} family
+        {% elif workshop.category.get_target_audience_display == 'adults' %} adults {% endif %}">
             {{ workshop.category.get_target_audience_display }}
         </p>
     </div>
