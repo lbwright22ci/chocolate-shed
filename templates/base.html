@@ -2,11 +2,9 @@
 
 {% url 'home' as home_url %}
 {% url 'contact' as contact_url %}
-
-<!-- {% url 'my_account' as account_admin_url %}-->
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
-{% url 'account_logout' as logout_url %} 
+{% url 'account_logout' as logout_url %}
 {% url 'startbooking' as startbooking_url %}
 {% url 'my_bookingsList' as my_bookingsList_url %}
 {% url 'my_account' as my_account_url %}
@@ -43,7 +41,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg fixed-top border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo-light.webp' %}"></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/logo-light.webp' %}" alt="The Chocolate Shed logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -52,37 +50,38 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %} active" aria-current="page {% endif %}" aria-label ="Takes you to the home page" href="{% url 'home'%}">Home</a>
+                        <a class="nav-link {% if request.path == home_url %} active" aria-current="page{% endif %}" aria-label ="Takes you to the home page" href="{% url 'home'%}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == contact_url %} active" aria-current="page {% endif %}" aria-label="takes you to the contact page" href="{% url 'contact' %}">Contact Us</a>
+                        <a class="nav-link {% if request.path == contact_url %} active" aria-current="page{% endif %}" aria-label="takes you to the contact page" href="{% url 'contact' %}">Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == bookings_url %} active" aria-current="page {% endif %}" aria-label="takes you to the booking page" href="{% url 'startbooking' %}">Book A Place!</a>
+                        <a class="nav-link {% if request.path == startbooking_url %} active" aria-current="page{% endif %}" aria-label="takes you to the booking page" href="{% url 'startbooking' %}">Book A Place!</a>
                     </li>
                     
-                </ul>
-                <span class="nat-item dropdown">
-                    {% if user.is_authenticated %}
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user-gear"></i> My account </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item " aria-label="takes you to account area to manage your account" href="{% url 'my_account' %}""> Settings </a></li>
-                        <li><a class="dropdown-item "  aria-label="takes you to account area to manage bookings" href="{% url 'my_bookingsList' %}"> My workshops </a></li>
-                        <li><a class="dropdown-item "  aria-label="takes you to account area to leave feedback for past workshops" href="{% url 'feedback_page' %}"> Leave feedback </a></li>
+            
+                    <li class="nat-item dropdown">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user-gear"></i> My account </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item nav-link{% if request.path == my_account_url %} active" aria-current="page{% endif %}" aria-label="takes you to account area to manage your account" href="{% url 'my_account' %}"> Settings </a></li>
+                            <li><a class="dropdown-item nav-link{% if request.path == my_bookingsList_url %} active" aria-current="page{% endif %}"  aria-label="takes you to account area to manage bookings" href="{% url 'my_bookingsList' %}"> My workshops </a></li>
+                            <li><a class="dropdown-item nav-link{% if request.path == feedback_page_url %} active" aria-current="page{% endif %}"  aria-label="takes you to account area to leave feedback for past workshops" href="{% url 'feedback_page' %}"> Leave feedback </a></li>
                         {% if user.is_staff %}
-                        <li><a class="dropdown-item "  aria-label="takes you to a staff page" href="{% url 'staff_page' %}"> Staff Area </a></li>
+                            <li><a class="dropdown-item nav-link {% if request.path == staff_page_url %} active" aria-current="page{% endif %}"  aria-label="takes you to a staff page" href="{% url 'staff_page' %}"> Staff Area </a></li>
                         {% endif %}
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" aria-label="logout of your account" href="{% url 'account_logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Logout </a></li>
-                    </ul>
-                    {% else %}
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i> Register / Login </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" aria-label="register for an account " href="{% url 'account_signup' %}"> <i class="fa-solid fa-user-plus"></i> Register </a></li>
-                        <li><a class="dropdown-item " aria-label="login to my account " href="{% url 'account_login' %}"> <i class="fa-solid fa-left-from-bracket"></i> Login </a></li>
-                    </ul>
-                                        {% endif %}
-                </span>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item nav-link {% if request.path == logout_url %} active" aria-current="page{% endif %}" aria-label="logout of your account" href="{% url 'account_logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Logout </a></li>
+                        </ul>
+                        {% else %}
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i> Register / Login </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item nav-link {% if request.path == signup_url %} active" aria-current="page{% endif %}" aria-label="register for an account " href="{% url 'account_signup' %}"> <i class="fa-solid fa-user-plus"></i> Register </a></li>
+                            <li><a class="dropdown-item nav-link {% if request.path == login_url %} active" aria-current="page{% endif %}" aria-label="login to my account " href="{% url 'account_login' %}"> <i class="fa-solid fa-left-from-bracket"></i> Login </a></li>
+                        </ul>
+                        {% endif %}
+                    </il>
+                </ul>
             </div>
         </div>
     </nav>

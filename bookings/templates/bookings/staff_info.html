@@ -85,13 +85,13 @@
                         <td> {{ booking.customer.first_name }} {{ booking.customer.last_name }}</td>
                         <td> {{ booking.customer.email }}</td>
                         <td class="text-center"> {{ booking.tickets }} </td>
-                        <td class="text-center"> {% if booking.has_dietary_requirements %} <span class="red-text"><i class="fa-solid fa-triangle-exclamation"></i></i></span>
+                        <td class="text-center"> {% if booking.has_dietary_requirements %} <span class="red-text"><i class="fa-solid fa-triangle-exclamation"></i></span>
                         {% else %} <span class="green-text"><i class="fa-solid fa-shield-heart"></i></span>
                         {% endif %}</td>
                         <td > {% if booking.has_dietary_requirements %} {{ booking.additional_information|safe }} {% else %} None {% endif %}</td>
                         <td class="text-center"> {% if booking.consent_given %} <span class="green-text"><i class="fa-solid fa-circle-check"></i></span>
                         {% else %} <span class="red-text"><i class="fa-solid fa-circle-xmark"></i></span>
-                        {% endif %}</td></td>
+                        {% endif %}</td>
                     </tr>
                     {% endif %}
                     {% endfor %}

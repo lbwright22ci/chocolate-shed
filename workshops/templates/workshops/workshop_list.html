@@ -9,7 +9,7 @@
 <header class="container-fluid" id="hero">
     <div class="row" id="home-logo">
         <div class="col-3">
-            <img src="{% static 'images/logo-dark.webp' %}">
+            <img src="{% static 'images/logo-dark.webp' %}" alt="The Chocolate Shed logo">
         </div>
     </div>
 
@@ -127,8 +127,8 @@
             </ul>
         </nav>
         {% endif %}
-    </div>
-
+        </div>
+    </div>  
 
 </section>
 
@@ -157,12 +157,9 @@
     </div>
 </div>
 
-<!-- area to display feedback from past customers -->
-
 {% endblock content %}
 
 {% block extra_scripts %}
-    
     <!-- JavaScript code-->
     <script src="{% static 'js/workshop_list.js' %}"></script>
 
