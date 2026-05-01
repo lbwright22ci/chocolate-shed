@@ -60,20 +60,20 @@
                                     <a href="{% url 'workshop_detail' workshop.slug %}" class="workshop-link">
                                         <div class="image-container">
                                         {% if "placeholder_workshop" in workshop.primary_photo.url %}
-                                        <img class="card-img-top" src="{% static 'images/logo-dark.webp' %}"
+                                            <img class="card-img-top" src="{% static 'images/logo-dark.webp' %}"
                                                         alt="placeholder image">
                                         {% else %}
-                                        <img class="card-img-top" src=" {{ workshop.primary_photo.url }}"
+                                            <img class="card-img-top" src=" {{ workshop.primary_photo.url }}"
                                                         alt="{{ workshop.activity.session_name }}">
                                         {% endif %}
                                         {% if workshop.low_stock %}
-                                        <div class="low-stock">
+                                            <div class="low-stock">
                                             <p>{% if workshop.max_places == workshop.tickets_sold %} Sold out {% else %}Almost sold out{% endif%}!</p>
-                                        </div>
-                                        {% endif %}
-                                        <div class="cover-bottom-corner">
-                                        </div>
-                                        <div class="age-cat-symbol">
+                                            </div>
+                                            {% endif %}
+                                            <div class="cover-bottom-corner">
+                                            </div>
+                                            <div class="age-cat-symbol">
                                             {% if workshop.category.get_target_audience_display == "children" %}
                                             <img src="{% static 'images/orange-shed.webp' %}"
                                                             alt="orange coloured logo symbol">
@@ -84,8 +84,8 @@
                                             <img src="{% static 'images/chocolate-shed.webp' %}"
                                                             alt="chocolate coloured logo symbol">
                                             {% endif %}
-                                        </div>
-                                        <div class="age-cat-text">
+                                            </div>
+                                            <div class="age-cat-text">
                                         {% if workshop.category.get_target_audience_display == "children" %}
                                             <p class="child">
                                         {% elif workshop.category.get_target_audience_display == "families" %}
@@ -95,7 +95,7 @@
                                         {% endif %}
                                                 {{ workshop.category.get_target_audience_display }}
                                             </p>
-                                        </div>
+                                            </div>
                                         </div>
                                     </a>
                                     <a href="{% url 'workshop_detail' workshop.slug %}" class="workshop-link">
@@ -127,9 +127,10 @@
             </ul>
         </nav>
         {% endif %}
-        </div>
-    </div>  
-
+        
+    </div>
+    </div>
+</div>  
 </section>
 
 
