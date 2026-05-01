@@ -47,15 +47,11 @@
                             <div class="workshop-date">
                                 <p class="date">{{ workshop.event_date|date:'jS M y a'}}</p>
                             </div>
-                            {% if workshop.category.get_target_audience_display == "children" %}
-                            <div class="card mb-4 card-child">
-                            {% elif workshop.category.get_target_audience_display == "families" %}
-                            <div class=" card mb-4 card-family">
-                            {% elif workshop.category.get_target_audience_display == "adults" %}
-                            <div class="card-adult card mb-4">
-                            {% else %}
-                            <div class="card mb-4">
-                            {% endif %}
+                            
+                            <div class="card mb-4 {% if workshop.category.get_target_audience_display == 'children' %} card-child
+                            {% elif workshop.category.get_target_audience_display == 'families' %} card-family
+                            {% elif workshop.category.get_target_audience_display == 'adults' %} card-adult
+                            {% else %} {% endif %}">
                                 <div class="card-body">
                                     <a href="{% url 'workshop_detail' workshop.slug %}" class="workshop-link">
                                         <div class="image-container">
@@ -110,7 +106,6 @@
                         </div>
                     </div>
                     {% endfor %}
-                    
                 </div>
             </div>
         </div>
