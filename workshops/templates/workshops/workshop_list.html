@@ -99,7 +99,7 @@
                                         <p class="card-text">{{ workshop.activity.excerpt }} </p>
                                     </a>
                                     <div class="card-btn-wrapper">
-                                        <a class="btn btn-second" href="{% url 'workshop_detail' workshop.slug %}" >Find out more!</a>
+                                        <a class="btn btn-second" href="{% url 'workshop_detail' workshop.slug %}" aria-label="Takes you to a page to read more about the workshop {{ workshop.activity.session_name }}" >Find out more!</a>
                                     </div>
                                 </div>
                             </div>
