@@ -19,7 +19,7 @@
             <form id="ReservationForm2" method="POST">
                 {{ booking_form | crispy }}
                 {% csrf_token %}
-                <p id="feedback_consent"></p>
+                <p id="feedback-consent"></p>
                 <button type="submit" class="btn btn-main justify-content-center"> Book! </button>
             </form>
         </div>

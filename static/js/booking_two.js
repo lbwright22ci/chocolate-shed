@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let allergies = e.target.has_dietary_requirements;
         let info = e.target.additional_information;
 
-        let feedbackMsg = document.getElementById("feedback_consent");
+        let feedbackMsg = document.getElementById("feedback-consent");
 
         feedbackMsg.innerText= '';
 
