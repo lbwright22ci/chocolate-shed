@@ -19,11 +19,9 @@ class WorkshopActivityAdmin(SummernoteModelAdmin):
 
 @admin.register(Workshop)
 class WorkshopAdmin(admin.ModelAdmin):
-    """ Renders all instances of :model:`Workshop` in admin panel 
-    
-    """
+    """ Renders all instances of :model:`Workshop` in admin panel """
     list_filter = ('publication_status', 'category')
-    search_fields =('event_date','activity')
+    search_fields =('event_date', 'activity__session_name')
     list_display =('event_date', 'category__target_audience', 'activity__session_name', 'tickets_sold')
 
 

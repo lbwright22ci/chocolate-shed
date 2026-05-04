@@ -19,6 +19,7 @@
     --background-color-semi-transparent: #fbfceedd;
     --success-background:#78a85788;
     --danger-background:#de1b2888;
+    --bs-dropdown-link-active-bg: #693c10ff; 
 }
 
 /* Generic style rules*/
@@ -166,6 +167,7 @@ a {
 
 .navbar-nav .nav-link.active{
     text-decoration: underline;
+    background-color: var(--secondary-text-color);
 }
 .navbar a:hover,
 .navbar-nav .nav-link.active:hover,
@@ -202,8 +204,8 @@ a {
     margin-left: 1rem;
     margin-right: 1rem;
 }
-.dropdown-item:active,
-.dropdown-item .active{
+
+a.dropdown-item.nav-link.active{
     background-color: var(--secondary-text-color);
 }
 
