@@ -210,7 +210,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD ='email'
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", 'password2*']
 ACCOUNT_LOGIN_METHODS = ("email")
 ACCOUNT_SIGNUP_FORM_CLASS= 'bookings.forms.CustomSignupForm'

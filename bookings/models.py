@@ -1,5 +1,5 @@
-from django.db import models
 from datetime import datetime
+from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from workshops.models import Workshop
@@ -9,6 +9,15 @@ RATING = ((0, 'not specified'), (1, 'Terrible'), (2, 'Disappointing'), (3, 'Aver
 
 # Create your models here.
 class UserProfile(models.Model):
+    """ 
+    Extends :model:`auth.User` with additional fields of 'newsletter_consent' and 'staff_status'
+    
+    **Business Logic**
+    - Future development work can link customer newsletter status to mailing list client such as MailChimp via API
+    - Users with staff_status = True will have access to details such as number of people attending
+    a workshop and their allergies but not the ability to access the admin panel. Ideal for staff hosting events
+    who do not have admin or management role.
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     newsletter_consent = models.BooleanField(default=False)
     staff_status =models.BooleanField(default = False)
@@ -16,10 +25,14 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
-
 class Reservation(models.Model):
+    """ 
+    Stores details of a single reservation related to both :model: `Workshop` and :model: `auth.User`.
+    This has a OneToOne relationship to :model:`Feedback`.
 
-    """ Stores details of a single reservation related to both :model: `Workshop` and :model: `auth.User`"""
+    Fields included in this model are: 'workshop', 'customer', 'tickets', 'created_on','updated_on', 
+    'paid', 'has_dietary_requirements', 'additional_information', 'consent_given'
+    """
 
     workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, related_name='workshop')
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "customer")
@@ -38,6 +51,17 @@ class Reservation(models.Model):
         return f"Booking by {self.customer} for {self.workshop.category} on {self.workshop.event_date.strftime("%d-%b-%y %H:%M")}"
 
 class Feedback(models.Model):
+    """ 
+    Stores details of feedback from each instance of :model:`bookings.Reservation` by OneToOne relationship
+
+    **Business Logic**
+    An instance of Feedback is automatically created when a reservation is made.  
+    Customers can not leave feedback until after the event date of the session.
+    Feedback is not displayed publically until marked by site owner as 'approved'
+    
+    The fields of this model are `booking', 'feedback_rating', 'feedback_comment', 'recommend', 'updated_on'
+    'approved' and 'submitted'.
+    """
     booking = models.OneToOneField(Reservation, on_delete=models.CASCADE, related_name ='booking')
     feedback_rating = models.IntegerField(choices=RATING, default=0)
     feedback_comment = models.TextField(blank=True)

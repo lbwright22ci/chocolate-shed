@@ -6,7 +6,19 @@ from .forms import ContactForm
 
 # Create your views here.
 def contact_us(request):
-    
+    """
+    Displays Contact us page including :model:`contact.Contact`.
+
+    **Context**
+
+    ``contact_form``
+        An instance of :form:`contact.ContactForm`.
+
+    **Template:**
+
+    :template:`contact/contact.html`
+    """
+
     if request.method == "POST":
         contact_form = ContactForm(data=request.POST)
         if contact_form.is_valid():

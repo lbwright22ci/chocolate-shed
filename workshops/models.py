@@ -9,8 +9,12 @@ from cloudinary.models import CloudinaryField
 
 class WorkshopType(models.Model):
     
-    """ Stores a single workshop category (eg. kids, 1 hour workshop, costing £27.50 pp)"""
-
+    """ Stores a single workshop category (eg. kids, 1 hour workshop, costing £27.50 pp)
+    
+    Model fields are: `target_audience`, `workshop_duration` and `workshop_price`.
+    This model is a Foriegn Key of :model:`Worshop`
+    """
+    # Holds target audience options for workshop sessions 
     TYPE_CHOICES =(
         ('CH', 'children'),
         ('AD', 'adults'),
@@ -28,11 +32,17 @@ class WorkshopType(models.Model):
         return f"{self.workshop_duration} min {self.get_target_audience_display()}"
 
 class WorkshopActivity(models.Model):
-    """ Stores generic workshop information for sessions which have the same activity."""
+    """ Stores generic workshop information for sessions which have the same activity.
+    
+    The fields of this model are `session_name`, `excerpt` and `full_description`.
+    This model is a Foriegn key to :model:`Worshop`
+    """
     session_name = models.CharField(max_length=100)
     excerpt = models.CharField(max_length= 150)
     full_description = models.TextField()
+    
     class Meta:
+        #corrects pluralisation of this model.
         verbose_name_plural ="workshop activities"
     def __str__(self):
         return f"{self.session_name}"
@@ -40,8 +50,15 @@ class WorkshopActivity(models.Model):
 
 class Workshop(models.Model):
     """ Stores a single workshop entry related to :model:`WorkshopCategory`
-    and :model: `WorkshopActivity`"""
-
+    and :model: `WorkshopActivity`
+    
+    The fields of this model are `category`, `activity`, `event_date`, `location`, `max_places`,
+    `primary_photo`, `updated_on`, `publication_status`, `slug`, `tickets_sold` and `low_stock`.
+    Images are hosted by Cloudinary and should be compressed to webp format prior to uploading via
+    the admin panel.
+    """
+    # holds options for publication status of a workshop.  Cancelled workshops are those with no
+    # bookings when the event date is less than 3 weeks from the current date. 
     STATUS = ( (0, 'Draft'), (1, 'Open'), (2, 'Cancelled'), (3, 'Closed'))
 
     category = models.ForeignKey(WorkshopType, on_delete=models.CASCADE, related_name= 'category')
@@ -50,7 +67,6 @@ class Workshop(models.Model):
     location = models.CharField(max_length=400, default='on site')
     max_places = models.IntegerField(default = 12)
     primary_photo = CloudinaryField('cover_image', default ='placeholder_workshop')
-    secondary_photo = CloudinaryField('extra_image', blank = True)
     updated_on = models.DateField(auto_now= True)
     publication_status = models.IntegerField(choices = STATUS, default = 0)
     slug = models.SlugField(max_length=200, unique=True)

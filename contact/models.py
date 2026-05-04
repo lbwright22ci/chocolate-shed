@@ -2,7 +2,10 @@ from django.db import models
 
 # Create your models here.
 class Contact(models.Model):
-    """ Stores single contact form submission entry"""
+    """ Stores single contact form submission entry
+    
+    Model fields are: `name`, `email`, `comment`, `read` and `created_on`
+    """
     name = models.CharField(max_length=200)
     email = models.EmailField()
     comment = models.TextField()
@@ -11,6 +14,7 @@ class Contact(models.Model):
 
     class Meta:
         ordering =["created_on"]
+        # corrects the plural name for this model when displayed in admin panel.
         verbose_name_plural = "messages"
 
     def __str__(self):
