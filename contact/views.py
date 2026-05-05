@@ -25,7 +25,10 @@ def contact_us(request):
             contact_form.save()
             messages.add_message(
                 request, messages.SUCCESS,
-                'Thank you for contacting The Chocolate Shed.  We will be in touch as soon as possible.  Please check your "spam" or "junk" folder if you have not heard from us within 2 working days.'
+                'Thank you for contacting The Chocolate Shed.  We will'
+                ' be in touch as soon as possible.  Please check your'
+                ' "spam" or "junk" folder if you have not heard from us'
+                ' within 2 working days.'
             )
 
     contact_form = ContactForm()
@@ -33,7 +36,7 @@ def contact_us(request):
     return render(
         request,
         "contact/contact.html",
-         {
-          "contact_form":contact_form,
-          },
+        {
+            "contact_form": contact_form,
+        },
     )
