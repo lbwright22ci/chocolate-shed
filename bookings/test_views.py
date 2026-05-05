@@ -3,12 +3,12 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
-from .models import Workshop, WorkshopActivity, WorkshopType
-from bookings.models import Reservation, Feedback
+from workshops.models import Workshop, WorkshopActivity, WorkshopType
+from models import Reservation, Feedback
 
 # Create your tests here.
 
-class TestWorkshopViews(TestCase):
+class TestBookingViews(TestCase):
 
     def setUp(self):
 
@@ -66,58 +66,10 @@ class TestWorkshopViews(TestCase):
                                  location="on site", low_stock=False, 
                                  publication_status=2, event_date=timezone.now()+timedelta(days=20))
         self.childworkshopcanceled.save()
-
-    def test_render_home_page_with_workshop_list(self):
-        """ Verifies request to render home page content containing the
-          list of workshops with open publication status """
-        response = self.client.get(reverse('home'))
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b"open child workshop", response.content)
-        self.assertIn(b"open adult workshop", response.content)
-        self.assertIn(b"open family workshop", response.content)
-        self.assertNotIn(b"closed workshop", response.content)
-        self.assertNotIn(b"canceled workshop", response.content)
-
-    def test_render_childlist_page_with_only_childrens_workshops(self):
-        """ Verifies request to render child list page content containing the
-          list of workshops with open publication status """
-        response = self.client.get(reverse('child_workshops'))
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b"open child workshop", response.content)
-        self.assertNotIn(b"open adult workshop", response.content)
-        self.assertNotIn(b"open family workshop", response.content)
-        self.assertNotIn(b"closed workshop", response.content)
-        self.assertNotIn(b"canceled workshop", response.content)
-
-    def test_render_adult_page_with_workshop_list(self):
-        """ Verifies request to render adult list page content containing the
-          list of workshops with open publication status """
-        response = self.client.get(reverse('adult_workshops'))
-        self.assertEqual(response.status_code, 200)
-        self.assertNotIn(b"open child workshop", response.content)
-        self.assertIn(b"open adult workshop", response.content)
-        self.assertNotIn(b"open family workshop", response.content)
-        self.assertNotIn(b"closed workshop", response.content)
-        self.assertNotIn(b"canceled workshop", response.content)
-    
-    def test_render_familylist_page_with_only_childrens_workshops(self):
-        """ Verifies request to render family list page content containing the
-          list of workshops with open publication status """
-        response = self.client.get(reverse('family_workshops'))
-        self.assertEqual(response.status_code, 200)
-        self.assertNotIn(b"open child workshop", response.content)
-        self.assertNotIn(b"open adult workshop", response.content)
-        self.assertIn(b"open family workshop", response.content)
-        self.assertNotIn(b"closed workshop", response.content)
-        self.assertNotIn(b"canceled workshop", response.content)
-    
-    def test_render_workshop_detail_page(self):
-        """ Verifies request to render workshop detail page content containing
-         full description, price, Faqs and feedback """
-        response = self.client.get(reverse('workshop_detail', args=['workshop-slug-open-child']))
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b"long description", response.content)
-        self.assertIn(b"FAQ", response.content)
-        self.assertIn(b"Recent reviews", response.content)
-        self.assertIn(b"30", response.content)
-
+        # for testing Feedback from past workshop is displayed on the workshop detail
+        # page
+        self.customer = User.objects.create_user(email="test@test.com", password="myPassword", username="myUsername")
+        self.customer.save()
+        self.customer2 = User.objects.create_user(email="test1@test.com", password="secondpassword", username="anotherperson")
+        self.customer2.save()
+# Create your tests here.
