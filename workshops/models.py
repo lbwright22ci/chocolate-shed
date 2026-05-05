@@ -8,10 +8,12 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class WorkshopType(models.Model):
-    """ 
-    Stores a single workshop category (eg. kids, 1 hour workshop, costing £27.50 pp)
+    """
+    Stores a single workshop category (eg. kids, 1 hour workshop,
+    costing £27.50 pp)
 
-    Model fields are: `target_audience`, `workshop_duration` and `workshop_price`.
+    Model fields are: `target_audience`, `workshop_duration` and
+    `workshop_price`.
     This model is a Foriegn Key of :model:`Worshop`
     """
     # Holds target audience options for workshop sessions
@@ -35,9 +37,11 @@ class WorkshopType(models.Model):
 
 
 class WorkshopActivity(models.Model):
-    """ Stores generic workshop information for sessions which have the same activity.
+    """ Stores generic workshop information for sessions which
+      have the same activity.
 
-    The fields of this model are `session_name`, `excerpt` and `full_description`.
+    The fields of this model are `session_name`, `excerpt` and
+      `full_description`.
     This model is a Foriegn key to :model:`Worshop`
     """
     session_name = models.CharField(max_length=100)
@@ -53,15 +57,20 @@ class WorkshopActivity(models.Model):
 
 
 class Workshop(models.Model):
-    """ Stores a single workshop entry related to :model:`WorkshopCategory`
+    """ Stores a single workshop entry related to
+      :model:`WorkshopCategory`
     and :model: `WorkshopActivity`
 
-    The fields of this model are `category`, `activity`, `event_date`, `location`, `max_places`,
-    `primary_photo`, `updated_on`, `publication_status`, `slug`, `tickets_sold` and `low_stock`.
-    Images are hosted by Cloudinary and should be compressed to webp format prior to uploading via
+    The fields of this model are `category`, `activity`, `event_date`,
+      `location`, `max_places`,
+    `primary_photo`, `updated_on`, `publication_status`, `slug`,
+      `tickets_sold` and `low_stock`.
+    Images are hosted by Cloudinary and should be compressed to webp
+      format prior to uploading via
     the admin panel.
     """
-    # holds options for publication status of a workshop.  Cancelled workshops are those with no
+    # holds options for publication status of a workshop.  Cancelled
+    # workshops are those with no
     # bookings when the event date is less than 3 weeks from the current date.
     STATUS = ((0, 'Draft'), (1, 'Open'), (2, 'Cancelled'), (3, 'Closed'))
 

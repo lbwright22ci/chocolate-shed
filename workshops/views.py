@@ -11,32 +11,34 @@ from bookings.views import update_workshop_numbers, update_publication_status
 
 # Create your views here.
 
+
 class WorkshopList(generic.ListView):
     """
     Renders a paginated list of all workshops with the open publication status as well as a 
     gallery of images to encourage views to book
 
     Displays a list of all instances of the :model:`workshops.Workshop` with `publication_status=1`
-    
+
     **Context**
     ``workshop_list`` 
     All workshops open for bookings
 
     **Template**
     :template: `workshop_list.html`
-    """    
-    queryset = Workshop.objects.filter(publication_status = 1)
+    """
+    queryset = Workshop.objects.filter(publication_status=1)
     paginate_by = 6
     template_name = "workshop_list.hmtl"
 
     def get_context_data(self, **kwargs):
-        # checks workshop numbers are up to date. Corrects for any bookings or adjustments done via 
+        # checks workshop numbers are up to date. Corrects for any bookings or adjustments done via
         # the back end.  Ensures correct stock levels are displayed (eg. low stock or sold out)
         update_workshop_numbers()
         # checks against today's date whether a workshop session should be closed or cancelled.
         update_publication_status()
         context = super().get_context_data(**kwargs)
         return context
+
 
 class ChildrensWorkshopList(generic.ListView):
     """
@@ -45,7 +47,7 @@ class ChildrensWorkshopList(generic.ListView):
 
     Displays a list of all instances of the :model:`workshops.Workshop` with `publication_status=1` and 
     `category__target_audience = CH`
-    
+
     **Context**
     ``workshop_list`` 
     All children's workshops open for bookings
@@ -53,11 +55,13 @@ class ChildrensWorkshopList(generic.ListView):
     **Template**
     :template: `workshop_list.html`
     """
-    model= Workshop
+    model = Workshop
+
     def get_queryset(self):
-        return super().get_queryset().filter(category__target_audience ="CH", publication_status=1)
+        return super().get_queryset().filter(category__target_audience="CH", publication_status=1)
     paginate_by = 6
-    template_name= "workshop_list.html" 
+    template_name = "workshop_list.html"
+
 
 class FamilyWorkshopList(generic.ListView):
     """
@@ -66,7 +70,7 @@ class FamilyWorkshopList(generic.ListView):
 
     Displays a list of all instances of the :model:`workshops.Workshop` with `publication_status=1` and 
     `category__target_audience = FA`
-    
+
     **Context**
     ``workshop_list`` 
     All family workshops open for bookings
@@ -74,11 +78,13 @@ class FamilyWorkshopList(generic.ListView):
     **Template**
     :template: `workshop_list.html`
     """
-    model= Workshop
+    model = Workshop
+
     def get_queryset(self):
-        return super().get_queryset().filter(category__target_audience ="FA", publication_status=1)
+        return super().get_queryset().filter(category__target_audience="FA", publication_status=1)
     paginate_by = 6
-    template_name= "workshop_list.html" 
+    template_name = "workshop_list.html"
+
 
 class AdultWorkshopList(generic.ListView):
     """
@@ -87,7 +93,7 @@ class AdultWorkshopList(generic.ListView):
 
     Displays a list of all instances of the :model:`workshops.Workshop` with `publication_status=1` and 
     `category__target_audience = AD`
-    
+
     **Context**
     ``workshop_list`` 
     All adult's workshops open for bookings
@@ -95,17 +101,20 @@ class AdultWorkshopList(generic.ListView):
     **Template**
     :template: `workshop_list.html`
     """
-    model= Workshop
+    model = Workshop
+
     def get_queryset(self):
-        return super().get_queryset().filter(category__target_audience ="AD", publication_status=1)
+        return super().get_queryset().filter(category__target_audience="AD", publication_status=1)
     paginate_by = 6
-    template_name= "workshop_list.html" 
+    template_name = "workshop_list.html"
+
 
 class WorkshopDetailView(generic.DetailView):
     """
-    Renders details of a single instance of the :model:`workshops.Workshop` as well as displaying recent approved
+    Renders details of a single instance of the :model:`workshops.Workshop`
+      as well as displaying recent approved
     customer feedback and FAQs
-    
+
     **Context**
     ``workshop`` 
     All fields of the workshop category
@@ -116,9 +125,11 @@ class WorkshopDetailView(generic.DetailView):
     **Template**
     :template: `workshop_detail.html`
     """
-    model= Workshop
-    queryset = Workshop.objects.filter(publication_status =1)
+    model = Workshop
+    queryset = Workshop.objects.filter(publication_status=1)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['feedback'] = Feedback.objects.filter(approved = True).order_by("-updated_on")[:6]
+        context['feedback'] = Feedback.objects.filter(
+            approved=True).order_by("-updated_on")[:6]
         return context

@@ -14,7 +14,7 @@ import os
 import sys
 from django.contrib.messages import constants as messages
 import dj_database_url
-if os.path.isfile('env.py'): 
+if os.path.isfile('env.py'):
     import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -108,8 +108,8 @@ WSGI_APPLICATION = 'thechocolateshed.wsgi.application'
 # }
 
 DATABASES = {
-'default':
-dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default':
+    dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 if 'test' in sys.argv:
@@ -150,7 +150,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-MESSAGE_TAGS ={
+MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.ERROR: 'alert-danger',
 }
@@ -188,7 +188,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': os.environ.get("GOOGLE_SECRET"),
             'key': ''
         },
-        'SCOPE':[
+        'SCOPE': [
             'profile',
             'email',
         ],
@@ -209,8 +209,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_AUTHENTICATION_METHOD ='email'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", 'password2*']
 ACCOUNT_LOGIN_METHODS = ("email")
-ACCOUNT_SIGNUP_FORM_CLASS= 'bookings.forms.CustomSignupForm'
+ACCOUNT_SIGNUP_FORM_CLASS = 'bookings.forms.CustomSignupForm'
