@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from django.test import TestCase
 from django.utils import timezone
 from workshops.models import WorkshopType, Workshop, WorkshopActivity
-from .forms import UserProfileForm, WorkshopActivityForm, ReservationForm, FeedbackForm
+from .forms import UserProfileForm, ReservationForm, FeedbackForm
 
 # Create your tests here.
 
@@ -160,3 +160,38 @@ class TestReservationForm(TestCase):
             'consent_given': True
             }, workshop_name = act_pk.pk)
         self.assertFalse(form.is_valid(), msg='Form is valid if no workshop selected')
+
+class TestFeedbackForm(TestCase):
+
+    def test_form_is_valid_when_all_fields_selected(self):
+        """ Test that form is valid when all fields completed """
+        form = FeedbackForm({
+            'feedback_rating':1,
+            'feedback_comment':'comment',
+            'recommend': True
+            })
+        self.assertTrue(form.is_valid(), msg='Form is not valid')
+    def test_form_is_valid_when_comment_is_blank(self):
+        """ Test that form is valid when feedback comment is blank """
+        form = FeedbackForm({
+            'feedback_rating':1,
+            'feedback_comment':'',
+            'recommend': True
+            })
+        self.assertTrue(form.is_valid(), msg='Form is not valid')
+    def test_form_is_invalid_when_feedback_rating_is_blank(self):
+        """ Test that form is valid when feedback comment is blank """
+        form = FeedbackForm({
+            'feedback_rating':'',
+            'feedback_comment':'comment',
+            'recommend': True
+            })
+        self.assertFalse(form.is_valid(), msg='Form is valid when feedback rating is blank')
+    def test_form_is_valid_when_recommend_is_false(self):
+        """ Test that form is valid when feedback comment is blank """
+        form = FeedbackForm({
+            'feedback_rating':1,
+            'feedback_comment':'comment',
+            'recommend': False
+            })
+        self.assertTrue(form.is_valid(), msg='Form is not valid')
