@@ -1,5 +1,5 @@
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Sum
@@ -263,13 +263,13 @@ def update_booking(request, id):
     update_publication_status()
 
     form = ReservationForm(workshop_name=original_booking.workshop.activity, instance = original_booking)
-
+    
     if request.method =="POST":
+        
         form = ReservationForm(data=request.POST, workshop_name=original_booking.workshop.activity, instance = original_booking)
         if form.is_valid():
             #variables collected by the request
             tickets_requested = int(request.POST.get('tickets'))
-
             ticket_difference = tickets_requested - temp
             
             workshop_pending = Workshop.objects.get(pk=request.POST.get('workshop'))
@@ -298,7 +298,6 @@ def update_booking(request, id):
         else:
             messages.error(request, "There was an error submitting this form")
 
-
     return render(
         request,
         "bookings/update_booking.html",
@@ -321,7 +320,7 @@ def delete_booking(request, id):
         booking.delete()
         #return tickets canceled back to the workshop total available:
         wk.tickets_sold = wk.tickets_sold - tk
-        if wk.tickets_sold > wk_pending.max_places-3:
+        if wk.tickets_sold > wk.max_places-3:
             wk.low_stock = True
         else:
             wk.low_stock= False
