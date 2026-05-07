@@ -5,82 +5,121 @@ from django.contrib.auth.models import User
 from workshops.models import Workshop
 
 
-RATING = ((0, 'not specified'), (1, 'Terrible'), (2, 'Disappointing'), (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Brilliant!'))
+RATING = ((0, 'not specified'), (1, 'Terrible'), (2, 'Disappointing'),
+          (3, 'Average'), (4, 'Enjoyed it!'), (5, 'Brilliant!'))
 
 # Create your models here.
+
+
 class UserProfile(models.Model):
-    """ 
-    Extends :model:`auth.User` with additional fields of 'newsletter_consent' and 'staff_status'
-    
+    """
+    Extends :model:`auth.User` with additional fields of
+      'newsletter_consent' and 'staff_status'
+
     **Business Logic**
-    - Future development work can link customer newsletter status to mailing list client such as MailChimp via API
-    - Users with staff_status = True will have access to details such as number of people attending
-    a workshop and their allergies but not the ability to access the admin panel. Ideal for staff hosting events
+    - Future development work can link customer newsletter status
+      to mailing list client such as MailChimp via API
+    - Users with staff_status = True will have access to details
+      such as number of people attending
+    a workshop and their allergies but not the ability to access
+      the admin panel. Ideal for staff hosting events
     who do not have admin or management role.
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="profile")
     newsletter_consent = models.BooleanField(default=False)
-    staff_status =models.BooleanField(default = False)
+    staff_status = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
+
 class Reservation(models.Model):
-    """ 
-    Stores details of a single reservation related to both :model: `Workshop` and :model: `auth.User`.
+    """
+    Stores details of a single reservation related to both
+      :model: `Workshop` and :model: `auth.User`.
     This has a OneToOne relationship to :model:`Feedback`.
 
-    Fields included in this model are: 'workshop', 'customer', 'tickets', 'created_on','updated_on', 
-    'paid', 'has_dietary_requirements', 'additional_information', 'consent_given'
+    Fields included in this model are: 'workshop', 'customer',
+      'tickets', 'created_on','updated_on',
+    'paid', 'has_dietary_requirements', 'additional_information',
+      'consent_given'
     """
 
-    workshop = models.ForeignKey(Workshop, on_delete=models.CASCADE, related_name='workshop')
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "customer")
-    tickets = models.IntegerField( verbose_name ="Number of tickets to reserve")
-    created_on = models.DateTimeField(auto_now_add= True)
-    updated_on = models.DateTimeField(auto_now= True)
-    paid = models.BooleanField(default = False)
-    has_dietary_requirements = models.BooleanField(default=False, verbose_name="Members of my booking have specific dietary needs or allergies")
-    additional_information = models.TextField(blank=True, verbose_name="If 'yes' above, please give details of any allergies (eg. latose, gluten, nuts) or dietary requirements (eg. vegan, Halal, vegetarian)")
-    consent_given = models.BooleanField(default = False, verbose_name="I agree to the terms and conditions of booking and have supplied accurate information about the dietary needs and allergies for those attending")
+    workshop = models.ForeignKey(
+        Workshop, on_delete=models.CASCADE, related_name='workshop')
+    customer = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="customer")
+    tickets = models.IntegerField(verbose_name="Number of"
+                                  " tickets to reserve")
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    paid = models.BooleanField(default=False)
+    has_dietary_requirements = models.BooleanField(
+        default=False,
+        verbose_name="Members of my booking have specific"
+        " dietary needs or allergies")
+    additional_information = models.TextField(
+        blank=True, verbose_name="If 'yes' above, please give"
+        " details of any allergies (eg. latose, gluten, nuts) or"
+        " dietary requirements (eg. vegan, Halal, vegetarian)")
+    consent_given = models.BooleanField(
+        default=False, verbose_name="I agree to the terms and"
+        " conditions of booking and have supplied accurate"
+        " information about the dietary needs and allergies"
+        " for those attending")
 
     class Meta:
-        ordering= ["workshop__event_date"]
+        ordering = ["workshop__event_date"]
 
     def __str__(self):
-        return f"Booking by {self.customer} for {self.workshop.category} on {self.workshop.event_date.strftime("%d-%b-%y %H:%M")}"
+        return f"Booking by {self.customer} for {
+            self.workshop.category} on {
+                self.workshop.event_date.strftime("%d-%b-%y %H:%M")}"
+
 
 class Feedback(models.Model):
-    """ 
-    Stores details of feedback from each instance of :model:`bookings.Reservation` by OneToOne relationship
+    """
+    Stores details of feedback from each instance of :model:
+    `bookings.Reservation` by OneToOne relationship
 
     **Business Logic**
-    An instance of Feedback is automatically created when a reservation is made.  
-    Customers can not leave feedback until after the event date of the session.
-    Feedback is not displayed publically until marked by site owner as 'approved'
-    
-    The fields of this model are `booking', 'feedback_rating', 'feedback_comment', 'recommend', 'updated_on'
+    An instance of Feedback is automatically created when a
+      reservation is made.
+    Customers can not leave feedback until after the event
+      date of the session.
+    Feedback is not displayed publically until marked by
+      site owner as 'approved'
+
+    The fields of this model are `booking', 'feedback_rating',
+      'feedback_comment', 'recommend', 'updated_on'
     'approved' and 'submitted'.
     """
-    booking = models.OneToOneField(Reservation, on_delete=models.CASCADE, related_name ='booking')
+    booking = models.OneToOneField(
+        Reservation, on_delete=models.CASCADE, related_name='booking')
     feedback_rating = models.IntegerField(choices=RATING, default=0)
     feedback_comment = models.TextField(blank=True)
-    recommend = models.BooleanField(default=False, verbose_name='I would recommend this to others.')
+    recommend = models.BooleanField(
+        default=False, verbose_name='I would recommend this to others.')
     updated_on = models.DateField(auto_now=True)
     approved = models.BooleanField(default=False)
     submitted = models.BooleanField(default=False)
 
     class Meta:
-        ordering=["-booking__workshop__event_date"]
-        verbose_name_plural= "feedback"
+        ordering = ["-booking__workshop__event_date"]
+        verbose_name_plural = "feedback"
 
     def __str__(self):
-        return f"Feedback by {self.booking.customer} for {self.booking.workshop.category}"
-    
-#create booking Feedback by default when booking is made:
+        return f"Feedback by {self.booking.customer} for {
+            self.booking.workshop.category}"
+
+# create booking Feedback by default when booking is made:
+
+
 def create_feedback(sender, instance, created, **kwargs):
     if created:
         reservation_feedback = Feedback(booking=instance)
         reservation_feedback.save()
+
 
 post_save.connect(create_feedback, sender=Reservation)
