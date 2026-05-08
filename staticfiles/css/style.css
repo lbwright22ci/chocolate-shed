@@ -74,15 +74,19 @@ a {
 .red-text{
     color:var(--text-highlight-color);
 }
+
 .orange-text{
     color:var(--third-highlight);
 }
+
 .green-text{
     color: var(--second-highlight);
 }
+
 .bold-text{
     font-weight:bold;
 }
+
 /* Buttons*/
 .btn-main{
     background-color: var(--text-highlight-color);
@@ -169,6 +173,7 @@ a {
     text-decoration: underline;
     background-color: var(--secondary-text-color);
 }
+
 .navbar a:hover,
 .navbar-nav .nav-link.active:hover,
 .footer a:hover{
@@ -214,6 +219,7 @@ a.dropdown-item.nav-link.active{
     height: 6.1rem;
     box-shadow: 0 0.5rem 0.5rem var(--shadow-color) inset;
 }
+
 .footer .fa-brands{
     padding:1.5rem;
     font-size:3rem;
@@ -246,8 +252,6 @@ options{
 
 /* Messages */
 
-
-
 .alert-success,
 .alert-danger{
     --bs-alert-color:var(--primary-text-color);
@@ -256,15 +260,16 @@ options{
     padding-right:6rem;
     --bs-alert-margin-bottom:0;
 }
+
 .alert-success{
     --bs-alert-bg:var(--success-background);
     --bs-alert-border-color:var(--success-background);
 }
+
 .alert-danger{
     --bs-alert-bg:var(--danger-background);
     --bs-alert-border-color:var(--danger-background);
 }
-
 
 /*Home page*/
 /*hero image*/
@@ -278,7 +283,6 @@ options{
     align-items: center;
     justify-content: end;
 }
-
 
 #home-logo{
     background-color: var(--background-color-semi-transparent);
@@ -295,7 +299,6 @@ options{
     margin-top: 2rem;
     margin-bottom:4rem;
 }
-
 
 /*workshop listings*/
 
@@ -344,7 +347,7 @@ options{
     top:-1.5rem;
     z-index:101;
     left:1rem;
-        background-color: var(--primary-background-color);
+    background-color: var(--primary-background-color);
     padding-left:1rem;
     padding-right:1rem;
 }
@@ -355,6 +358,7 @@ options{
     font-weight:bold;
     margin-bottom: 0;
 }
+
 .low-stock{
     position: absolute;
     top:10%;
@@ -367,8 +371,6 @@ options{
     padding-right:1rem;
 }
 
-
-
 .cover-bottom-corner{
     background-color: var(--primary-background-color);
     position:absolute;
@@ -379,6 +381,7 @@ options{
     border-radius: 4rem;
     z-index: 80;
 }
+
 .age-cat-text{
     position: absolute;
     font-family: var(--heading-font);
@@ -503,8 +506,6 @@ options{
     padding:0rem 3rem 1rem 3rem;
 }
 
-/*gallery*/
-
 /* Worshop details page */
 
 .workshop-header{
@@ -530,11 +531,13 @@ options{
     width:12rem;
     border-radius: 6rem;
 }
+
 .age-cat-symbol.detail-page img{
     right:3rem;
     bottom:-5rem;
     height:10rem;
 }
+
 .age-cat-text.detail-page{
     right:8rem;
 }
@@ -557,7 +560,8 @@ options{
 }
 
 .accordion{
-    padding:4rem;
+    padding-top:4rem;
+    padding-bottom:4rem;
     border-width:0;
 }
 .accordion-button{
@@ -586,9 +590,11 @@ options{
 .c1{
     width: 10%;
 }
+
 .c2{
     width:20%;
 }
+
 .c3{
     width:15%;
 }
@@ -596,18 +602,18 @@ options{
 .table{
     margin-bottom: 0;
 }
+
 .table-holder{
     overflow-x: auto;
     width: 100%;
     margin-bottom:1rem;
 }
-/* Media queries */
 
+/* Media queries */
 
 /* Large screens 992px and above: laptops*/
 @media screen and (min-width:992px) {
     .workshop-detail-image{
         aspect-ratio: 16/5;
     }
-
 }
