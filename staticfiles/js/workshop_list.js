@@ -6,5 +6,4 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("filter-dropdown-reveal-ages").classList.toggle("hide");
     }
 
-
-})
+});

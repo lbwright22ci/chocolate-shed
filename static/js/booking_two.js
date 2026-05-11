@@ -7,13 +7,17 @@ document.addEventListener("DOMContentLoaded", function () {
         let consent = e.target.consent_given;
         let allergies = e.target.has_dietary_requirements;
         let info = e.target.additional_information;
+        let tickets = e.target.tickets.value;
 
         let feedbackMsg = document.getElementById("feedback-consent");
 
         feedbackMsg.innerText= '';
 
-        if(!consent.checked){
-            feedbackMsg.innerText = " You must agree to terms and conditions in order to confirm your booking";
+        if(tickets <= 0){
+            feedbackMsg.innerText = "Number of tickets must be greater than 0.";
+        }
+        else if(!consent.checked){
+            feedbackMsg.innerText +=" You must agree to terms and conditions in order to confirm your booking";
             if(allergies.checked && info.value.length==0){
                 feedbackMsg.innerText +=" You must provide further information about the allergies or dietary requirements members of your booking have." ;
             }

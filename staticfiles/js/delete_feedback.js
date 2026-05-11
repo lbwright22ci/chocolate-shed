@@ -9,6 +9,5 @@ document.addEventListener("DOMContentLoaded", function () {
             deleteConfirm.href = `delete/${feedbackId}`;
             deleteModal.show();
         });
-}
-
-})
+    }
+});
