@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let info = e.target.additional_information;
         let tickets = e.target.tickets.value;
 
-        
-console.log(tickets);
         let feedbackMsg = document.getElementById("feedback-consent");
 
         feedbackMsg.innerText= '';
