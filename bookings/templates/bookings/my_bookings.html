@@ -54,7 +54,7 @@
         <div class="col-10 col-md-8">
             <div class="row section-at-a-glance-bookings">
                 <div class="col-12 col-lg-6">
-                    <i class="fa-brands fa-readme"></i> <a href="{% url 'workshop_detail' session.workshop.slug %}"> More information </a>
+                    <i class="fa-brands fa-readme"></i> <a href="{% url 'workshop_detail' session.workshop.slug %}" aria-label="takes you to the page {{ workshop.activity.session }} where you can find out more information about the session"> More information </a>
                 </div>
                 <div class="col-12 col-lg-6">
                     <i class="fa-solid fa-clock"></i> {{ session.workshop.category.workshop_duration }} minutes
