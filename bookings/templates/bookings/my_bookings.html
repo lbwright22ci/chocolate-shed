@@ -6,15 +6,14 @@
 {% url 'feedback_page' as feedback_page_url %}
 
 
-   {% block headcontent %}
+{% block headcontent %}
     <title>The Chocolate Shed | My upcoming workshops </title>
     <meta name="description"
         content="Workshops coming up which you have made a reservation for at The Chocolate Shed">
     <meta name="keywords" content="chocolate workshop, learn a skill, craft workshop, chocolate experience, family friendly "> 
-    {% endblock headcontent %}
+{% endblock headcontent %}
 
 {% block content %}
-
 
 {% if user.is_authenticated %}
 <div class=" container section">
@@ -99,8 +98,6 @@
 
 </div>
 
-
-
 {% else %}
 <div class="container section">
     <div class="row">
@@ -144,7 +141,6 @@
     </div>
   </div>
 </div>
-
 
 {% endblock content %}
 

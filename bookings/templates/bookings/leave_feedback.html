@@ -4,9 +4,7 @@
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 
-
 {% block content %}
-
 
 {% if user.is_authenticated %}
 <div class=" container section">
@@ -84,10 +82,7 @@
         <hr class = "section">
 </div>
 {% endfor %}
-
 </div>
-
-
 
 {% else %}
 <div class="container section">
@@ -104,7 +99,6 @@
     </div>
 </div>
         
-
 {% endif %}
 
 <!-- Delete feedback modal here -->
@@ -132,8 +126,6 @@
     </div>
   </div>
 </div>
-
-
 
 {% endblock content %}
 
