@@ -609,6 +609,11 @@ options{
     margin-bottom:1rem;
 }
 
+.not-found-page{
+    padding:4rem;
+    width:50vw;
+    max-width:40rem;
+}
 /* Media queries */
 
 /* Large screens 992px and above: laptops*/
